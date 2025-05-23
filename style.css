@@ -586,3 +586,26 @@ main h2 {
         font-size: 2rem;
     }
 }
+.profile-image-container {
+ width: 150px; /* 写真を表示するコンテナの幅 */
+ height: 150px; /* 写真を表示するコンテナの高さ */
+ border-radius: 50%; /* これで画像を丸くします */
+ overflow: hidden; /* コンテナからはみ出る部分を隠します */
+ margin: 20px auto; /* 中央寄せと上下の余白 */
+}
+
+.profile-image {
+ width: 100%; /* コンテナの幅いっぱいに表示 */
+ height: 100%; /* コンテナの高さ一杯に表示 */
+ object-fit: cover; /* 画像がコンテナに合わせてトリミングされるようにします */
+}
+
+/* 必要に応じてさらに調整 */
+.profile-section-container .profile-content #casual-bio .profile-image-container {
+ float: none; /* フロートを解除 */
+ margin: 20px auto; /* 中央寄せ */
+}
+
+.profile-section-container .profile-content #casual-bio .profile-image {
+ display: block; /* インライン要素による回り込みを防ぐ */
+}
