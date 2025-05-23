@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tatsuki mitsuhashi 三橋龍起 official site - ホーム</title>
+    <title>tatsuki mitsuhashi 三橋龍起 official site - 深淵への扉</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -15,12 +16,7 @@
             </div>
             <nav class="global-nav">
                 <ul>
-                    <li><a href="/">ホーム</a></li>
-                    <li><a href="blog.html">ブログ</a></li>
-                    <li><a href="language-log.html">語学記録</a></li>
-                    <li><a href="about.html">プロフィール</a></li>
-                    <li><a href="contact.html">お問い合わせ</a></li>
-                </ul>
+                    <li><a href="/" class="active">思索の淵</a></li> <li><a href="blog.html">言葉の綴り</a></li> <li><a href="language-log.html">語学の軌跡</a></li> <li><a href="about.html">存在の深淵</a></li> <li><a href="contact.html">接触</a></li> </ul>
             </nav>
             <div class="language-switcher">
                 <button id="langButton">JP ▼</button>
@@ -38,41 +34,74 @@
     </header>
 
     <main>
-        <section class="hero-section">
-            <h2>ようこそ！</h2>
-            <p class="tagline">語学、旅、学び。日々の記録と経験をあなたに。</p>
+        <section class="hero-full-screen">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <div class="main-title-container">
+                    <h2 class="main-title">TATSUKI MITSUHASHI</h2>
+                    <p class="tagline-jp">人間失格。ただ、識ることに耽る。</p>
+                </div>
+                <div class="multi-lang-quote">
+                    <p class="quote-text lang-jp">「或る思念は、或る言語の中に於いてのみ可能である。」</p>
+                    <p class="quote-author">― 太宰 治</p>
+                    <p class="quote-text lang-en">"A certain thought is only possible in a certain language."</p>
+                    <p class="quote-author lang-en">― Osamu Dazai</p>
+                    <p class="quote-text lang-math">∀x (P(x) → Q(x))</p>
+                    <p class="quote-author lang-math">― Principia Mathematica</p>
+                </div>
+                <div class="scroll-indicator">
+                    <span>Scroll Down</span>
+                    <div class="arrow-down"></div>
+                </div>
+            </div>
         </section>
 
-        <section class="latest-blog-posts">
-            <h2>最新ブログ記事</h2>
-            <div class="post-list">
-                <article class="blog-post-summary">
-                    <img src="images/post-placeholder-1.jpg" alt="記事のサムネイル" class="post-thumbnail">
-                    <h3><a href="posts/sample-article-1.html">初めての海外一人旅：準備から出発まで</a></h3>
-                    <p class="post-meta">投稿日: 2025/05/23 | カテゴリー: 旅</p>
-                    <p class="post-excerpt">旅の計画、持ち物、現地でのハプニングなど、私が経験した初めての海外一人旅について詳しくご紹介します。...</p>
-                </article>
+        <section class="latest-blog-posts section-dark">
+            <div class="section-content">
+                <h2>深淵からの声：最新の綴り</h2>
+                <div class="post-list">
+                    <article class="blog-post-summary">
+                        <img src="images/post-placeholder-1.jpg" alt="哲学書とコーヒー" class="post-thumbnail">
+                        <h3><a href="posts/2025-05-24-my-first-travel-experience.html">放浪者の記：異国の地で悟る無常</a></h3>
+                        <p class="post-meta">投稿日: 2025/05/24 | カテゴリー: 旅, 哲学</p>
+                        <p class="post-excerpt">初めての海外一人旅。異文化の波に揉まれ、己の無知と世界の広大さを同時に知る。太宰治が描いたような人間の脆さと向き合った日々の記録。</p>
+                    </article>
 
-                <article class="blog-post-summary">
-                    <img src="images/post-placeholder-2.jpg" alt="記事のサムネイル" class="post-thumbnail">
-                    <h3><a href="posts/sample-article-2.html">英語学習ロードマップ：初心者からTOEIC800点まで</a></h3>
-                    <p class="post-meta">投稿日: 2025/05/20 | カテゴリー: 語学学習</p>
-                    <p class="post-excerpt">私が実践した英語学習法やおすすめの教材、モチベーション維持のコツを段階的に解説します。...</p>
-                </article>
+                    <article class="blog-post-summary">
+                        <img src="images/post-placeholder-2.jpg" alt="数学の公式と古びた本" class="post-thumbnail">
+                        <h3><a href="posts/sample-article-2.html">虚数の美学：不可視の真理を探求する</a></h3>
+                        <p class="post-meta">投稿日: 2025/05/20 | カテゴリー: 数学, 哲学</p>
+                        <p class="post-excerpt">虚数という概念が数学の世界に与えた衝撃は、まるで人間の存在論的な問いのよう。目に見えないものの中にこそ、真実の美しさが宿る。</p>
+                    </article>
+                    </div>
+                <p class="view-all-posts"><a href="blog.html">全ての綴りを読む »</a></p>
             </div>
-            <p class="view-all-posts"><a href="blog.html">全てのブログ記事を見る »</a></p>
+        </section>
+
+        <section class="about-excerpt section-light">
+            <div class="section-content">
+                <h2>存在の断片</h2>
+                <div class="about-excerpt-content">
+                    <img src="images/tatsuki_profile.jpg" alt="三橋龍起 プロフィール写真" class="about-excerpt-image">
+                    <p>私の名は三橋龍起。この世界に存在する不可視の真理、言葉の深淵、そして人間の本質を探求する者である。古き日本の美意識と、現代の知性が交錯する地点に、私は立つ。</p>
+                    <p><a href="about.html">…もっと深く知る</a></p>
+                </div>
+            </div>
         </section>
     </main>
 
     <footer>
         <div class="footer-content">
-            <p>&copy; 2025 tatsuki mitsuhashi official site. All Rights Reserved.</p>
+            <p>© 2025 tatsuki mitsuhashi official site. All Rights Reserved.</p>
             <nav class="footer-nav">
                 <ul>
-                    <li><a href="privacy-policy.html">プライバシーポリシー</a></li>
-                    <li><a href="sitemap.html">サイトマップ</a></li>
+                    <li><a href="privacy-policy.html">秘匿の規約</a></li>
+                    <li><a href="sitemap.html">地図</a></li>
                 </ul>
             </nav>
+            <div class="footer-quote">
+                <p>「私は、この地球を去るまで、絶えず学び続けるであろう。」</p>
+            </div>
         </div>
     </footer>
 
