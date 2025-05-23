@@ -609,3 +609,178 @@ main h2 {
 .profile-section-container .profile-content #casual-bio .profile-image {
  display: block; /* インライン要素による回り込みを防ぐ */
 }
+/* --- 語学記録ページ専用スタイル --- */
+.language-log-section h2 {
+    /* 既存のh2スタイルを継承しつつ、必要なら調整 */
+}
+
+.language-list-container {
+    padding: 20px;
+    background-color: #2a2a2a; /* セクションの背景色と合わせる */
+    border-radius: 8px;
+    margin-top: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.language-list-container h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.8rem;
+    color: #9ecaed;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(158, 202, 237, 0.3);
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.language-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* レスポンシブグリッド */
+    gap: 20px; /* アイテム間の余白 */
+}
+
+.language-grid li {
+    background-color: #1a1a1a; /* アイテムの背景色 */
+    border: 1px solid #4a4a4a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.language-grid li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+}
+
+.lang-item {
+    display: block; /* リンク全体をクリック可能に */
+    padding: 20px;
+    text-align: center;
+    color: #f0f0f0;
+    text-decoration: none;
+}
+
+.lang-item .lang-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #9ecaed;
+    display: block;
+    margin-bottom: 10px;
+}
+
+.lang-item .lang-progress,
+.lang-item .lang-note {
+    font-size: 0.9rem;
+    color: #bbb;
+    display: block;
+    margin-top: 5px;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .language-grid {
+        grid-template-columns: 1fr; /* モバイルでは1列に */
+    }
+}
+/* --- 各言語学習記録詳細ページ（language-log-detail-section）専用スタイル --- */
+.language-log-detail-section {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #2a2a2a; /* 背景色 */
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    color: #f0f0f0;
+    line-height: 1.8;
+}
+
+.language-log-detail-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #9ecaed;
+    border-bottom: 1px solid rgba(158, 202, 237, 0.3);
+    padding-bottom: 15px;
+}
+
+.language-log-detail-section h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.8rem;
+    color: #9ecaed;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 5px;
+}
+
+.language-log-detail-section h4 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.4rem;
+    color: #f0f0f0;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.language-log-detail-section p {
+    margin-bottom: 1em;
+    color: #ccc;
+}
+
+.language-log-detail-section ul {
+    list-style: disc; /* リストのマーク */
+    margin-left: 25px;
+    margin-bottom: 1em;
+    color: #ccc;
+}
+
+.language-log-detail-section ul li {
+    margin-bottom: 5px;
+}
+
+/* 学習記録の個別エントリのスタイル */
+.log-entries {
+    margin-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 30px;
+}
+
+.log-entry {
+    background-color: #1a1a1a;
+    border: 1px solid #4a4a4a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.log-entry h4 {
+    color: #9ecaed;
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: none; /* 個別エントリの見出しには下線なし */
+    padding-bottom: 0;
+}
+
+.log-entry p {
+    margin-bottom: 0;
+    color: #ccc;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .language-log-detail-section {
+        padding: 20px;
+    }
+    .language-log-detail-section h2 {
+        font-size: 2rem;
+    }
+    .language-log-detail-section h3 {
+        font-size: 1.5rem;
+    }
+}
