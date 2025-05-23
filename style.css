@@ -735,20 +735,47 @@ main h2 {
     gap: 20px; /* アイテム間の余白 */
 }
 
+/* --- 語学記録ページ（language-log.html）専用スタイル --- */
+/* ... (このセクションの他のスタイルはそのまま) ... */
+
 .language-grid li {
     background-color: #1a1a1a;
     border: 1px solid #4a4a4a;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+    /* ホバー時のアニメーションの滑らかさを高めるため、backgroundもtransitionに追加 */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, background-image 0.5s ease;
+
+    /* レインボーアニメーションの準備 */
+    background-size: 200% 200%; /* グラデーションのサイズを大きく設定 */
+    position: relative; /* 子要素の配置基準 */
+    z-index: 1; /* グラデーションが他の要素の上に表示されないように */
 }
 
 .language-grid li:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-    background-color: #3a3a3a; /* ホバー時の背景色変更 */
+    /* ここが変更点！ レインボーグラデーションの背景色とアニメーション */
+    background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 25%, #ffb62f 50%, #d8eb34 75%, #00c6fb 100%); /* レインボーグラデーション */
+    background-position: center center; /* 初期位置 */
+    animation: rainbow-bg 2s ease-in-out infinite; /* アニメーション適用 */
 }
+
+/* レインボーアニメーションの定義 */
+@keyframes rainbow-bg {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* ... (このセクションの他のスタイルはそのまま) ... */
 
 .lang-item {
     display: flex; /* Flexboxを使って縦並び */
@@ -822,3 +849,17 @@ main h2 {
         font-size: 0.85rem;
     }
 }
+/* 言語アイテムのスタイル（文字色の調整） */
+.lang-item .lang-jp,
+.lang-item .lang-native,
+.lang-item .lang-details {
+    transition: color 0.3s ease; /* ホバー時の文字色変化を滑らかに */
+}
+
+.language-grid li:hover .lang-item .lang-jp,
+.language-grid li:hover .lang-item .lang-native,
+.language-grid li:hover .lang-item .lang-details {
+    color: #fff; /* ホバー時に文字色を白に統一（グラデーションに埋もれないよう） */
+    text-shadow: 0 0 5px rgba(0,0,0,0.5); /* 文字に軽い影をつけて読みやすく */
+}
+
