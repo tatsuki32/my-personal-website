@@ -9,12 +9,17 @@
 </head>
 <body>
 
-    <header>
+   <header>
         <div class="header-content">
             <div class="site-title">
                 <h1>tatsuki mitsuhashi <small>三橋龍起 official site</small></h1>
             </div>
-            <nav class="global-nav">
+            <button id="hamburgerButton" class="hamburger-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="global-nav" id="globalNav">
                 <ul>
                     <li><a href="/" class="active">思索の淵</a></li>
                     <li><a href="blog.html">言葉の綴り</a></li>
@@ -39,19 +44,21 @@
     </header>
 
     <main>
-        <section class="hero-full-screen-text-only">
+        <section class="hero-full-screen-with-profile">
             <div class="hero-overlay"></div>
             <div class="hero-content">
                 <div class="main-title-container">
-                    <h2 class="main-title-en">Welcome to</h2>
-                    <h2 class="main-title">TATSUKI MITSUHASHI Official Site</h2>
-                    <p class="tagline-jp-new">ようこそ、いらっしゃいました。<br>私の自己表現、自己主張の場でございます。</p>
-                    <p class="long-message-jp">
-                        ただ好きなことや好きなものを語り、載せて<br>
-                        死ぬ時には何も天国へ持っていけないのはわかっているのですが<br>
-                        何か、残したい。生きた証拠を残したい、そんな欲望に駆られて<br>
-                        このサイトは運営されています。
-                    </p>
+                    <img src="images/tatsuki_profile.jpg" alt="三橋龍起 プロフィール写真" class="hero-profile-image">
+                    <h2 class="main-title">TATSUKI MITSUHASHI</h2>
+                    <p class="tagline-jp">人間失格。ただ、識ることに耽る。</p>
+                </div>
+                <div class="multi-lang-quote">
+                    <p class="quote-text lang-jp">「或る思念は、或る言語の中に於いてのみ可能である。」</p>
+                    <p class="quote-author">― 太宰 治</p>
+                    <p class="quote-text lang-en">"A certain thought is only possible in a certain language."</p>
+                    <p class="quote-author lang-en">― Osamu Dazai</p>
+                    <p class="quote-text lang-math">∀x (P(x) → Q(x))</p>
+                    <p class="quote-author lang-math">― Principia Mathematica</p>
                 </div>
                 <div class="scroll-indicator">
                     <span>Scroll Down</span>
@@ -99,9 +106,9 @@
             <div class="section-content">
                 <h2>注目の映像</h2>
                 <div class="video-container">
-                    <iframe width="560" height="315" src="https://www.youtube.com/watch?v=F1Pe_ZGb00U" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 </div>
-                <p style="text-align: center; margin-top: 20px;"><a href="https://www.youtube.com/watch?v=2lmNCPXe5n0">YouTubeチャンネルへ »</a></p>
+                <p style="text-align: center; margin-top: 20px;"><a href="https://www.youtube.com/watch?v=KDXSEE5pn_0">YouTubeチャンネルへ »</a></p>
             </div>
         </section>
 
@@ -120,10 +127,10 @@
 
         <section class="contact-cta section-dark">
             <div class="section-content">
-                <h2>お問い合わせ</h2>
+                <h2>接触</h2>
                 <p>仕事のご依頼やご相談、その他お問い合わせは、以下のボタンよりご連絡ください。</p>
                 <p><a href="contact.html" class="cta-button">お問い合わせフォームへ »</a></p>
-            </div>
+                </div>
         </section>
     </main>
 

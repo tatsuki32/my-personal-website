@@ -934,3 +934,588 @@ main h2 {
         font-size: 1.5rem;
     }
 }
+/* ヘッダー */
+header {
+    background-color: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    padding: 1rem 0;
+    position: fixed;
+    width: 100%;
+    z-index: 2000;
+}
+
+.header-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    /* flex-wrap: wrap; は @media query で定義する */
+    box-sizing: border-box;
+}
+
+/* ... site-title は変更なし ... */
+
+/* グローバルナビゲーション */
+.global-nav {
+    flex-grow: 2;
+    text-align: center;
+}
+.global-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+/* ... global-nav ul li, global-nav ul li a は変更なし ... */
+
+
+/* ハンバーガーメニューボタン (PCでは非表示) */
+.hamburger-button {
+    display: none; /* 初期状態では非表示 */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    z-index: 2001; /* メニューより手前に */
+}
+
+.hamburger-button span {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background-color: #f0f0f0;
+    margin: 5px 0;
+    transition: all 0.3s ease;
+}
+
+/* ハンバーガーメニューが閉じる時のアニメーション (Xマーク) */
+.hamburger-button.is-active span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger-button.is-active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-button.is-active span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ... language-switcher 以下のCSSは変更なし ... */
+
+
+/* --- レスポンシブ対応の簡易化 (@media (max-width: 768px) {...} ブロック全体を置き換え) --- */
+@media (max-width: 768px) {
+    /* ヘッダーの調整 */
+    header {
+        position: fixed; /* モバイルでも固定にする */
+        padding: 0.5rem 0;
+    }
+    .header-content {
+        flex-direction: row; /* 横並びに戻す */
+        justify-content: space-between; /* 左右に配置 */
+        align-items: center;
+        padding: 0 15px; /* 左右のパディングを減らす */
+        flex-wrap: nowrap; /* モバイルで折り返さない */
+    }
+    .site-title {
+        flex-grow: 0; /* 縮小 */
+        margin-bottom: 0; /* 余白を0に */
+    }
+    .site-title h1 {
+        font-size: 1.3rem; /* モバイルでさらに小さく */
+    }
+    .site-title h1 small {
+        font-size: 0.6rem;
+    }
+
+    /* ハンバーガーメニューボタンの表示 */
+    .hamburger-button {
+        display: block; /* モバイルで表示 */
+        order: 2; /* タイトルの右に配置 */
+        margin-left: auto; /* 言語スイッチャーとスペースを作る */
+    }
+
+    /* 言語スイッチャーの調整 */
+    .language-switcher {
+        order: 3; /* タイトル、ハンバーガーの右に配置 */
+        margin-left: 10px; /* ハンバーガーとの間隔 */
+        flex-grow: 0; /* 伸びない */
+    }
+    .language-switcher button {
+        padding: 5px 10px;
+        font-size: 0.8rem;
+    }
+    .language-switcher ul {
+        left: unset; /* 中央寄せを解除 */
+        right: 0; /* 右寄せ */
+        transform: none; /* 中央寄せの調整を解除 */
+        width: auto; /* 幅を自動調整 */
+        min-width: 100px;
+    }
+
+    /* グローバルナビゲーション (ハンバーガーメニューの中身) */
+    .global-nav {
+        position: fixed; /* 画面に固定 */
+        top: 0;
+        left: -100%; /* 初期状態では画面外に隠す */
+        width: 80%; /* メニューの幅 */
+        height: 100vh; /* 画面いっぱいの高さ */
+        background-color: rgba(26, 26, 26, 0.95); /* 暗い背景色、半透明 */
+        backdrop-filter: blur(8px);
+        box-shadow: 2px 0 10px rgba(0,0,0,0.5);
+        transition: left 0.4s ease-out; /* 滑らかなスライドイン */
+        z-index: 1999; /* ヘッダーの下に */
+        padding-top: 80px; /* ヘッダーの高さ分開ける */
+        box-sizing: border-box;
+        overflow-y: auto; /* メニューが多い場合にスクロール可能に */
+        flex-grow: 0; /* 伸びない */
+    }
+
+    .global-nav.is-open {
+        left: 0; /* 表示時に画面内にスライドイン */
+    }
+
+    .global-nav ul {
+        flex-direction: column; /* 縦並び */
+        align-items: center; /* 中央揃え */
+        margin-top: 0;
+    }
+    .global-nav ul li {
+        margin: 15px 0; /* メニュー項目の上下の余白 */
+    }
+    .global-nav ul li a {
+        font-size: 1.3rem; /* メニュー項目のフォントサイズを大きく */
+        padding: 10px 0;
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+
+    /* オーバーレイ (メニュー表示時に背景を暗くする) */
+    body.menu-open-overlay::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1998;
+    }
+
+
+    /* メインコンテンツの調整 */
+    main {
+        padding-top: 60px; /* ヘッダーの高さに合わせて調整 */
+    }
+
+    /* キービジュアルの調整 */
+    .hero-full-screen-text-only {
+        height: auto;
+        min-height: 80vh;
+        padding: 60px 15px 30px;
+    }
+    .main-title-en {
+        font-size: 1.8rem;
+    }
+    .main-title {
+        font-size: 2.5rem;
+    }
+    .tagline-jp-new {
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+    .long-message-jp {
+        font-size: 0.85rem;
+        margin: 20px auto;
+        line-height: 1.6;
+    }
+    .scroll-indicator {
+        bottom: 15px;
+    }
+
+
+    /* セクション共通の調整 */
+    section {
+        padding: 25px 15px;
+        margin: 25px auto;
+    }
+    h2 {
+        font-size: 1.6rem;
+        margin-bottom: 20px;
+        padding-bottom: 10px;
+    }
+
+
+    /* 広告ロゴセクションの調整 */
+    .logo-grid {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+        gap: 10px;
+        padding: 0 5px;
+    }
+    .logo-item {
+        padding: 8px;
+        font-size: 0.75rem;
+    }
+    .logo-item img {
+        max-width: 70px;
+    }
+
+
+    /* 最新ニュース記事セクションの調整 */
+    .news-list {
+        gap: 8px;
+    }
+    .news-item {
+        padding: 12px 15px;
+    }
+    .news-item .news-date {
+        font-size: 0.75rem;
+    }
+    .news-item h3 {
+        font-size: 1rem;
+    }
+    .view-all-news {
+        font-size: 0.9rem;
+        margin-top: 15px;
+    }
+
+
+    /* 注目の映像セクションの調整 */
+    .featured-video {
+        padding: 0;
+    }
+
+
+    /* プロフィール抜粋CTAセクションの調整 */
+    .profile-excerpt-cta .profile-flex-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 20px;
+    }
+    .profile-excerpt-cta h2 {
+        text-align: center;
+        font-size: 2rem;
+    }
+    .profile-excerpt-cta .profile-excerpt-image {
+        width: 120px;
+        height: 120px;
+        border-width: 3px;
+    }
+    .profile-excerpt-cta p {
+        font-size: 0.95rem;
+    }
+    .cta-button {
+        padding: 10px 20px;
+        font-size: 0.95rem;
+    }
+
+
+    /* お問い合わせCTAセクションの調整 */
+    .contact-cta p {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+
+
+    /* フッターの調整 */
+    footer {
+        padding: 1.5rem 10px;
+    }
+    .footer-nav ul li {
+        margin: 0 5px;
+        font-size: 0.75rem;
+    }
+    .footer-quote {
+        font-size: 0.75rem;
+    }
+
+
+    /* その他ページ共通の要素の調整 */
+    .blog-list-section,
+    .language-log-section,
+    .contact-section,
+    .privacy-policy-section,
+    .sitemap-section,
+    .blog-article-detail {
+        max-width: unset;
+        margin: 15px 10px;
+        padding: 15px;
+    }
+
+
+    /* プロフィールページ専用スタイルの調整 */
+    .profile-section-container {
+        padding: 15px;
+    }
+    .profile-nav ul {
+        margin-bottom: 20px;
+    }
+    .profile-nav ul li {
+        margin: 3px 5px;
+    }
+    .profile-nav ul li a {
+        padding: 6px 0;
+        font-size: 0.9rem;
+    }
+    .profile-content h3 {
+        font-size: 1.1rem;
+        margin-bottom: 15px;
+    }
+    .profile-image-container { /* プロフィール写真のサイズ調整 */
+        width: 100px;
+        height: 100px;
+        margin-bottom: 15px;
+    }
+    .profile-image {
+        /* サイズは100%でコンテナに合わせる */
+    }
+}
+
+
+/* --- 語学記録ページ（language-log.html）専用スタイル --- */
+.language-log-section h2 {
+    /* 既存のh2スタイルを継承しつつ、必要なら調整 */
+}
+
+.language-log-section .section-description {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 40px;
+    color: #ccc;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.language-list-container {
+    padding: 30px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    margin-top: 30px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+}
+
+.language-list-container h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.8rem;
+    color: #9ecaed;
+    margin-bottom: 25px;
+    border-bottom: 1px solid rgba(158, 202, 237, 0.3);
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.language-grid {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); /* アイテムの最小幅を調整 */
+    gap: 20px; /* アイテム間の余白 */
+}
+
+.language-grid li {
+    background-color: #1a1a1a;
+    border: 1px solid #4a4a4a;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, background-image 0.5s ease;
+}
+
+.language-grid li:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 25%, #ffb62f 50%, #d8eb34 75%, #00c6fb 100%); /* レインボーグラデーション */
+    background-position: center center;
+    animation: rainbow-bg 2s ease-in-out infinite; /* アニメーション適用 */
+}
+
+@keyframes rainbow-bg {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.lang-item {
+    display: flex; /* Flexboxを使って縦並び */
+    flex-direction: column;
+    padding: 20px;
+    text-align: center;
+    color: #f0f0f0;
+    text-decoration: none;
+    height: 100%; /* 親要素の高さを引き継ぐ */
+    box-sizing: border-box; /* パディングを含めて高さを計算 */
+}
+
+.lang-item .lang-jp {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #9ecaed;
+    margin-bottom: 5px;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    opacity: 1; /* 初期表示 */
+    transform: translateY(0);
+}
+
+.lang-item .lang-native {
+    font-family: 'Playfair Display', serif; /* ネイティブ表示は英字フォント */
+    font-size: 1.3rem;
+    font-weight: normal;
+    color: #f0f0f0; /* ネイティブ表示の文字色 */
+    min-height: 1.3em; /* 高さのちらつき防止 */
+    opacity: 0; /* 初期非表示 */
+    transform: translateY(5px);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.lang-item:hover .lang-jp {
+    opacity: 0;
+    transform: translateY(-5px); /* ホバーで上に移動して非表示 */
+}
+
+.lang-item:hover .lang-native {
+    opacity: 1;
+    transform: translateY(0); /* ホバーで表示 */
+}
+
+.lang-item .lang-details {
+    font-size: 0.9rem;
+    color: #bbb;
+    display: block;
+    margin-top: 10px;
+    line-height: 1.4;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .language-grid {
+        grid-template-columns: 1fr; /* モバイルでは1列に */
+    }
+    .lang-item .lang-jp,
+    .lang-item .lang-native { /* モバイルではホバーを考慮せず常に両方表示する等の調整も検討 */
+        font-size: 1.3rem;
+    }
+    .lang-item .lang-native {
+        opacity: 1; /* モバイルでは常に表示 */
+        transform: translateY(0);
+    }
+    .lang-item:hover .lang-jp { /* モバイルではホバーしても非表示にしない */
+        opacity: 1;
+        transform: translateY(0);
+    }
+    .lang-item .lang-details {
+        font-size: 0.85rem;
+    }
+}
+/* --- 各言語学習記録詳細ページ（language-log-detail-section）専用スタイル --- */
+.language-log-detail-section {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #2a2a2a; /* 背景色 */
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    color: #f0f0f0;
+    line-height: 1.8;
+}
+
+.language-log-detail-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #9ecaed;
+    border-bottom: 1px solid rgba(158, 202, 237, 0.3);
+    padding-bottom: 15px;
+}
+
+.language-log-detail-section h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.8rem;
+    color: #9ecaed;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 5px;
+}
+
+.language-log-detail-section h4 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.4rem;
+    color: #f0f0f0;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.language-log-detail-section p {
+    margin-bottom: 1em;
+    color: #ccc;
+}
+
+.language-log-detail-section ul {
+    list-style: disc; /* リストのマーク */
+    margin-left: 25px;
+    margin-bottom: 1em;
+    color: #ccc;
+}
+
+.language-log-detail-section ul li {
+    margin-bottom: 5px;
+}
+
+/* 学習記録の個別エントリのスタイル */
+.log-entries {
+    margin-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 30px;
+}
+
+.log-entry {
+    background-color: #1a1a1a;
+    border: 1px solid #4a4a4a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.log-entry h4 {
+    color: #9ecaed;
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: none; /* 個別エントリの見出しには下線なし */
+    padding-bottom: 0;
+}
+
+.log-entry p {
+    margin-bottom: 0;
+    color: #ccc;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .language-log-detail-section {
+        padding: 20px;
+    }
+    .language-log-detail-section h2 {
+        font-size: 2rem;
+    }
+    .language-log-detail-section h3 {
+        font-size: 1.5rem;
+    }
+}

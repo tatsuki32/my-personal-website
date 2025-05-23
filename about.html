@@ -7,17 +7,24 @@
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 </head>
-<body class="about-page"> <header>
+<body class="about-page">
+
+<header>
         <div class="header-content">
             <div class="site-title">
                 <h1>tatsuki mitsuhashi <small>三橋龍起 official site</small></h1>
             </div>
-            <nav class="global-nav">
+            <button id="hamburgerButton" class="hamburger-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="global-nav" id="globalNav">
                 <ul>
-                    <li><a href="/">思索の淵</a></li>
+                    <li><a href="/" class="active">思索の淵</a></li>
                     <li><a href="blog.html">言葉の綴り</a></li>
                     <li><a href="language-log.html">語学の軌跡</a></li>
-                    <li><a href="about.html" class="active">存在の深淵</a></li>
+                    <li><a href="about.html">存在の深淵</a></li>
                     <li><a href="contact.html">接触</a></li>
                 </ul>
             </nav>
@@ -35,7 +42,6 @@
             </div>
         </div>
     </header>
-
     <main>
         <section class="profile-section-container">
             <h2>存在の深淵：私の記録</h2>

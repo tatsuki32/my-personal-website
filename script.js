@@ -117,3 +117,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+// --- ハンバーガーメニューの機能 ---
+document.addEventListener('DOMContentLoaded', () => {
+    const hamburgerButton = document.getElementById('hamburgerButton');
+    const globalNav = document.getElementById('globalNav');
+    const body = document.body;
+
+    if (hamburgerButton && globalNav && body) { // 要素が存在するか確認
+        hamburgerButton.addEventListener('click', () => {
+            globalNav.classList.toggle('is-open'); // メニューの表示/非表示を切り替えるクラス
+            hamburgerButton.classList.toggle('is-active'); // ハンバーガーアイコンのアニメーション用クラス
+            body.classList.toggle('menu-open-overlay'); // メニュー表示時の背景オーバーレイ用クラス
+        });
+
+        // メニューリンククリック時や、メニュー外クリック時にメニューを閉じる
+        globalNav.addEventListener('click', (event) => {
+            // メニュー内のリンクがクリックされた場合のみ閉じる
+            if (event.target.tagName === 'A') {
+                globalNav.classList.remove('is-open');
+                hamburgerButton.classList.remove('is-active');
+                body.classList.remove('menu-open-overlay');
+            }
+        });
+
+        // 言語切り替えメニューが開いているときにメニュー外をクリックしたら閉じる（既存の機能の強化）
+        const langButton = document.getElementById('langButton');
+        const langMenu = document.getElementById('langMenu');
+        if (langButton && langMenu) {
+            document.addEventListener('click', (event) => {
+                if (!langButton.contains(event.target) && !langMenu.contains(event.target) && !hamburgerButton.contains(event.target) && !globalNav.contains(event.target)) {
+                    // 他のメニュー要素をクリックしていない場合にのみ言語メニューを閉じる
+                    langMenu.classList.add('lang-menu-hidden');
+                }
+            });
+        }
+    }
+});

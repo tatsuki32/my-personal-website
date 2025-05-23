@@ -6,28 +6,35 @@
     <link rel="stylesheet" href="../style.css"> </head>
 <body>
 
-    <header>
+   <header>
         <div class="header-content">
             <div class="site-title">
-                <h1>tatsuki mitsuhashi <small>official site</small></h1>
+                <h1>tatsuki mitsuhashi <small>三橋龍起 official site</small></h1>
             </div>
-            <nav class="global-nav">
+            <button id="hamburgerButton" class="hamburger-button">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <nav class="global-nav" id="globalNav">
                 <ul>
-                    <li><a href="../">Home</a></li> <li><a href="../blog.html">Blog</a></li>
-                    <li><a href="../language-log.html">Language Log</a></li>
-                    <li><a href="../about.html">Profile</a></li>
-                    <li><a href="../contact.html">Contact</a></li>
+                    <li><a href="/" class="active">思索の淵</a></li>
+                    <li><a href="blog.html">言葉の綴り</a></li>
+                    <li><a href="language-log.html">語学の軌跡</a></li>
+                    <li><a href="about.html">存在の深淵</a></li>
+                    <li><a href="contact.html">接触</a></li>
                 </ul>
             </nav>
             <div class="language-switcher">
-                <button id="langButton">EN ▼</button> <ul id="langMenu" class="lang-menu-hidden">
-                    <li><a href="../index.html" data-lang="jp">JP</a></li>
-                    <li><a href="index.html" data-lang="en">EN</a></li>
-                    <li><a href="../zoroali/index.html" data-lang="zoroali">Zoroali</a></li>
-                    <li><a href="../vn/index.html" data-lang="vn">VN</a></li>
-                    <li><a href="../id/index.html" data-lang="id">ID</a></li>
-                    <li><a href="../ru/index.html" data-lang="ru">RU</a></li>
-                    <li><a href="../kg/index.html" data-lang="kg">KG</a></li>
+                <button id="langButton">JP ▼</button>
+                <ul id="langMenu" class="lang-menu-hidden">
+                    <li><a href="index.html" data-lang="jp">JP</a></li>
+                    <li><a href="en/index.html" data-lang="en">EN</a></li>
+                    <li><a href="zoroali/index.html" data-lang="zoroali">Zoroali</a></li>
+                    <li><a href="vn/index.html" data-lang="vn">VN</a></li>
+                    <li><a href="id/index.html" data-lang="id">ID</a></li>
+                    <li><a href="ru/index.html" data-lang="ru">RU</a></li>
+                    <li><a href="kg/index.html" data-lang="kg">KG</a></li>
                 </ul>
             </div>
         </div>
