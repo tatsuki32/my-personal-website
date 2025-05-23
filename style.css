@@ -160,7 +160,7 @@ main {
 }
 
 /* キービジュアル (全画面) - 顔写真なし、テキストのみ */
-.hero-full-screen-text-only { /* クラス名を変更 */
+.hero-full-screen-text-only {
     position: relative;
     width: 100%;
     height: 100vh; /* 画面いっぱいの高さ */
@@ -170,9 +170,9 @@ main {
     align-items: center;
     text-align: center;
     color: #f0f0f0;
-    overflow: hidden; /* 子要素がはみ出さないように */
-    padding: 80px 20px 40px; /* ヘッダーの高さ分と下部の余白 */
-    box-sizing: border-box; /* パディングを含めて幅を計算 */
+    overflow: hidden;
+    padding: 80px 20px 40px;
+    box-sizing: border-box;
 }
 
 .hero-overlay {
@@ -182,7 +182,7 @@ main {
     width: 100%;
     height: 100%;
     background: rgba(0, 0, 0, 0.6); /* 暗いオーバーレイ */
-    backdrop-filter: blur(2px); /* 少しぼかす */
+    backdrop-filter: blur(2px);
     z-index: 1;
 }
 
@@ -517,7 +517,7 @@ footer {
 }
 
 
-/* その他ページ共通の要素（h2など） */
+/* その他のページ共通の要素（h2など） */
 main h2 {
     font-family: 'Noto Serif JP', serif;
     font-size: 2.5rem;
@@ -735,34 +735,23 @@ main h2 {
     gap: 20px; /* アイテム間の余白 */
 }
 
-/* --- 語学記録ページ（language-log.html）専用スタイル --- */
-/* ... (このセクションの他のスタイルはそのまま) ... */
-
 .language-grid li {
     background-color: #1a1a1a;
     border: 1px solid #4a4a4a;
     border-radius: 8px;
     overflow: hidden;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    /* ホバー時のアニメーションの滑らかさを高めるため、backgroundもtransitionに追加 */
     transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, background-image 0.5s ease;
-
-    /* レインボーアニメーションの準備 */
-    background-size: 200% 200%; /* グラデーションのサイズを大きく設定 */
-    position: relative; /* 子要素の配置基準 */
-    z-index: 1; /* グラデーションが他の要素の上に表示されないように */
 }
 
 .language-grid li:hover {
     transform: translateY(-5px);
     box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-    /* ここが変更点！ レインボーグラデーションの背景色とアニメーション */
     background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 25%, #ffb62f 50%, #d8eb34 75%, #00c6fb 100%); /* レインボーグラデーション */
-    background-position: center center; /* 初期位置 */
+    background-position: center center;
     animation: rainbow-bg 2s ease-in-out infinite; /* アニメーション適用 */
 }
 
-/* レインボーアニメーションの定義 */
 @keyframes rainbow-bg {
     0% {
         background-position: 0% 50%;
@@ -774,8 +763,6 @@ main h2 {
         background-position: 0% 50%;
     }
 }
-
-/* ... (このセクションの他のスタイルはそのまま) ... */
 
 .lang-item {
     display: flex; /* Flexboxを使って縦並び */
@@ -849,17 +836,101 @@ main h2 {
         font-size: 0.85rem;
     }
 }
-/* 言語アイテムのスタイル（文字色の調整） */
-.lang-item .lang-jp,
-.lang-item .lang-native,
-.lang-item .lang-details {
-    transition: color 0.3s ease; /* ホバー時の文字色変化を滑らかに */
+/* --- 各言語学習記録詳細ページ（language-log-detail-section）専用スタイル --- */
+.language-log-detail-section {
+    max-width: 960px;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #2a2a2a; /* 背景色 */
+    box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    border-radius: 8px;
+    color: #f0f0f0;
+    line-height: 1.8;
 }
 
-.language-grid li:hover .lang-item .lang-jp,
-.language-grid li:hover .lang-item .lang-native,
-.language-grid li:hover .lang-item .lang-details {
-    color: #fff; /* ホバー時に文字色を白に統一（グラデーションに埋もれないよう） */
-    text-shadow: 0 0 5px rgba(0,0,0,0.5); /* 文字に軽い影をつけて読みやすく */
+.language-log-detail-section h2 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #9ecaed;
+    border-bottom: 1px solid rgba(158, 202, 237, 0.3);
+    padding-bottom: 15px;
 }
 
+.language-log-detail-section h3 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.8rem;
+    color: #9ecaed;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    padding-bottom: 5px;
+}
+
+.language-log-detail-section h4 {
+    font-family: 'Noto Serif JP', serif;
+    font-size: 1.4rem;
+    color: #f0f0f0;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+.language-log-detail-section p {
+    margin-bottom: 1em;
+    color: #ccc;
+}
+
+.language-log-detail-section ul {
+    list-style: disc; /* リストのマーク */
+    margin-left: 25px;
+    margin-bottom: 1em;
+    color: #ccc;
+}
+
+.language-log-detail-section ul li {
+    margin-bottom: 5px;
+}
+
+/* 学習記録の個別エントリのスタイル */
+.log-entries {
+    margin-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding-top: 30px;
+}
+
+.log-entry {
+    background-color: #1a1a1a;
+    border: 1px solid #4a4a4a;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.log-entry h4 {
+    color: #9ecaed;
+    font-size: 1.3rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    border-bottom: none; /* 個別エントリの見出しには下線なし */
+    padding-bottom: 0;
+}
+
+.log-entry p {
+    margin-bottom: 0;
+    color: #ccc;
+}
+
+/* モバイル対応 */
+@media (max-width: 768px) {
+    .language-log-detail-section {
+        padding: 20px;
+    }
+    .language-log-detail-section h2 {
+        font-size: 2rem;
+    }
+    .language-log-detail-section h3 {
+        font-size: 1.5rem;
+    }
+}
