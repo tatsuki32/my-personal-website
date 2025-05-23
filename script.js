@@ -86,3 +86,34 @@ document.addEventListener('DOMContentLoaded', () => {
 
     console.log("TATSUKI.ASIAのJavaScriptが動いています！");
 });
+// --- 語学リストのホバーで言語名を切り替える機能 ---
+document.addEventListener('DOMContentLoaded', () => {
+    const langItems = document.querySelectorAll('.language-grid .lang-item');
+
+    if (langItems.length > 0) {
+        langItems.forEach(item => {
+            const langJpSpan = item.querySelector('.lang-jp');
+            const langNativeSpan = item.querySelector('.lang-native');
+            const nativeLangText = item.getAttribute('data-lang-native');
+
+            if (langJpSpan && langNativeSpan && nativeLangText) {
+                langNativeSpan.textContent = nativeLangText; // ネイティブ表示スパンにテキストを設定
+
+                // ホバー時に切り替え（CSSの切り替えを補助）
+                item.addEventListener('mouseenter', () => {
+                    langJpSpan.style.opacity = '0';
+                    langJpSpan.style.transform = 'translateY(-5px)';
+                    langNativeSpan.style.opacity = '1';
+                    langNativeSpan.style.transform = 'translateY(0)';
+                });
+
+                item.addEventListener('mouseleave', () => {
+                    langJpSpan.style.opacity = '1';
+                    langJpSpan.style.transform = 'translateY(0)';
+                    langNativeSpan.style.opacity = '0';
+                    langNativeSpan.style.transform = 'translateY(5px)';
+                });
+            }
+        });
+    }
+});
