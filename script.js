@@ -226,20 +226,49 @@ document.addEventListener('DOMContentLoaded', () => {
         // 各記事のデータ (URL, タイトル, 概要) をここに追加してください
         // サムネイルは自動取得できないため、ここでは画像は指定しません。
         // タイトルと概要は手動で入力してください。
+
+        {
+            url: "https://www.city.chigasaki.kanagawa.jp/kyouiku/1039510/1051337.html",
+            title: "令和5年茅ヶ崎市はたちのつどいを開催しました",
+            description: "茅ヶ崎市様に掲載いただきました。"
+        },
+
+        {
+            url: "https://emc-global.jp/media/3478/",
+            title: "[Be a global entrepreneur!] Candidate Interview -TATSUKI MITSUHASHI-",
+            description: "武蔵野大学アントレプレナーシップ学部 様に取材いただきました。"
+        },
+
+        {
+            url: "https://www.youtube.com/watch?v=kGqZx2w8wnk&ab_channel=%E6%AD%A6%E8%94%B5%E9%87%8E%E5%A4%A7%E5%AD%A6%E3%82%A2%E3%83%B3%E3%83%88%E3%83%AC%E3%83%97%E3%83%AC%E3%83%8A%E3%83%BC%E3%82%B7%E3%83%83%E3%83%97%E5%AD%A6%E9%83%A8%EF%BC%88%E6%AD%A6%E8%94%B5%E9%87%8EEMC%EF%BC%89",
+            title: "[Be a global entrepreneur!] Candidate Interview -TATSUKI MITSUHASHI-",
+            description: "武蔵野大学アントレプレナーシップ学部 様に動画インタビューをしていただきました。"
+        },
+
+         {
+            url: "https://note.com/mu_emc/n/n4e54d1d29eac",
+            title: "EMC GLOBAL SUMMIT 開催レポート",
+            description: "武蔵野大学アントレプレナーシップ学部主催 EMC GLOBAL SUMMITに登壇いたしました。"
+        },
+
           {
             url: "https://prtimes.jp/main/html/rd/p/000000004.000073331.html",
             title: "株式会社Unpacked iU情報経営イノベーション専門職大学と「次世代の教育推進」を目的として連携",
+            description: "iU情報経営イノベーション専門職大学さまとの提携のリリース"
         },
 
          {
             url: "https://prtimes.jp/main/html/rd/p/000000003.000073331.html",
-            title: "Unpacked×テレビ東京コミュニケーションズ　共同事業としてU18キャリアサミットの開催を決定",
+            title: "Unpacked×テレビ東京コミュニケーションズ 共同事業としてU18キャリアサミットの開催を決定",
+            description: "テレビ東京コミュニケーションズさまとの提携のリリース"
             
         },
 
          {
             url: "https://kininarukotomatome.com/u18-career-summit-c0514/",
             title: "【第2弾：なんとなくから卒業だ】U18キャリアサミット",
+            description: "【第2弾：なんとなくから卒業だ】U18キャリアサミットのリリース"
+            
         },
 
          {
@@ -276,74 +305,49 @@ document.addEventListener('DOMContentLoaded', () => {
         },
        
           {
-            url: "https://coki.jp/",
-            title: "Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki",
-            description: "株式会社 Unpackedの活動に関するCokiでのインタビュー記事です。"
+            url: "https://shonan100.org/100club_post/1941/",
+            title: "夜寝るときに、明日が楽しみと思える人を1人でも増やしたい―16歳が切り拓く“自分の道”、その志。",
+            description: "NPO法人湘南スタイルさまに取材いただきました。"
         },
 
           {
-            url: "https://coki.jp/",
-            title: "Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki",
-            description: "株式会社 Unpackedの活動に関するCokiでのインタビュー記事です。"
+            url: "https://coki.jp/stakeholder/management/5490/",
+            title: "Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】",
+            description: "Cokiさまに取材いただきました。"
         },
 
           {
-            url: "https://coki.jp/",
-            title: "Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki",
-            description: "株式会社 Unpackedの活動に関するCokiでのインタビュー記事です。"
+            url: "https://www.youtube.com/watch?v=xPWbSv7j3Rc&ab_channel=%E3%81%9F%E3%81%A3%E3%81%9F%E3%82%93%E6%97%85%E3%81%A8%E5%A4%9A%E8%A8%80%E8%AA%9E",
+            title: "新成人代表挨拶」令和5年茅ヶ崎市はたちのつどい（旧成人式）新成人代表の言葉 三橋 龍起",
+            description: "茅ヶ崎市の新成人代表の挨拶を行いました。"
         },
 
           {
-            url: "https://coki.jp/",
-            title: "Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki",
-            description: "株式会社 Unpackedの活動に関するCokiでのインタビュー記事です。"
+            url: "https://crossxroad.com/young-entrepreneur",
+            title: "N高等学校在籍時に起業！21歳でセブ島、ベトナム、日本で事業を興す若者の育て方・育ち方",
+            description: "CROSSxROADさまに取材いただきました。"
         },
        
         {
-            url: "https://coki.jp/",
-            title: "Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki",
-            description: "株式会社 Unpackedの活動に関するCokiでのインタビュー記事です。"
+            url: "https://cebu-business-english-academy.com/visiting-professor/tatsuki-mitsuhashi-2",
+            title: "Cebu Business English Academy ［CBEA セベア］客員教授",
+            description: "Cebu Business English Academyの客員教授を拝命いたしました。"
         },
         {
-            url: "https://u-29.com/",
-            title: "「明日を楽しみに夜眠る人を増やす」 同世代に寄り添うN高生社長・三橋龍起の志 | U-29.com",
-            description: "U-29.comでの深掘りインタビュー記事。"
+            url: "https://u-18.makers-u.jp/think-big-forum/?fbclid=IwAR325rDcmp_6-sBT5xNReZd-ITN_1iwoBfD5jnvNyIyWABVcPGbdOTPsmoI",
+            title: "MAKERS UNIVERSITY U-18 THINK BIG FORUM 登壇",
+            description: "NPO法人　ETICさま運営のMAKERS UNIVERSITY U-18イベントに登壇いたしました。"
         },
+       
+        
         {
-            url: "https://shonan100.org/",
-            title: "夜寝るときに、明日が楽しみと思える人を1人でも増やしたい—16歳が切り拓く“自分の道”、その志。 | 湘南ワンハンドレッドプロジェクト",
-            description: "湘南100クラブでのインタビュー記事です。"
-        },
-        {
-            url: "https://www.watch.impress.co.jp/",
-            title: "人生を切り拓く！N高卒業生と起業部が語る、事業と社会変革のアイディア——プレゼンテーションイベント「NED2020」レポート後編",
-            description: "プレゼンテーションイベント「NED2020」に関するレポート記事。"
-        },
-        {
-            url: "https://news.line.me/",
+            url: "https://www.nippon-foundation.or.jp/journal/2019/39073",
             title: "「一番の問題は環境問題」ノーベル平和賞受賞者ムハマド・ユヌス氏が日本の高校生と意見を交わす (BLOGOS)",
-            description: "ムハマド・ユヌス氏との対談記事。"
+            description: "ムハマド・ユヌス氏との当時の高校生らの対談記事。"
         },
-        {
-            url: "https://u29-141.peatix.com/",
-            title: "【Vol.140】ユニキャリ by 父の死→N高に転校→起業を目指す！三橋龍起さんに聞く「自分で切り拓く人生論」とは",
-            description: "ユニークな価値観を持つ29歳以下の世代（U-29世代）のためのコミュニティ「ユニキャリ」でのインタビュー。"
-        },
-        {
-            url: "https://dwango.co.jp/",
-            title: "起業部法人登記第6号誕生中高生向けのキャリア教育支援事業「株式会社 Unpacked」高校生が高校生に未知なる発見や学びを提供|株式会社ドワンゴ",
-            description: "株式会社Unpacked設立に関するドワンゴのプレスリリース。"
-        },
-        {
-            url: "https://www.unpacked-inc.com/",
-            title: "株式会社Unpacked ホームページ",
-            description: "私が創業した会社(株式会社Unpacked）のホームページです。"
-        },
-        {
-            url: "https://www.u18career.com/",
-            title: "U18キャリアサミット 公式HP",
-            description: "事業の1つ（U18CareerSummit）特設ページです。"
-        },
+        
+       
+        
         // 20〜30件ある取材記事のURLとタイトル、概要をここに追加してください
         // 例：
         // {
