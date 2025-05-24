@@ -3,99 +3,81 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ホーム | たつき＠趣味としての多言語</title>
+    <title>ホーム | たつき＠趣味としての多言語学習</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="overlay"></div>
-    
-    
-    <header class="main-header">
-    <div class="container header-content">
-        <div class="logo">たつき＠趣味としての多言語学習</div>
-        <div class="lang-switcher">
-            <a href="index.html" class="active">JP</a>
+    <div class="overlay"></div> <header class="main-header">
+        <div class="container header-content">
+            <div class="logo">たつき＠趣味としての多言語学習</div>
+            <div class="lang-switcher">
+                <a href="index.html" class="active">JP</a>
+                <a href="en/index.html">EN</a>
+                <a href="kg/index.html">KG</a>
+                <a href="ru/index.html">RU</a>
+            </div>
+            <button class="lang-switcher-toggle">言語</button>
+            <nav class="main-nav">
+                <button class="hamburger" aria-label="メニューを開く">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="blog.html">日記</a></li>
+                    <li><a href="multilingual-journey.html">多言語奮闘記</a></li>
+                    <li><a href="profile.html">自己紹介</a></li>
+                    <li><a href="contact.html">お問い合わせ</a></li>
+                </ul>
+            </nav>
+        </div>
+        <div class="lang-switcher-dropdown">
+            <a href="index.html">JP</a>
             <a href="en/index.html">EN</a>
             <a href="kg/index.html">KG</a>
             <a href="ru/index.html">RU</a>
         </div>
-        <button class="lang-switcher-toggle">言語</button>
-
-        <button class="hamburger" aria-label="メニューを開く">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button>
-        
-        <nav class="main-nav">
-            <ul class="nav-list">
-                <li><a href="index.html">ホーム</a></li>
-                <li><a href="blog.html">日記</a></li>
-                <li><a href="multilingual-journey.html">多言語奮闘記</a></li>
-                <li><a href="profile.html">自己紹介</a></li>
-                <li><a href="contact.html">お問い合わせ</a></li>
-            </ul>
-        </nav>
-    </div>
-    <div class="lang-switcher-dropdown">
-        <a href="index.html">JP</a>
-        <a href="en/index.html">EN</a>
-        <a href="kg/index.html">KG</a>
-        <a href="ru/index.html">RU</a>
-    </div>
-</header>
-<div class="overlay"></div> 
+    </header>
 
     <main>
         <section id="hero" class="hero-section">
             <div class="container">
                 <h1>言葉の奥深さを探求する旅</h1>
                 <p>世界中の言語、その使い方、そして表現の可能性を巡る私の記録</p>
-                </div>
-        </section>
-
-        <section id="latest-blog" class="blog-section container">
-            <h2>最新日記記事</h2>
-            <div class="home-latest-articles">
-                <div class="home-article-preview">
-                    <span class="date">2025/05/20</span>
-                    <h3>言語学習のモチベーション維持の秘訣</h3>
-                </div>
-                <div class="home-article-preview">
-                    <span class="date">2025/05/18</span>
-                    <h3>なぜ日本語は美しいのか？</h3>
-                </div>
-                <div class="home-article-preview">
-                    <span class="date">2025/05/15</span>
-                    <h3>旅先でのコミュニケーション術</h3>
-                </div>
-            </div>
-            <div class="text-center">
-                <a href="blog.html" class="btn btn-small">日記記事をもっと見る</a>
             </div>
         </section>
 
-        <section id="latest-multilingual" class="multilingual-journey-section container">
-            <h2>多言語奮闘記 更新情報</h2>
-            <div class="home-latest-articles">
-                <div class="home-article-preview">
-                    <span class="date">2025/05/22</span>
-                    <h3>英語学習：発音矯正のポイント</h3>
-                </div>
-                <div class="home-article-preview">
-                    <span class="date">2025/05/19</span>
-                    <h3>ロシア語の動詞の体（アスペクト）を理解する</h3>
-                </div>
-                <div class="home-article-preview">
-                    <span class="date">2025/05/17</span>
-                    <h3>キルギス語の挨拶表現集</h3>
-                </div>
-            </div>
-            <div class="text-center">
-                <a href="multilingual-journey.html" class="btn btn-small">多言語奮闘記をもっと見る</a>
-            </div>
+        <section id="thought" class="thought-section container">
+            <h2>私の心にある言葉への想い</h2>
+            <p>
+                言葉は、単なる意思伝達の道具ではありません。それは思考そのものであり、文化の器であり、そして何よりも、世界を認識し、他者と深く繋がるための魔法です。
+                私は幼い頃から、この言葉の不思議な力に魅せられてきました。日本語という母語の繊細な美しさに感動する一方で、異言語を学ぶことで、同じ世界が全く異なる光を放つことに驚きと喜びを感じています。
+                このブログは、私が言葉を巡る旅で出会った発見や葛藤、喜びを共有する場です。言語学的な探求から、実用的な学習のヒント、そして旅先での言葉を通じた心温まる交流まで、私の情熱のすべてをここに綴ります。
+                言葉は無限の可能性を秘めています。この場所が、訪れてくださる皆様にとって、言葉への新たな興味や、自己表現への一歩を踏み出すきっかけとなれば幸いです。
+            </p>
         </section>
+
+        <section id="youtube-section" class="youtube-section container">
+            <h2>動画で旅する言葉の世界</h2>
+            <div class="youtube-thumbnail-wrapper">
+                <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID/hqdefault.jpg" alt="YouTube動画のサムネイル" class="thumbnail">
+                <div class="play-button"></div>
+                <iframe 
+                    width="560" 
+                    height="315" 
+                    src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+                    title="YouTube video player" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    referrerpolicy="strict-origin-when-cross-origin" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <p class="text-center">私の多言語学習の様子や旅の体験を動画で共有しています。ぜひご覧ください！</p>
+        </section>
+
 
         <section id="about-me-cta" class="profile-section container">
             <div class="text-center">
@@ -116,7 +98,7 @@
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 たつき All Rights Reserved.</p>
+            <p>© 2025 たつき All Rights Reserved.</p>
         </div>
     </footer>
 

@@ -178,54 +178,17 @@ p {
     margin-left: 15px; /* ハンバーガーとの間隔 */
 }
 
-.main-nav {
-    margin-left: 30px; /* 言語スイッチャーとナビの間にスペース */
-    flex-grow: 1; /* 残りのスペースを埋める */
-    text-align: right;
-}
-
-.nav-list {
-    list-style: none;
-    display: flex;
-    justify-content: flex-end; /* 右寄せ */
-}
-
-.nav-list li {
-    margin-left: 30px;
-}
-
-.nav-list a {
-    font-weight: 700;
-    font-size: 1.1em;
-    padding: 5px 0;
-    position: relative;
-    color: var(--color-black);
-}
-
-.nav-list a::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background-color: var(--color-black);
-    transition: width 0.3s ease;
-}
-
-.nav-list a:hover::after,
-.nav-list a.active-page::after { /* 現在のページもハイライト */
-    width: 100%;
-}
-
+/* ハンバーガーメニュー */
 .hamburger {
     display: none; /* デフォルトは非表示 */
     background: none;
     border: none;
     cursor: pointer;
     padding: 10px;
-    position: relative;
-    z-index: 10000; /* ナビより手前に */
+    position: absolute; /* 親要素 .header-content に対して絶対配置 */
+    top: 15px; /* ヘッダー上部からの位置 */
+    right: 20px; /* 右端からの位置 */
+    z-index: 10000; /* モバイルメニュー（z-index:9999）より高くする */
 }
 
 .hamburger .bar {
@@ -256,7 +219,7 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.7); /* 暗くする背景 */
+    background-color: rgba(0, 0, 0, 0.5); /* 暗くする背景 */
     z-index: 998; /* メニューより下、コンテンツより上 */
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
@@ -267,10 +230,13 @@ p {
     opacity: 1;
 }
 
+/* bodyに no-scroll クラスが追加されたらスクロールを禁止 */
+body.no-scroll {
+    overflow: hidden;
+}
 
 /* ヒーローセクション */
 .hero-section {
-    /* 既存の背景設定 */
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), /* ここを修正: 透明度を上げる (0.6 -> 0.7) */
                 url('https://via.placeholder.com/1500x500/333333/FFFFFF?text=Language+Study') no-repeat center center/cover;
     color: var(--color-white); /* 文字色は白 */
@@ -288,23 +254,50 @@ p {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* ★文字に影を追加: 影の色を濃くして視認性を高める */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* 文字に影を追加: 影の色を濃くして視認性を高める */
 }
 
 .hero-section h1 {
     color: var(--color-white); /* 文字色は白 */
-    font-size: 3.8em; /* ★文字サイズを大きく (3.5em -> 3.8em) */
-    margin-bottom: 20px; /* ★下マージンを増やす (15px -> 20px) */
+    font-size: 3.8em; /* 文字サイズを大きく (3.5em -> 3.8em) */
+    margin-bottom: 20px; /* 下マージンを増やす (15px -> 20px) */
     line-height: 1.2;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* ★h1専用の影を強める */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* h1専用の影を強める */
 }
 
 .hero-section p {
-    font-size: 1.4em; /* ★文字サイズを大きく (1.3em -> 1.4em) */
+    font-size: 1.4em; /* 文字サイズを大きく (1.3em -> 1.4em) */
     max-width: 700px;
     margin: 0 auto 30px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* ★p専用の影 */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* p専用の影 */
 }
+
+/* ヒーローセクション下の思想・想いを書くエリア */
+.thought-section {
+    padding: 60px 20px;
+    text-align: center;
+    background-color: var(--color-off-white);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.02);
+    /* ドットグリッドの背景はbodyから継承 */
+}
+.thought-section h2 {
+    font-size: 1.8em;
+    color: var(--color-black);
+    margin-bottom: 20px;
+    text-align: center; /* 中央寄せ */
+}
+.thought-section h2::after { /* 下線を中央に */
+    left: 50%;
+    transform: translateX(-50%);
+}
+.thought-section p {
+    font-size: 1.1em;
+    line-height: 1.8;
+    max-width: 800px;
+    margin: 0 auto;
+    color: var(--color-dark-gray);
+}
+
 
 /* 各セクションの基本スタイル */
 section {
@@ -341,7 +334,7 @@ section h2::after {
     background-color: var(--color-black);
 }
 
-/* ホームの最新記事プレビュー */
+/* ホームの最新記事プレビュー (スタイルは残すが、index.htmlからは削除される) */
 .home-latest-articles {
     display: flex;
     justify-content: center;
@@ -350,6 +343,8 @@ section h2::after {
 }
 
 .home-article-preview {
+    position: relative; /* hidden-link の基準にする */
+    cursor: pointer;
     background-color: var(--color-white);
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.03);
@@ -357,6 +352,11 @@ section h2::after {
     width: 300px;
     text-align: center;
     margin-bottom: 20px;
+    transition: box-shadow 0.3s ease, transform 0.3s ease; /* ホバー効果 */
+}
+.home-article-preview:hover {
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08); /* 影を強く */
+    transform: translateY(-3px); /* 少し上に移動 */
 }
 
 .home-article-preview .date {
@@ -371,6 +371,17 @@ section h2::after {
     line-height: 1.4;
     margin-bottom: 0; /* 概要がないので */
 }
+.home-article-preview .hidden-link {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; /* 手前に表示 */
+    text-decoration: none; /* 下線を表示させない */
+    background-color: transparent; /* 背景も透明 */
+}
+
 
 /* 日記記事グリッド (blog.html, 個別記事ページなど) */
 .article-grid {
@@ -478,7 +489,7 @@ section h2::after {
 }
 
 
-/* 多言語奮闘記セクション (multilingual-journey.html) */
+/* 多言語奮闘記セクション (multilingual-journey.html のスタイルは残す) */
 .multilingual-journey-section .section-description {
     text-align: center;
     max-width: 800px;
@@ -694,6 +705,93 @@ section h2::after {
     color: var(--color-light-gray);
 }
 
+/* YouTubeセクション */
+.youtube-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+}
+.youtube-section h2 {
+    margin-bottom: 30px;
+}
+
+.youtube-thumbnail-wrapper {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* 16:9 のアスペクト比 */
+    height: 0;
+    overflow: hidden;
+    margin: 0 auto;
+    max-width: 800px; /* 動画の最大幅 */
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    cursor: pointer;
+    background-color: var(--color-light-gray); /* サムネイルが表示されるまでの背景 */
+    transition: box-shadow 0.3s ease;
+}
+
+.youtube-thumbnail-wrapper:hover {
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+.youtube-thumbnail-wrapper img.thumbnail {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: opacity 0.3s ease;
+}
+
+.youtube-thumbnail-wrapper .play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+.youtube-thumbnail-wrapper .play-button::before {
+    content: '';
+    width: 0;
+    height: 0;
+    border-top: 20px solid transparent;
+    border-bottom: 20px solid transparent;
+    border-left: 30px solid var(--color-white);
+    margin-left: 5px; /* 三角形の位置調整 */
+}
+
+.youtube-thumbnail-wrapper .play-button:hover {
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+/* 動画埋め込み時のスタイル */
+.youtube-thumbnail-wrapper iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+    display: none; /* 初期状態は非表示 */
+}
+
+.youtube-thumbnail-wrapper.playing iframe {
+    display: block; /* 再生中に表示 */
+}
+.youtube-thumbnail-wrapper.playing img.thumbnail,
+.youtube-thumbnail-wrapper.playing .play-button {
+    display: none; /* 再生中に非表示 */
+}
+
 
 /* ============================
     レスポンシブデザイン
@@ -716,10 +814,10 @@ section h2::after {
 
     .logo {
         font-size: 1.5em;
-        /* width: 100%; スマホでロゴを一行に */
-        text-align: left; /* ロゴは左寄せに戻す */
-        margin-bottom: 0; /* 元のマージンをリセット */
-        flex-grow: 1; /* ロゴが伸びるように */
+        width: auto;
+        text-align: left;
+        margin-bottom: 0;
+        flex-grow: 1;
     }
 
     .lang-switcher {
@@ -728,40 +826,39 @@ section h2::after {
 
     .lang-switcher-toggle {
         display: block; /* モバイル版ボタンを表示 */
-        order: 1; /* ハンバーガーの隣に配置 */
-        margin-left: auto; /* 右寄せ */
-    }
-
-    .main-nav {
-        width: 100%;
-        text-align: center;
-        margin-left: 0;
-        order: 3; /* 一番下に配置 */
+        /* positionはすでにabsoluteで設定済み */
     }
 
     .hamburger {
         display: block; /* スマホでハンバーガー表示 */
-        position: static; /* position:absolute から変更 */
-        margin-left: 15px; /* 言語ボタンとの間隔 */
-        order: 2; /* 言語ボタンの隣に配置 */
+        /* positionはすでにabsoluteで設定済み */
+    }
+
+    /* .main-nav 自体は display: none; にしない (nav-listで制御) */
+    .main-nav {
+        margin-left: 0;
+        text-align: left; /* メニューリストのアイテムを左寄せにするため */
+        width: auto;
+        flex-grow: 0;
     }
 
     /* モバイルメニューが開いた際のスタイル */
     .nav-list {
         flex-direction: column;
-        width: 100%;
+        width: 280px; /* メニューの幅を固定 */
         background-color: var(--color-white);
         position: fixed; /* 画面全体を覆う */
         top: 0;
-        left: 0;
+        right: 0; /* 右からスライドイン */
         height: 100%; /* 画面の高さに合わせる */
         transform: translateX(100%); /* 最初は右に隠す */
         transition: transform 0.3s ease-in-out;
-        box-shadow: -5px 0 10px rgba(0,0,0,0.1);
+        box-shadow: -5px 0 10px rgba(0,0,0,0.2); /* 影を濃くして視覚的に引き締める */
         z-index: 9999; /* 最前面に */
         padding-top: 80px; /* ヘッダーの高さ分開ける */
         align-items: flex-start; /* 左寄せ */
         padding-left: 20px;
+        overflow-y: auto; /* メニューが長くなったらスクロール可能に */
     }
 
     .nav-list.is-active {
@@ -788,24 +885,24 @@ section h2::after {
 
     /* モバイル版言語スイッチャーのドロップダウン */
     .lang-switcher-dropdown {
-        display: none; /* デフォルトは非表示 */
+        display: flex; /* Flexboxで縦並びに */
         position: fixed;
         top: 0;
-        right: 0;
+        right: 0; /* 右からスライドイン */
         width: 200px; /* ドロップダウンの幅 */
         background-color: var(--color-white);
-        box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-        z-index: 9998;
+        box-shadow: -5px 0 10px rgba(0,0,0,0.1);
+        z-index: 9999;
         flex-direction: column;
         padding: 15px;
         transform: translateX(100%);
         transition: transform 0.3s ease-in-out;
+        /* `is-active` クラスで表示される */
     }
 
     .lang-switcher-dropdown.is-active {
         transform: translateX(0);
     }
-
     .lang-switcher-dropdown a {
         display: block;
         padding: 10px 0;
@@ -816,20 +913,32 @@ section h2::after {
         border-bottom: none;
     }
 
+
     /* ヒーローセクション */
-    
     .hero-section {
-        padding: 60px 20px; /* ★モバイルでのパディングを調整 */
-        min-height: 300px; /* ★モバイルでの最小高さを調整 */
+        padding: 60px 20px; /* モバイルでのパディングを調整 */
+        min-height: 300px; /* モバイルでの最小高さを調整 */
     }
     .hero-section h1 {
-        font-size: 2.5em; /* ★モバイルでの文字サイズを大きく (2em -> 2.5em) */
+        font-size: 2.5em; /* モバイルでの文字サイズを大きく */
         margin-bottom: 15px;
     }
     .hero-section p {
-        font-size: 1.1em; /* ★モバイルでの文字サイズを大きく (1em -> 1.1em) */
+        font-size: 1.1em; /* モバイルでの文字サイズを大きく */
         margin-bottom: 20px;
     }
+
+    /* ヒーローセクション下の思想・想いを書くエリア */
+    .thought-section {
+        padding: 40px 20px; /* モバイルでのパディング */
+    }
+    .thought-section h2 {
+        font-size: 1.5em;
+    }
+    .thought-section p {
+        font-size: 1em;
+    }
+
 
     h2 {
         font-size: 1.8em;

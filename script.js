@@ -2,13 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- グローバルナビゲーションとハンバーガーメニュー ---
     const hamburger = document.querySelector('.hamburger');
     const navList = document.querySelector('.nav-list');
-    const overlay = document.querySelector('.overlay'); // オーバーレイ要素を取得
+    const overlay = document.querySelector('.overlay');
 
     const toggleNav = () => {
-        hamburger.classList.toggle('is-active');
-        navList.classList.toggle('is-active');
-        overlay.classList.toggle('is-active'); // オーバーレイの表示/非表示も切り替え
-        document.body.classList.toggle('no-scroll'); // 背景のスクロールを禁止
+        hamburger.classList.toggle('is-active'); // X印アニメーション
+        navList.classList.toggle('is-active'); // メニューのスライド
+        overlay.classList.toggle('is-active'); // オーバーレイの表示
+        document.body.classList.toggle('no-scroll'); // 背景のスクロール禁止
+        
+        // ハンバーガーメニューが開いたら言語ドロップダウンを閉じる
+        if (navList.classList.contains('is-active') && langSwitcherDropdown.classList.contains('is-active')) {
+            langSwitcherDropdown.classList.remove('is-active');
+        }
     };
 
     hamburger.addEventListener('click', toggleNav);
@@ -29,16 +34,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (langSwitcherToggle && langSwitcherDropdown) {
         langSwitcherToggle.addEventListener('click', (event) => {
-            event.stopPropagation(); // クリックイベントの伝播を停止
+            event.stopPropagation(); // クリックイベントの伝播を停止（bodyクリックで閉じないように）
             langSwitcherDropdown.classList.toggle('is-active');
-            // 必要であれば、言語ドロップダウンが開いたらオーバーレイも表示する
-            // overlay.classList.toggle('is-active'); 
-            // document.body.classList.toggle('no-scroll');
+
+            // 言語ドロップダウンが開いたらハンバーガーメニューを閉じる
+            if (langSwitcherDropdown.classList.contains('is-active') && navList.classList.contains('is-active')) {
+                toggleNav(); // ハンバーガーメニューを閉じる
+            }
+            // 言語ドロップダウンが開いたらオーバーレイも表示する (任意)
+            // overlay.classList.add('is-active'); // 言語ドロップダウンを開いた時にもオーバーレイを表示したい場合
+            // document.body.classList.add('no-scroll'); // 言語ドロップダウンが開いた時にもスクロールを禁止したい場合
         });
 
-        // ドロップダウン外をクリックで閉じる
+        // ドロップダウン外をクリックで閉じる (ハンバーガーメニューと同時開閉は考慮しない)
         document.addEventListener('click', (event) => {
-            if (!langSwitcherDropdown.contains(event.target) && langSwitcherDropdown.classList.contains('is-active')) {
+            if (!langSwitcherDropdown.contains(event.target) && !langSwitcherToggle.contains(event.target) && langSwitcherDropdown.classList.contains('is-active')) {
                 langSwitcherDropdown.classList.remove('is-active');
                 // if (!navList.classList.contains('is-active')) { // ハンバーガーメニューが開いてない時だけスクロール許可
                 //     document.body.classList.remove('no-scroll');
@@ -57,7 +67,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- 現在のページに応じたナビゲーションリンクのハイライト ---
+
+    // --- 現在のページに応じたナビゲーションリンクのハイライト (既存のコード) ---
     const currentPath = window.location.pathname.split('/').pop();
     const currentLangDir = window.location.pathname.split('/')[1];
 
@@ -66,7 +77,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         if (currentPath === 'index.html' && linkHref === 'index.html') {
             link.classList.add('active-page');
-        } else if (currentPath === '' && linkHref === 'index.html' && currentLangDir === '') { // ルートURLのJP版
+        } else if (currentPath === '' && linkHref === 'index.html' && currentLangDir === '') {
              link.classList.add('active-page');
         }
         else if (linkHref !== 'index.html' && currentPath === linkHref) {
@@ -74,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- 言語スイッチャーのハイライト ---
+    // --- 言語スイッチャーのハイライト (既存のコード) ---
     const langSwitcherLinks = document.querySelectorAll('.lang-switcher a');
     const langSwitcherDropdownLinks = document.querySelectorAll('.lang-switcher-dropdown a');
     
@@ -95,7 +106,7 @@ document.addEventListener('DOMContentLoaded', () => {
     highlightLangLink(langSwitcherDropdownLinks);
 
 
-    // --- 多言語奮闘記セクションのインタラクション ---
+    // --- 多言語奮闘記セクションのインタラクション (既存のコード) ---
     const languageItems = document.querySelectorAll('.language-item');
 
     const languageData = {
@@ -119,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     // PC/タブレット: マウスオーバー時のインタラクション
-    if (window.innerWidth > 768) { // 768px以上をPC/タブレットと判断
+    if (window.innerWidth > 768) {
         languageItems.forEach(item => {
             const langKey = item.dataset.lang;
             const langPoetry = item.querySelector('.lang-poetry');
@@ -136,13 +147,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(() => {
                     item.classList.remove('is-active');
                     item.classList.remove(languageData[langKey].colorClass);
-                    langPoetry.textContent = ''; // 詩をクリア
-                }, 200); // 200msの遅延
+                    langPoetry.textContent = '';
+                }, 200);
             });
         });
     }
 
-    // スマートフォン: スクロール時のインタラクション (Intersection Observer APIを使用)
+    // スマートフォン: スクロール時のインタラクション
     const observerOptions = {
         root: null,
         rootMargin: '0px',
@@ -156,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const langPoetry = item.querySelector('.lang-poetry');
             
             if (languageData[langKey]) {
-                langPoetry.textContent = languageData[langKey].poetry; // モバイルでは常に詩を設定
+                langPoetry.textContent = languageData[langKey].poetry;
             }
 
             if (entry.isIntersecting) {
@@ -173,12 +184,21 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    if (document.getElementById('multilingual-journey-section-id')) { // IDを追加
+    if (document.getElementById('multilingual-journey-section-id')) {
         languageItems.forEach(item => {
             languageObserver.observe(item);
         });
     }
 
-    // --- 背景スクロール禁止用のクラス ---
-    // CSSで body.no-scroll { overflow: hidden; } を追加
+    // --- YouTubeサムネイル再生ロジック ---
+    const youtubeThumbnailWrapper = document.querySelector('.youtube-thumbnail-wrapper');
+    if (youtubeThumbnailWrapper) {
+        youtubeThumbnailWrapper.addEventListener('click', function() {
+            // iframeのsrc属性からautoplay=1を追加
+            const iframe = this.querySelector('iframe');
+            const youtubeId = iframe.src.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/)[1];
+            iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1`;
+            this.classList.add('playing'); // playingクラスを追加して動画を表示
+        });
+    }
 });
