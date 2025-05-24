@@ -830,15 +830,17 @@ section h2::after {
         align-items: center;
         padding: 0 20px; /* ★左右のパディング */
     }
-
-    .logo {
+.logo {
         font-size: 1.2em; /* ★ここを修正: より小さい値に調整 */
         width: auto;
         text-align: left;
         margin-bottom: 0;
         flex-grow: 1;
         order: 2;
-      
+        /* 追加で以下も検討 */
+        white-space: nowrap; /* テキストの折り返しを禁止 */
+        overflow: hidden; /* はみ出した部分を隠す（必要であれば） */
+        text-overflow: ellipsis; /* はみ出した部分を...で表示（必要であれば） */
     }
 
     .lang-switcher {
