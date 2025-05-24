@@ -8,16 +8,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <header class="main-header">
+    <div class="overlay"></div> <header class="main-header">
         <div class="container header-content">
+            <button class="lang-switcher-toggle">LG</button>
+
             <div class="logo">たつき＠趣味としての多言語学習</div>
             <div class="lang-switcher">
-                <a href="/index.html">JP</a>
-                <a href="/en/index.html">EN</a>
-                <a href="/kg/index.html">KG</a>
-                <a href="/ru/index.html">RU</a>
+                <a href="index.html">JP</a>
+                <a href="en/index.html">EN</a>
+                <a href="kg/index.html">KG</a>
+                <a href="ru/index.html">RU</a>
             </div>
+            
             <nav class="main-nav">
                 <button class="hamburger" aria-label="メニューを開く">
                     <span class="bar"></span>
@@ -33,6 +35,13 @@
                 </ul>
             </nav>
         </div>
+        <div class="lang-switcher-dropdown">
+            <button class="lang-switcher-close-button">×</button>
+            <a href="index.html">JP</a>
+            <a href="en/index.html">EN</a>
+            <a href="kg/index.html">KG</a>
+            <a href="ru/index.html">RU</a>
+        </div>
     </header>
 
     <main>
@@ -40,11 +49,293 @@
             <div class="content-page">
                 <h2>自己紹介</h2>
                 <img src="https://via.placeholder.com/200/DDDDDD/000000?text=Your+Photo" alt="あなたの写真" style="width: 200px; height: 200px; border-radius: 50%; display: block; margin: 0 auto 30px;">
-                <p>たつきと申します。幼少の頃から言葉の持つ不思議な力に魅せられ、これまで様々な言語を学び、その奥深さを探求してきました。このブログは、私の個人的な言語学習の記録であり、言葉を通じて見えてくる世界の面白さ、そしてコミュニケーションの可能性について、皆さんと共有したいという思いから立ち上げました。</p>
-                <p>趣味として多言語学習に取り組んでおり、特に英語、ロシア語、キルギス語に力を入れています。また、古典文学に登場する中古日本語や、まだ誰も話さない人工言語の創造にも興味があります。言葉は、単なる記号の羅列ではなく、文化、歴史、そして人間の思考そのものを形作るものだと信じています。</p>
-                <p>旅をすることも大好きで、訪れた国々で出会った言語や人々との交流は、私の探求心をさらに深めてくれています。時には数学や音楽も「言語」として捉え、その共通点や相違点について考察することもあります。このブログが、皆さんの言葉への興味を刺激し、新たな発見のきっかけになれば幸いです。</p>
-                <p>どうぞ、ゆっくりと私の「言葉を巡る旅」にお付き合いください。</p>
+                
+                <p>初めまして。三橋龍起(Mitsuhashi Tatsuki ）と申します。こちらは、私の多言語学習とビジネス、そして日々の探求についてまとめた簡単な自己紹介です。</p>
+                <p>頭の中の乱雑な思想については、より詳細な <a href="https://ja.wikipedia.org/wiki/%E4%B8%89%E6%A9%8B%E9%BE%8D%E8%B5%B7" target="_blank" rel="noopener noreferrer">#🇯🇵三橋龍起_wiki_JP</a> をご覧ください。（※これは、私の思想をまとめた架空のページへのリンクです）</p>
+                
+                <p class="update-info">
+                    <strong>更新日:</strong> 2024.6.12 | 2023.9.11 | 2024.10.09
+                    </p>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>基本情報</h3>
+                <ul>
+                    <li><strong>名前:</strong> 三橋龍起 (Tatsuki Mitsuhashi)</li>
+                    <li><strong>年齢:</strong> 21歳</li>
+                    <li><strong>出身地:</strong> 神奈川県茅ヶ崎市、日本</li>
+                    <li><strong>現在の所属:</strong> 株式会社高校生 代表取締役、CYBER - NOT A BAR 共同創業者 (フィリピンで X Bar 経営、東京で ROYAL STAND 経営)、IT開発会社 (4期目)</li>
+                    <li><strong>学歴:</strong> 鵠沼高等学校 → N高等学校 (起業部4期生) → ZEN大学 (2025年4月入学予定)</li>
+                </ul>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>略歴 (Timeline)</h3>
+                <ul>
+                    <li><strong>2003年3月:</strong> 神奈川県茅ヶ崎市に生まれ育つ。幼少期はわがままで好奇心旺盛。家族に愛され、海や自然、図書館などに連れて行ってもらう。</li>
+                    <li><strong>小学生時代:</strong> サッカー2年、体操2年、バスケ3年、水泳6年を経験。</li>
+                    <li><strong>中学時代:</strong> バスケットボール部で部長を務める。友人に恵まれ、楽しい日々を送る。</li>
+                    <li><strong>14歳:</strong> 父が急病で他界。</li>
+                    <li><strong>15歳:</strong> 高校入学後半年で、父の死による影響でうつ病となり不登校に。約1年間、東京で遊び明かす日々を送る。</li>
+                    <li><strong>16歳頃:</strong> 「このままではいけない」と決意。父への後悔を乗り越え、誰かのためにできることを考え始める。中高生向けのインターンシップや起業支援に関する記事を読み、東京の関連イベントに参加し始める。</li>
+                    <li><strong>2019年8月-12月:</strong> 国内ライブコマース大手 17 Live 株式会社でインターンシップを行う。</li>
+                    <li><strong>2019年9月:</strong> 第二回世界青少年志プレゼンテーション大会のファイナリストに選ばれる。</li>
+                    <li><strong>17歳:</strong> N高等学校に転学し、起業部4期生として採択される。孫泰造氏が理事を務めるNPO法人ETIC Makers University U18の6期生に選ばれる。</li>
+                    <li><strong>2020年12月:</strong> 株式会社Unpackedを設立し、CEOに就任。中高生1000人を集めた当時日本最大級のキャリアイベント「U18キャリアサミット」を創設。大企業のCSR費用を活用し、若者のキャリア教育支援プロジェクトを多岐にわたり展開。</li>
+                    <li><strong>2020年-2022年:</strong> 逗子市立逗子小学校で外部講師として4ヶ月間勤務。30以上の小・中・高校で探求時間のカリキュラム作成に携わる。</li>
+                    <li><strong>2022年3月:</strong> ドバイで大阪・関西万博2025の告知活動を水谷氏と共に行う。マレーシア政府との共同イベントに参加し、アラビア圏全域放送のテレビ局 Abu Dhabi TVに出演。</li>
+                    <li><strong>2023年1月:</strong> 神奈川県茅ヶ崎市のはたちの集い（旧成人式）で代表挨拶を行う。</li>
+                    <li><strong>2023年:</strong> ベトナムで「CYBER - NOT A BAR」を3店舗プロデュース。現在は2店舗を展開中。</li>
+                    <li><strong>2024年4月:</strong> 株式会社高校生で、採用・営業エージェンシー向けチャットボット開発事業を開始 (2024年8月リリース予定)。</li>
+                    <li><strong>2024年5月:</strong> フィリピン・セブ島でアジト「Cebu χ Bar & Lounge」をプレオープン。</li>
+                    <li><strong>2025年1月〜:</strong> キルギス共和国でロシア語留学中。</li>
+                    <li><strong>その他メディア出演:</strong> 茅ヶ崎市タウンニュース、公益財団法人YMCA、株式会社ドワンゴ、湘南100club、角川ドワンゴ ニコニコ超会議 NED2020、Markers University、NHKトライアングル、テレビ東京 カンブリア宮殿「アイデアの扉」など。</li>
+                </ul>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>SNSアカウント</h3>
+                <div class="sns-links-grid">
+                    <a href="mailto:admin@kokosei.jp" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=✉️" alt="メールアイコン">
+                        <p>仕事の問い合わせ用メール</p>
+                    </a>
+                    <a href="https://my.prairie.cards/u/tatsuki3284" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=🪪" alt="名刺アイコン">
+                        <p>電子名刺</p>
+                    </a>
+                    <a href="https://www.instagram.com/2gisgis/" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=📷" alt="インスタグラムアイコン">
+                        <p>Instagram (日本での発信/思い出保存)</p>
+                    </a>
+                    <a href="https://x.com/tatsuki3284" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=X" alt="X (旧Twitter) アイコン">
+                        <p>X (日本での広報)</p>
+                    </a>
+                    <a href="https://www.facebook.com/tatsuki3284" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=f" alt="Facebookアイコン">
+                        <p>Facebook (日本語の発信)</p>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tatsuki3284" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=in" alt="LinkedInアイコン">
+                        <p>LinkedIn (英語でのビジネス)</p>
+                    </a>
+                    <a href="https://t.me/tatsuki32" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=✈️" alt="Telegramアイコン">
+                        <p>Telegram (ロシア語学習)</p>
+                    </a>
+                    <a href="https://www.youtube.com/@tatsuki3284?app=desktop" target="_blank" rel="noopener noreferrer" class="sns-item"> <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=▶️" alt="YouTubeアイコン">
+                        <p>YouTube (個人の娯楽用)</p>
+                    </a>
+                    <a href="https://note.com/tatsuki32841" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=n" alt="noteアイコン">
+                        <p>note (エッセイ、ブログ、詩)</p>
+                    </a>
                 </div>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>生活習慣</h3>
+                <ul>
+                    <li><strong>煙草:</strong> 吸いません。ノンニコチンシーシャは吸いますが、シーシャ屋立ち上げ時にニコチンシーシャを試した際、アトピー性皮膚炎が悪化したため現在は吸っていません。</li>
+                    <li><strong>酒:</strong> 飲みません。バー経営をしており以前は飲んでいましたが、現在はアルコールアレルギーとアトピー性皮膚炎が悪化し、ビール1杯で体が痒くなるため飲まなくなりました。</li>
+                    <li><strong>オール (徹夜で遊ぶこと):</strong> しません。以前は好きでしたが、最近は朝のモーニングルーティンを重視しており、それが狂うと一日が不安定になるため避けています。東京では朝まで遊べる場所も多いですが、キルギスやカザフスタンではそのような友人も稀なため、習慣からなくなりました。基本21:00には帰宅します。</li>
+                </ul>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>インターネットとの関わり方</h3>
+                <p>「遅いインターネット」という概念も提唱されていますが、私にとって情報過多は疲労や「もう何もしたくない」という気持ちにつながることが多いです。また、せっかく見た映画や本の感想を咄嗟に思い出せないことも課題でした。そのため、気がついた時に、本や映画だけでなく、Webの記事の感想や批評を書くようにしています。これにより、一度読んだ良い記事を忘れにくくなるだけでなく、私がそこから何を感じ、気づき、知ったのかが読み取れ、「自分の頭でものを考える」良い練習になっています。</p>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>趣味</h3>
+                <p>多趣味で、年とともに変わりますが、おそらく生涯続くと感じる事柄です。</p>
+                <div class="hobbies-list">
+                    <ul>
+                        <li>語学学習</li>
+                        <li>音楽</li>
+                        <li>筋トレや健康のための行動</li>
+                        <li>自然との戯れ</li>
+                        <li>旅</li>
+                        <li>アニメ鑑賞</li>
+                        <li>漫画</li>
+                        <li>読書</li>
+                        <li>古典の追求</li>
+                        <li>紙に文字を書く活動</li>
+                    </ul>
+                    <ul>
+                        <li>心地よい睡眠の追求</li>
+                        <li>うまい水を探し飲む</li>
+                        <li>自分を他者に知ってもらう活動</li>
+                        <li>自身の解像度を高める活動</li>
+                        <li>愛への解像度を高め実行する</li>
+                        <li>友人、家族との関わり方に対する改善</li>
+                        <li>節度、規律、自制ある生活への行動変革</li>
+                        <li>ゆるくふんわり甘い生活の模索と実行</li>
+                    </ul>
+                </div>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>行った国</h3>
+                <p class="country-list">
+                    🇯🇵🇦🇺🇻🇳🇲🇾🇵🇭🇮🇩🇮🇳🇰🇭🇹🇭🇹🇼🇸🇬🇨🇳🇰🇷🇦🇿🇰🇼🇴🇲🇦🇪🇷🇸🇧🇬🇦🇿🇪🇬🇰🇬🇰🇿
+                </p>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>言語スキル</h3>
+                <div class="language-skills-grid">
+                    <div class="language-category">
+                        <h4>話せる言語</h4>
+                        <ul>
+                            <li>日本語</li>
+                            <li>英語</li>
+                            <li>ベトナム語</li>
+                        </ul>
+                    </div>
+                    <div class="language-category">
+                        <h4>勉強中の言語</h4>
+                        <ul>
+                            <li>ロシア語</li>
+                            <li>セルビア語</li>
+                            <li>インドネシア語</li>
+                            <li>スペイン語</li>
+                            <li>ラテン語</li>
+                            <li>キルギス語</li>
+                            <li>中国語</li>
+                            <li>フランス語</li>
+                            <li>エスペラント語</li>
+                            <li>アラビア語</li>
+                        </ul>
+                    </div>
+                    <div class="language-category">
+                        <h4>勉強したい言語</h4>
+                        <ul>
+                            <li>ハワイ語</li>
+                            <li>サウジ方言アラビア語</li>
+                            <li>マレー語</li>
+                            <li>ブルガリア語</li>
+                            <li>古代ヘブライ語</li>
+                            <li>ギリシャ語</li>
+                            <li>ドイツ語</li>
+                            <li>スワヒリ語</li>
+                            <li>ヒンディー語</li>
+                            <li>韓国語</li>
+                            <li>ウルドゥ語</li>
+                            <li>イタリア語</li>
+                            <li>ブラジルポルトガル語</li>
+                            <li>ポーランド語</li>
+                            <li>トルコ語</li>
+                            <li>アゼルバイジャン語</li>
+                            <li>ビサヤ語</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>日々のルーティン (理想を含む)</h3>
+                <p>朝5時に起き、歯磨き、洗顔、髪のセット、髭剃り、肌のケア、水を飲む。その後、音楽を聴きながらコーヒー豆を挽き、瞑想5分、イメージング10分、アファメーション1分、ジャーナリング10分を行う。20分ストレッチをしてから、30分語学学習。肩が疲れたら散歩やストレッチをし、本を10ページ読む。その後軽く朝食を作り、仕事を始める。仕事は誰かのためになる何かを7時00分から10時までは行う。その後は日によるが、朝の時間で頭を使う意思決定はほとんど終わっている。外に出てリラックスする。夜は21時までには家に戻り、22時には部屋の電気を消す。寝られない日は無理せず起きても良いが、必ず5時には起きるようにする。</p>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>取材履歴 (一部抜粋)</h3>
+                <p>これまでのメディア掲載やインタビュー記事の一部です。クリックで詳細をご覧いただけます。</p>
+                <div class="media-articles-grid">
+                    <div class="media-article-item">
+                        <a href="https://www.jetro.go.jp/events/scc/a610798e353de032.html" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=JETRO+Article" alt="JETRO記事サムネイル" class="article-thumb">
+                            <h4>JETRO 記事タイトル（例）</h4>
+                            <p>海外ビジネスに関するJETROでの掲載記事です。</p>
+                        </a>
+                    </div>
+                    <div class="media-article-item">
+                        <a href="https://coki.jp/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=Coki+Article" alt="Coki記事サムネイル" class="article-thumb">
+                            <h4>Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki</h4>
+                            <p>株式会社 Unpackedの活動に関するCokiでのインタビュー記事です。</p>
+                        </a>
+                    </div>
+                    <div class="media-article-item">
+                        <a href="https://u-29.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=U-29+Article" alt="U-29記事サムネイル" class="article-thumb">
+                            <h4>「明日を楽しみに夜眠る人を増やす」 同世代に寄り添うN高生社長・三橋龍起の志 | U-29.com</h4>
+                            <p>U-29.comでの深掘りインタビュー記事。</p>
+                        </a>
+                    </div>
+                    <div class="media-article-item">
+                        <a href="https://shonan100.org/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=湘南100club" alt="湘南100club記事サムネイル" class="article-thumb">
+                            <h4>夜寝るときに、明日が楽しみと思える人を1人でも増やしたい—16歳が切り拓く“自分の道”、その志。 | 湘南ワンハンドレッドプロジェクト</h4>
+                            <p>湘南100クラブでのインタビュー記事です。</p>
+                        </a>
+                    </div>
+                    <div class="media-article-item">
+                        <a href="https://www.watch.impress.co.jp/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=NED2020" alt="NED2020記事サムネイル" class="article-thumb">
+                            <h4>人生を切り拓く！N高卒業生と起業部が語る、事業と社会変革のアイディア——プレゼンテーションイベント「NED2020」レポート後編</h4>
+                            <p>プレゼンテーションイベント「NED2020」に関するレポート記事。</p>
+                        </a>
+                    </div>
+                    <div class="media-article-item">
+                        <a href="https://news.line.me/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=BLOGOS" alt="BLOGOS記事サムネイル" class="article-thumb">
+                            <h4>「一番の問題は環境問題」ノーベル平和賞受賞者ムハマド・ユヌス氏が日本の高校生と意見を交わす (BLOGOS)</h4>
+                            <p>ムハマド・ユヌス氏との対談記事。</p>
+                        </a>
+                    </div>
+                    <div class="media-article-item">
+                        <a href="https://u29-141.peatix.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=ユニキャリ" alt="ユニキャリ記事サムネイル">
+                            <h4>【Vol.140】ユニキャリ by 父の死→N高に転校→起業を目指す！三橋龍起さんに聞く「自分で切り拓く人生論」とは</h4>
+                            <p>ユニークな価値観を持つ29歳以下の世代（U-29世代）のためのコミュニティ「ユニキャリ」でのインタビュー。</p>
+                        </a>
+                    </div>
+                    <div class="media-article-item">
+                        <a href="https://dwango.co.jp/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=ドワンゴ" alt="ドワンゴ記事サムネイル">
+                            <h4>起業部法人登記第6号誕生中高生向けのキャリア教育支援事業「株式会社 Unpacked」高校生が高校生に未知なる発見や学びを提供|株式会社ドワンゴ</h4>
+                            <p>株式会社Unpacked設立に関するドワンゴのプレスリリース。</p>
+                        </a>
+                    </div>
+                    <div class="media-article-item">
+                        <a href="https://www.unpacked-inc.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=Unpacked+HP" alt="株式会社Unpackedホームページサムネイル">
+                            <h4>株式会社Unpacked ホームページ</h4>
+                            <p>私が創業した会社(株式会社Unpacked）のホームページ。</p>
+                        </a>
+                    </div>
+                     <div class="media-article-item">
+                        <a href="https://www.u18career.com/" target="_blank" rel="noopener noreferrer">
+                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=U18サミットHP" alt="U18キャリアサミットホームページサムネイル">
+                            <h4>U18キャリアサミット 公式HP</h4>
+                            <p>事業の1つ（U18CareerSummit）特設ページ。</p>
+                        </a>
+                    </div>
+                    </div>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>補足（私の考え方・価値観）</h3>
+                <p>以下は、私の個人的な考え方や価値観に関する補足です。これらの項目は、私という人間をより深く理解していただくための一助となれば幸いです。個人のプライバシーに配慮し、抽象的な表現に留めています。</p>
+                <ul>
+                    <li><strong>対人関係と恋愛:</strong> 互いを尊敬し、それぞれ自立しながら、互いに必要とし、定期的な対話・話し合いによって関係性を維持・向上できる関係性を理想としています。悩みは生きている限り尽きないと知り、支えあい共に乗り越える意思を重視します。また、人類は決して全知になれず無知であることを自覚し、高齢になっても共に手を取り合える関係性を目指しています。</li>
+                    <li><strong>現在の関係性:</strong> 現時点では、「彼女や付き合っている」という言葉で特定の他者と関係性を築くことに関心はありません。過去の関係性も、便宜上はなかったものとしています。ただし、結婚については法律やステークホルダーが増えるため、もし将来結婚したらパートナーの存在を公言します。</li>
+                </ul>
+                <ul>
+                    <li><strong>性別:</strong> 自身の性別について、固定的に決めようとは考えていません。</li>
+                </ul>
+
+                <hr style="margin: 40px 0;">
+
+                <div class="text-center">
+                    <h2>お問い合わせ</h2>
+                    <p>私の活動やこのブログにご興味をお持ちいただけましたら、お気軽にご連絡ください。</p>
+                    <a href="contact.html" class="btn">お問い合わせはこちら</a>
+                </div>
+            </div>
         </section>
     </main>
 
