@@ -163,11 +163,9 @@ p {
     border-color: var(--color-black);
 }
 
-/* --- レスポンシブデザインの調整 (既存の @media (max-width: 768px) 内に記述) --- */
-@media (max-width: 768px) {
-    /* ... 既存のCSS ... */
 
-    /* モバイル版言語スイッチャーボタン */
+
+/* モバイル版言語スイッチャーボタン */
     .lang-switcher-toggle {
         display: block; /* モバイル版ボタンを表示 */
         position: absolute;
@@ -183,7 +181,7 @@ p {
         white-space: nowrap; /* テキストが折り返さないように */
     }
 
-    /* ハンバーガーメニュー */
+/* ハンバーガーメニュー */
     .hamburger {
         display: block; /* スマホでハンバーガー表示 */
         position: absolute;
@@ -201,37 +199,6 @@ p {
         justify-content: center;
         align-items: center;
     }
-
-    /* ... 既存のCSS ... */
-}
-
-/* モバイル版言語スイッチャーボタン */
-.lang-switcher-toggle {
-    display: none; /* デフォルトは非表示 */
-    background: none;
-    border: none;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 1.1em;
-    color: var(--color-black);
-    padding: 10px;
-    position: relative;
-    z-index: 1001;
-    margin-left: 15px; /* ハンバーガーとの間隔 */
-}
-
-/* ハンバーガーメニュー */
-.hamburger {
-    display: none; /* デフォルトは非表示 */
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 10px;
-    position: absolute; /* 親要素 .header-content に対して絶対配置 */
-    top: 15px; /* ヘッダー上部からの位置 */
-    right: 20px; /* 右端からの位置 */
-    z-index: 10000; /* モバイルメニュー（z-index:9999）より高くする */
-}
 
 .hamburger .bar {
     display: block;
