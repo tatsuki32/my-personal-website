@@ -3,156 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tatsuki mitsuhashi 三橋龍起 official site - 深淵への扉</title>
+    <title>たつき＠趣味としての多言語学習 | ホーム</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
 
-   <header>
-        <div class="header-content">
-            <div class="site-title">
-                <h1>tatsuki mitsuhashi <small>三橋龍起 official site</small></h1>
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo">たつき＠趣味としての多言語学習</div>
+            <div class="lang-switcher">
+                <a href="/index.html" class="active">JP</a>
+                <a href="/en/index.html">EN</a>
+                <a href="/kg/index.html">KG</a>
+                <a href="/ru/index.html">RU</a>
             </div>
-            <button id="hamburgerButton" class="hamburger-button">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            <nav class="global-nav" id="globalNav">
-                <ul>
-                    <li><a href="/" class="active">思索の淵</a></li>
-                    <li><a href="blog.html">言葉の綴り</a></li>
-                    <li><a href="language-log.html">語学の軌跡</a></li>
-                    <li><a href="about.html">存在の深淵</a></li>
-                    <li><a href="contact.html">接触</a></li>
+            <nav class="main-nav">
+                <button class="hamburger" aria-label="メニューを開く">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="blog.html">日記</a></li>
+                    <li><a href="multilingual-journey.html">多言語奮闘記</a></li>
+                    <li><a href="profile.html">自己紹介</a></li>
+                    <li><a href="contact.html">お問い合わせ</a></li>
                 </ul>
             </nav>
-            <div class="language-switcher">
-                <button id="langButton">JP ▼</button>
-                <ul id="langMenu" class="lang-menu-hidden">
-                    <li><a href="index.html" data-lang="jp">JP</a></li>
-                    <li><a href="en/index.html" data-lang="en">EN</a></li>
-                    <li><a href="zoroali/index.html" data-lang="zoroali">Zoroali</a></li>
-                    <li><a href="vn/index.html" data-lang="vn">VN</a></li>
-                    <li><a href="id/index.html" data-lang="id">ID</a></li>
-                    <li><a href="ru/index.html" data-lang="ru">RU</a></li>
-                    <li><a href="kg/index.html" data-lang="kg">KG</a></li>
-                </ul>
-            </div>
         </div>
     </header>
 
     <main>
-        <section class="hero-full-screen-with-profile">
-            <div class="hero-overlay"></div>
-            <div class="hero-content">
-                <div class="main-title-container">
-                    <img src="images/tatsuki_profile.jpg" alt="三橋龍起 プロフィール写真" class="hero-profile-image">
-                    <h2 class="main-title">TATSUKI MITSUHASHI</h2>
-                    <p class="tagline-jp">人間失格。ただ、識ることに耽る。</p>
-                </div>
-                <div class="multi-lang-quote">
-                    <p class="quote-text lang-jp">「或る思念は、或る言語の中に於いてのみ可能である。」</p>
-                    <p class="quote-author">― 太宰 治</p>
-                    <p class="quote-text lang-en">"A certain thought is only possible in a certain language."</p>
-                    <p class="quote-author lang-en">― Osamu Dazai</p>
-                    <p class="quote-text lang-math">∀x (P(x) → Q(x))</p>
-                    <p class="quote-author lang-math">― Principia Mathematica</p>
-                </div>
-                <div class="scroll-indicator">
-                    <span>Scroll Down</span>
-                    <div class="arrow-down"></div>
-                </div>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <h1>言葉の奥深さを探求する旅</h1>
+                <p>世界中の言語、その使い方、そして表現の可能性を巡る私の記録</p>
+                <a href="#latest-blog" class="btn">最新記事を見る</a>
             </div>
         </section>
 
-        <section class="sponsor-logos section-dark">
-            <div class="section-content">
-                <h2>パートナー企業</h2>
-                <div class="logo-grid">
-                    <div class="logo-item"><img src="images/sponsor-logo-1.png" alt="企業ロゴ1"><span>パートナー企業名A</span></div>
-                    <div class="logo-item"><img src="images/sponsor-logo-2.png" alt="企業ロゴ2"><span>パートナー企業名B</span></div>
-                    <div class="logo-item"><img src="images/sponsor-logo-3.png" alt="企業ロゴ3"><span>パートナー企業名C</span></div>
-                    <div class="logo-item"><img src="images/sponsor-logo-4.png" alt="企業ロゴ4"><span>パートナー企業名D</span></div>
-                    <div class="logo-item"><img src="images/sponsor-logo-5.png" alt="企業ロゴ5"><span>パートナー企業名E</span></div>
-                    <div class="logo-item"><img src="images/sponsor-logo-6.png" alt="企業ロゴ6"><span>パートナー企業名F</span></div>
+        <section id="latest-blog" class="blog-section container">
+            <h2>最新日記記事</h2>
+            <div class="home-latest-articles">
+                <div class="home-article-preview">
+                    <span class="date">2025/05/20</span>
+                    <h3>言語学習のモチベーション維持の秘訣</h3>
                 </div>
+                <div class="home-article-preview">
+                    <span class="date">2025/05/18</span>
+                    <h3>なぜ日本語は美しいのか？</h3>
+                </div>
+                <div class="home-article-preview">
+                    <span class="date">2025/05/15</span>
+                    <h3>旅先でのコミュニケーション術</h3>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="blog.html" class="btn btn-small">日記記事をもっと見る</a>
             </div>
         </section>
 
-        <section class="latest-news-posts section-light">
-            <div class="section-content">
-                <h2>最新情報</h2>
-                <div class="news-list">
-                    <article class="news-item">
-                        <p class="news-date">2025/05/25</p>
-                        <h3><a href="posts/2025-05-24-my-first-travel-experience.html">【ブログ更新】初めての海外一人旅：準備から出発、そして感動まで！</a></h3>
-                    </article>
-                    <article class="news-item">
-                        <p class="news-date">2025/05/20</p>
-                        <h3><a href="posts/sample-article-2.html">【学習記録】ロシア語学習、現在の進捗と課題について</a></h3>
-                    </article>
-                    <article class="news-item">
-                        <p class="news-date">2025/05/18</p>
-                        <h3><a href="posts/sample-article-3.html">【お知らせ】NHKラジオ「〇〇語講座」への出演が決定</a></h3>
-                    </article>
+        <section id="latest-multilingual" class="multilingual-journey-section container">
+            <h2>多言語奮闘記 更新情報</h2>
+            <div class="home-latest-articles">
+                <div class="home-article-preview">
+                    <span class="date">2025/05/22</span>
+                    <h3>英語学習：発音矯正のポイント</h3>
                 </div>
-                <p class="view-all-news"><a href="blog.html">全てのニュースを見る »</a></p>
+                <div class="home-article-preview">
+                    <span class="date">2025/05/19</span>
+                    <h3>ロシア語の動詞の体（アスペクト）を理解する</h3>
+                </div>
+                <div class="home-article-preview">
+                    <span class="date">2025/05/17</span>
+                    <h3>キルギス語の挨拶表現集</h3>
+                </div>
+            </div>
+            <div class="text-center">
+                <a href="multilingual-journey.html" class="btn btn-small">多言語奮闘記をもっと見る</a>
             </div>
         </section>
 
-        <section class="featured-video section-dark">
-            <div class="section-content">
-                <h2>注目の映像</h2>
-                <div class="video-container">
-                    <iframe width="560" height="315" src="https://www.youtube.com/embed/YOUR_YOUTUBE_VIDEO_ID" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                </div>
-                <p style="text-align: center; margin-top: 20px;"><a href="https://www.youtube.com/watch?v=KDXSEE5pn_0">YouTubeチャンネルへ »</a></p>
-            </div>
-        </section>
+        </main>
 
-        <section class="profile-excerpt-cta section-light">
-            <div class="section-content profile-flex-container">
-                <div class="profile-excerpt-image-container">
-                    <img src="images/tatsuki_profile.jpg" alt="三橋龍起 プロフィール写真" class="profile-excerpt-image">
-                </div>
-                <div class="profile-excerpt-text">
-                    <h2>三橋龍起について</h2>
-                    <p>私の名は三橋龍起。この世界に存在する不可視の真理、言葉の深淵、そして人間の本質を探求する者である。古き日本の美意識と、現代の知性が交錯する地点に、私は立つ。</p>
-                    <p><a href="about.html" class="cta-button">存在の深淵へ »</a></p>
-                </div>
-            </div>
-        </section>
-
-        <section class="contact-cta section-dark">
-            <div class="section-content">
-                <h2>接触</h2>
-                <p>仕事のご依頼やご相談、その他お問い合わせは、以下のボタンよりご連絡ください。</p>
-                <p><a href="contact.html" class="cta-button">お問い合わせフォームへ »</a></p>
-                </div>
-        </section>
-    </main>
-
-    <footer>
-        <div class="footer-content">
-            <p>© 2025 tatsuki mitsuhashi official site. All Rights Reserved.</p>
-            <nav class="footer-nav">
-                <ul>
-                    <li><a href="privacy-policy.html">秘匿の規約</a></li>
-                    <li><a href="sitemap.html">地図</a></li>
-                    <li><a href="terms.html">利用規約</a></li>
-                    <li><a href="commercial-transactions.html">特定商取引法に関する表記</a></li>
-                    <li><a href="payment-methods.html">支払時期 / 解約方法について</a></li>
-                    <li><a href="recommended-environment.html">推奨環境</a></li>
-                    <li><a href="help.html">ヘルプ / お問い合わせ</a></li>
-                    <li><a href="register.html">会員登録</a></li>
-                    <li><a href="login.html">ログイン</a></li>
-                </ul>
-            </nav>
-            <div class="footer-quote">
-                <p>「私は、この地球を去るまで、絶えず学び続けるであろう。」</p>
-            </div>
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 たつき All Rights Reserved.</p>
         </div>
     </footer>
 

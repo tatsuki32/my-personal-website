@@ -1,61 +1,60 @@
 <!DOCTYPE html>
-<html lang="en"> <head>
+<html lang="ky">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tatsuki mitsuhashi official site - Home</title>
-    <link rel="stylesheet" href="../style.css"> </head>
+    <title>Өзүм жөнүндө | Тацуки @ Көп тилдүүлүккө умтулуум</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <div class="site-title">
-                <h1>tatsuki mitsuhashi <small>official site</small></h1>
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo">Тацуки @ Көп тилдүүлүккө умтулуум</div>
+            <div class="lang-switcher">
+                <a href="/index.html">JP</a>
+                <a href="/en/index.html">EN</a>
+                <a href="/kg/index.html" class="active">KG</a>
+                <a href="/ru/index.html">RU</a>
             </div>
-            <nav class="global-nav">
-                <ul>
-                    <li><a href="../">Home</a></li> <li><a href="../blog.html">Blog</a></li>
-                    <li><a href="../language-log.html">Language Log</a></li>
-                    <li><a href="../about.html">Profile</a></li>
-                    <li><a href="../contact.html">Contact</a></li>
+            <nav class="main-nav">
+                <button class="hamburger" aria-label="Менюну ачуу">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="../index.html">Башкы бет</a></li>
+                    <li><a href="index.html">Өзүм жөнүндө</a></li>
+                    <li><a href="#contact">Байланыш</a></li>
                 </ul>
             </nav>
-            <div class="language-switcher">
-                <button id="langButton">EN ▼</button> <ul id="langMenu" class="lang-menu-hidden">
-                    <li><a href="../index.html" data-lang="jp">JP</a></li>
-                    <li><a href="index.html" data-lang="en">EN</a></li>
-                    <li><a href="../zoroali/index.html" data-lang="zoroali">Zoroali</a></li>
-                    <li><a href="../vn/index.html" data-lang="vn">VN</a></li>
-                    <li><a href="../id/index.html" data-lang="id">ID</a></li>
-                    <li><a href="../ru/index.html" data-lang="ru">RU</a></li>
-                    <li><a href="../kg/index.html" data-lang="kg">KG</a></li>
-                </ul>
-            </div>
         </div>
     </header>
 
     <main>
-        <section class="hero-section">
-            <h2>Welcome!</h2>
-            <p class="tagline">Languages, travels, and learning. My daily records and experiences for you.</p>
-        </section>
-
-        <section class="latest-blog-posts">
-            <h2>Latest Blog Posts</h2>
-            <p>This page is currently under construction. Please visit the Japanese version for full content.</p>
+        <section class="container">
+            <div class="content-page">
+                <h2>Өзүм жөнүндө</h2>
+                <img src="https://via.placeholder.com/200/DDDDDD/000000?text=Your+Photo" alt="Сүрөтүңүз" style="width: 200px; height: 200px; border-radius: 50%; display: block; margin: 0 auto 30px;">
+                <p>Салам! Менин атым Тацуки. Бала кезимден бери сөздөрдүн сырдуу күчүнө арбалып, көптөгөн тилдерди үйрөнүп, алардын тереңдигин изилдеп келем. Бул блог менин тил үйрөнүү саякатымдын жеке жазуусу жана мен тил аркылуу көрүнгөн дүйнөнүн кызыктуулугун, ошондой эле баарлашуунун мүмкүнчүлүктөрүн баарыңыздар менен бөлүшкүм келет.</p>
+                <p>Мен көп тилдүүлүктү хобби катары үйрөнөм, өзгөчө англис, орус жана кыргыз тилдерине басым жасайм. Ошондой эле, классикалык адабияттарда кездешкен байыркы жапон тилине жана жасалма тилдерди түзүүгө кызыгам. Сөз жөн гана символдордун жыйындысы эмес, маданиятты, тарыхты жана адамдын ой жүгүртүүсүн калыптандыруучу нерсе деп эсептейм.</p>
+                <p>Саякаттоону да аябай жакшы көрөм, ар кайсы өлкөлөрдө жолуккан тилдер жана адамдар менен болгон мамиле менин изилдөөчүлүк духумду андан ары тереңдетти. Кээде математиканы жана музыканы да "тил" катары карап, алардын жалпылыктарын жана айырмачылыктарын карап чыгам. Бул блог сиздердин тилге болгон кызыгууңуздарды арттырып, жаңы ачылыштарга себеп болот деп үмүттөнөм.</p>
+                <p>Менин "сөздөр дүйнөсүнө саякатыма" кошулуңуздар.</p>
+                <h3>Байланыш</h3>
+                <p id="contact">Пикириңиздер, сунуштарыңыздар же кызматташуу боюнча сунуштарыңыздар болсо, тартынбай кайрылыңыздар.</p>
+                <p>Электрондук почта: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 tatsuki mitsuhashi official site. All Rights Reserved.</p>
-            <nav class="footer-nav">
-                <ul>
-                    <li><a href="../privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="../sitemap.html">Sitemap</a></li>
-                </ul>
-            </nav>
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Тацуки Бардык укуктар корголгон.</p>
         </div>
     </footer>
 
-    <script src="../script.js"></script> </body>
+    <script src="../script.js"></script>
+</body>
 </html>

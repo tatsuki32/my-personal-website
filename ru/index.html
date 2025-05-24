@@ -1,61 +1,60 @@
 <!DOCTYPE html>
-<html lang="en"> <head>
+<html lang="ru">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>tatsuki mitsuhashi official site - Home</title>
-    <link rel="stylesheet" href="../style.css"> </head>
+    <title>Обо мне | Тацуки @ Изучение языков как хобби</title>
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+</head>
 <body>
 
-    <header>
-        <div class="header-content">
-            <div class="site-title">
-                <h1>tatsuki mitsuhashi <small>official site</small></h1>
+    <header class="main-header">
+        <div class="container header-content">
+            <div class="logo">Тацуки @ Изучение языков как хобби</div>
+            <div class="lang-switcher">
+                <a href="/index.html">JP</a>
+                <a href="/en/index.html">EN</a>
+                <a href="/kg/index.html">KG</a>
+                <a href="/ru/index.html" class="active">RU</a>
             </div>
-            <nav class="global-nav">
-                <ul>
-                    <li><a href="../">Home</a></li> <li><a href="../blog.html">Blog</a></li>
-                    <li><a href="../language-log.html">Language Log</a></li>
-                    <li><a href="../about.html">Profile</a></li>
-                    <li><a href="../contact.html">Contact</a></li>
+            <nav class="main-nav">
+                <button class="hamburger" aria-label="Открыть меню">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+                <ul class="nav-list">
+                    <li><a href="../index.html">Главная</a></li>
+                    <li><a href="index.html">Обо мне</a></li>
+                    <li><a href="#contact">Контакты</a></li>
                 </ul>
             </nav>
-            <div class="language-switcher">
-                <button id="langButton">EN ▼</button> <ul id="langMenu" class="lang-menu-hidden">
-                    <li><a href="../index.html" data-lang="jp">JP</a></li>
-                    <li><a href="index.html" data-lang="en">EN</a></li>
-                    <li><a href="../zoroali/index.html" data-lang="zoroali">Zoroali</a></li>
-                    <li><a href="../vn/index.html" data-lang="vn">VN</a></li>
-                    <li><a href="../id/index.html" data-lang="id">ID</a></li>
-                    <li><a href="../ru/index.html" data-lang="ru">RU</a></li>
-                    <li><a href="../kg/index.html" data-lang="kg">KG</a></li>
-                </ul>
-            </div>
         </div>
     </header>
 
     <main>
-        <section class="hero-section">
-            <h2>Welcome!</h2>
-            <p class="tagline">Languages, travels, and learning. My daily records and experiences for you.</p>
-        </section>
-
-        <section class="latest-blog-posts">
-            <h2>Latest Blog Posts</h2>
-            <p>This page is currently under construction. Please visit the Japanese version for full content.</p>
+        <section class="container">
+            <div class="content-page">
+                <h2>Обо мне</h2>
+                <img src="https://via.placeholder.com/200/DDDDDD/000000?text=Your+Photo" alt="Ваше фото" style="width: 200px; height: 200px; border-radius: 50%; display: block; margin: 0 auto 30px;">
+                <p>Здравствуйте! Меня зовут Тацуки. С детства я был очарован таинственной силой слов, и с тех пор я изучаю различные языки и исследую их глубины. Этот блог — моя личная запись о путешествии по изучению языков, и я начал его с желанием поделиться со всеми вами чудесами мира, которые открываются через язык, и возможностями общения.</p>
+                <p>В качестве хобби я занимаюсь многоязычным обучением, уделяя особое внимание английскому, русскому и кыргызскому языкам. Мне также интересны классический японский язык, который встречается в классической литературе, и создание искусственных языков. Я верю, что язык — это не просто набор символов, а нечто, что формирует культуру, историю и само человеческое мышление.</p>
+                <p>Я также очень люблю путешествовать, и языки и люди, которых я встречал в разных странах, еще больше углубили мою любознательность. Иногда я даже рассматриваю математику и музыку как «языки», исследуя их сходства и различия. Надеюсь, этот блог вызовет у вас интерес к языкам и станет катализатором для новых открытий.</p>
+                <p>Пожалуйста, не торопитесь присоединиться ко мне в моем «путешествии по словам».</p>
+                <h3>Контакты</h3>
+                <p id="contact">Не стесняйтесь обращаться ко мне с любыми мнениями, отзывами или предложениями о сотрудничестве.</p>
+                <p>Электронная почта: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+            </div>
         </section>
     </main>
 
-    <footer>
-        <div class="footer-content">
-            <p>&copy; 2025 tatsuki mitsuhashi official site. All Rights Reserved.</p>
-            <nav class="footer-nav">
-                <ul>
-                    <li><a href="../privacy-policy.html">Privacy Policy</a></li>
-                    <li><a href="../sitemap.html">Sitemap</a></li>
-                </ul>
-            </nav>
+    <footer class="main-footer">
+        <div class="container">
+            <p>&copy; 2025 Тацуки. Все права защищены.</p>
         </div>
     </footer>
 
-    <script src="../script.js"></script> </body>
+    <script src="../script.js"></script>
+</body>
 </html>
