@@ -7,16 +7,15 @@
     <link rel="stylesheet" href="../style.css"> <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="overlay"></div>
 
     <header class="main-header">
         <div class="container header-content">
-            <div class="logo">Tatsuki @ My Multilingual Journey as a Hobby</div>
+            <button class="lang-switcher-toggle">EN</button> <div class="logo">Tatsuki @ My Multilingual Journey as a Hobby</div>
             <div class="lang-switcher">
-                <a href="/index.html">JP</a>
-                <a href="/en/index.html" class="active">EN</a>
-                <a href="/kg/index.html">KG</a>
-                <a href="/ru/index.html">RU</a>
-            </div>
+                <a href="../index.html">JP</a> <a href="index.html" class="active">EN</a>
+                <a href="../kg/index.html">KG</a> <a href="../ru/index.html">RU</a> </div>
+            
             <nav class="main-nav">
                 <button class="hamburger" aria-label="Open menu">
                     <span class="bar"></span>
@@ -24,37 +23,242 @@
                     <span class="bar"></span>
                 </button>
                 <ul class="nav-list">
-                    <li><a href="../index.html">Home</a></li>
-                    <li><a href="index.html">About Me</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
+                    <li><a href="../index.html">Home</a></li> <li><a href="../blog.html">Diary</a></li> <li><a href="../multilingual-journey.html">Multilingual Journey</a></li> <li><a href="index.html">About Me</a></li> <li><a href="../contact.html">Contact</a></li> </ul>
             </nav>
         </div>
+        <div class="lang-switcher-dropdown">
+            <button class="lang-switcher-close-button">×</button>
+            <a href="../index.html">JP</a> <a href="index.html">EN</a>
+            <a href="../kg/index.html">KG</a> <a href="../ru/index.html">RU</a> </div>
     </header>
 
     <main>
         <section class="container">
             <div class="content-page">
                 <h2>About Me</h2>
-                <img src="https://via.placeholder.com/200/DDDDDD/000000?text=Your+Photo" alt="Your Photo" style="width: 200px; height: 200px; border-radius: 50%; display: block; margin: 0 auto 30px;">
-                <p>Hello! My name is Tatsuki. Since childhood, I've been fascinated by the mysterious power of words, and I've been learning various languages and exploring their depths. This blog is a personal record of my language learning journey, and I started it with the desire to share the wonders of the world seen through language and the possibilities of communication with all of you.</p>
-                <p>As a hobby, I'm dedicated to multilingual learning, with a particular focus on English, Russian, and Kyrgyz. I'm also interested in Classical Japanese, which appears in classical literature, and the creation of artificial languages. I believe that language is not just a series of symbols, but something that shapes culture, history, and human thought itself.</p>
-                <p>I also love traveling, and the languages and people I've encountered in various countries have deepened my curiosity. Sometimes, I even consider mathematics and music as "languages," exploring their commonalities and differences. I hope this blog sparks your interest in languages and becomes a catalyst for new discoveries.</p>
-                <p>Please take your time to join me on my "journey through words."</p>
+                <img src="../images/your-profile-photo.jpg" alt="Your Photo" style="width: 200px; height: 200px; border-radius: 50%; display: block; margin: 0 auto 30px;">
+                
+                <p>Hello! My name is Tatsuki Mitsuhashi. This is a brief introduction to my multilingual learning, business, and daily explorations.</p>
+                <p>For my more philosophical thoughts, please refer to <a href="https://ja.wikipedia.org/wiki/%E4%B8%89%E6%A9%8B%E9%BE%8D%E8%B5%B7" target="_blank" rel="noopener noreferrer">#🇯🇵Mitsuhashi Tatsuki_wiki_JP</a>. (※This is a link to a hypothetical page summarizing my thoughts.)</p>
+                
+                <p class="update-info">
+                    <strong>Last Updated:</strong> 2025.5.25
+                </p>
 
-                <h3 style="margin-top: 40px;">Contact</h3>
-                <p id="contact">Feel free to contact me with any opinions, feedback, or collaboration proposals.</p>
-                <p>Email: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
+                <hr style="margin: 40px 0;">
+
+                <h3>Basic Information</h3>
+                <ul>
+                    <li><strong>Name:</strong> Tatsuki Mitsuhashi</li>
+                    <li><strong>Age:</strong> Not Public</li>
+                    <li><strong>Hometown:</strong> Chigasaki City, Kanagawa Prefecture, Japan</li>
+                    <li><strong>Current Affiliation:</strong> First-year student at ZEN University, Representative Director at KOKOSEI Inc., Co-founder of CYBER - NOT A BAR (Operating X Bar in the Philippines, ROYAL STAND in Tokyo), IT Development Company (4th year)</li>
+                    <li><strong>Education:</strong> Kugenuma High School → N High School → ZEN University </li>
+                </ul>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>Timeline</h3>
+                <ul>
+                    <li><strong>March 2003:</strong> Born and raised in Chigasaki City, Kanagawa Prefecture. As a child, I was willful, highly curious, and had diverse interests. I felt deeply loved by my family, who took me to the beach, nature, libraries, and various places.</li>
+                    <li><strong>Elementary School:</strong> Played soccer for 2 years, gymnastics for 2 years, basketball for 3 years, and swimming for 6 years.</li>
+                    <li><strong>Junior High School:</strong> Joined the basketball club and served as captain. Blessed with good friends, I cherish memories of enjoyable daily life.</li>
+                    <li><strong>Age 14:</strong> Father passed away suddenly.</li>
+                    <li><strong>Age 15:</strong> Six months after entering high school, I became depressed due to my father's death, stopped attending school and basketball club, and became a truant. I spent a year playing in Tokyo every day, returning home late at night.</li>
+                    <li><strong>Around Age 16:</strong> Decided, "This can't go on." Thinking about what I could do for others, I started looking for ways to overcome the regret of not even being able to thank my father. I found articles about junior and senior high school students doing internships, starting businesses, and NPO support. Using my allowance for transportation, I began attending related events in Tokyo.</li>
+                    <li><strong>2019 Aug - Dec:</strong> Interned at 17 Live Inc., a major domestic live commerce company.</li>
+                    <li><strong>2019 Sep:</strong> Selected as a finalist in the 2nd World Youth Ambition Presentation Competition.</li>
+                    <li><strong>Age 17:</strong> Transferred from Kugenuma High School to N High School, where I was selected as a 4th-generation member of the N High School Entrepreneurship Club. I was also accepted into the 6th cohort of NPO ETIC Makers University U18, whose board is chaired by Mr. Taizo Son.</li>
+                    <li><strong>December 2020:</strong> Established Unpacked Inc. and became its CEO. Created the U18 Career Summit, then Japan's largest career event for junior and senior high school students, gathering 1000 participants. Launched various projects to support youth career education by utilizing CSR funds from large corporations.</li>
+                    <li><strong>2020-2022:</strong> Worked as an external lecturer at Zushi Municipal Zushi Elementary School for 4 months. Involved in curriculum development for inquiry-based learning at over 30 elementary, junior high, and high schools.</li>
+                    <li><strong>March 2022:</strong> Conducted promotional activities for Expo 2025 Osaka, Kansai in Dubai with Mr. Mizutani. Participated in joint events with the Malaysian government and appeared on Abu Dhabi TV, which broadcasts across the entire Arab region.</li>
+                    <li><strong>January 2023:</strong> Gave a representative address at the Coming-of-Age Ceremony (formerly Seijin-shiki) in Chigasaki City, Kanagawa Prefecture.</li>
+                    <li><strong>2023:</strong> Produced 3 "CYBER - NOT A BAR" establishments in Vietnam, currently operating 2.</li>
+                    <li><strong>April 2024:</strong> Started a chatbot development business for recruitment and sales agencies at KOKOSEI Inc.</li>
+                    <li><strong>July 2024:</strong> Opened "Cebu χ Bar & Lounge" in Cebu Island, Philippines.</li>
+                    <li><strong>October 2024:</strong> Opened "ROYAL STAND" in Tokyo.</li>
+                    <li><strong>Other Media Appearances:</strong> Chigasaki City Town News, Public Interest Incorporated Foundation YMCA, DWANGO Co., Ltd., Shonan 100club, Kadokawa Dwango Nico Nico Chokaigi NED2020, Makers University, NHK Triangle, TV Tokyo Cambria Palace "Door to Ideas," etc.</li>
+                </ul>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>Media & Interview History (Excerpts)</h3>
+                <p>Here are some of my past media appearances and interview articles. Click to view details.</p>
+                <div class="media-articles-grid" id="media-articles-container-en">
+                    </div>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>SNS Accounts</h3>
+                <div class="sns-links-grid">
+                    <a href="mailto:admin@kokosei.jp" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <span class="sns-icon-text">✉️</span>
+                        <p>Email (Business Inquiries)</p>
+                    </a>
+                    <a href="https://my.prairie.cards/u/tatsuki3284" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <span class="sns-icon-text">🪪</span>
+                        <p>Digital Business Card</p>
+                    </a>
+                    <a href="https://www.instagram.com/2gisgis/" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <span class="sns-icon-text">📷</span>
+                        <p>Instagram (Japan/Memories)</p>
+                    </a>
+                    <a href="https://x.com/tatsuki3284" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <span class="sns-icon-text">X</span>
+                        <p>X (formerly Twitter)</p>
+                    </a>
+                    <a href="https://www.facebook.com/tatsuki3284" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <span class="sns-icon-text">f</span>
+                        <p>Facebook</p>
+                    </a>
+                    <a href="https://www.linkedin.com/in/tatsuki3284" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <span class="sns-icon-text">in</span>
+                        <p>LinkedIn</p>
+                    </a>
+                    <a href="https://t.me/tatsuki32" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <span class="sns-icon-text">✈️</span>
+                        <p>Telegram (Russian Study)</p>
+                    </a>
+                    <a href="https://www.youtube.com/@tatsuki3284?app=desktop" target="_blank" rel="noopener noreferrer" class="sns-item"> <span class="sns-icon-text">▶️</span>
+                        <p>YouTube (Personal)</p>
+                    </a>
+                    <a href="https://note.com/tatsuki32841" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <span class="sns-icon-text">n</span>
+                        <p>note (Essays, Blog, Poetry)</p>
+                    </a>
                 </div>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>Lifestyle Habits</h3>
+                <ul>
+                    <li><strong>Smoking:</strong> I do not smoke. I do smoke non-nicotine shisha, but stopped nicotine shisha when launching shisha bars as it worsened my atopic dermatitis.</li>
+                    <li><strong>Alcohol:</strong> I do not drink. I used to drink when managing bars, but currently, alcohol allergy and atopic dermatitis worsen, making me itch after just one beer, so I stopped.</li>
+                    <li><strong>All-nighters (playing out all night):</strong> I do not pull all-nighters. I used to enjoy them, but recently, I prioritize my morning routine, and disrupting it makes my day unstable and disorganized due to my weak willpower. While Tokyo has many places to play until morning, in Kyrgyzstan and Kazakhstan, there are only clubs, bars, and 24-hour cafes, and friends who would join me are rare, so it faded from my habits. I'm usually home by 9:00 PM.</li>
+                </ul>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>Relationship with the Internet</h3>
+                <p>The concept of "slow internet" has been proposed, but I often feel tired and "don't want to do anything anymore" due to the overwhelming amount of information I receive daily, exceeding my information management and collection capacity. Also, even after summarizing and abstracting content, I sometimes can't recall details from movies or books when asked by friends. Therefore, I try to write down my impressions and critiques of web articles, books, and movies whenever I notice. This not only helps me remember good articles I've read but also allows me to understand what I felt, realized, and learned from them, serving as good practice for "thinking for myself."</p>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>Hobbies</h3>
+                <p>I have many hobbies, and they change with age, but these are the things I probably won't stop until the end of my life:</p>
+                <div class="hobbies-list">
+                    <ul>
+                        <li>Language Learning</li>
+                        <li>Music</li>
+                        <li>Strength Training & Health-related Activities</li>
+                        <li>Communing with Nature</li>
+                        <li>Travel</li>
+                        <li>Anime Watching</li>
+                        <li>Manga</li>
+                        <li>Reading</li>
+                        <li>Pursuit of Classics</li>
+                        <li>Writing on Paper</li>
+                    </ul>
+                    <ul>
+                        <li>Pursuit of Comfortable Sleep</li>
+                        <li>Seeking and Drinking Good Water</li>
+                        <li>Activities to Make Myself Known to Others</li>
+                        <li>Activities to Enhance My Self-Awareness</li>
+                        <li>Deepening My Understanding and Practice of Love</li>
+                        <li>Continuous Improvement in Relationships with Friends & Family</li>
+                        <li>Behavioral Change Towards a Life of Moderation, Discipline, and Self-Control</li>
+                        <li>Exploration and Practice of a Relaxed, Gentle, and Sweet Life</li>
+                    </ul>
+                </div>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>Countries Visited</h3>
+                <p class="country-list">
+                    🇯🇵🇦🇺🇻🇳🇲🇾🇵🇭🇮🇩🇮🇳🇰🇭🇹🇭🇹🇼🇸🇬🇨🇳🇰🇷🇦🇿🇰🇼🇴🇲🇦🇪🇷🇸🇧🇬🇦🇿🇪🇬🇰🇬🇰🇿🇺🇿🇹🇯🇺🇸
+                </p>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>Language Skills</h3>
+                <div class="language-skills-grid">
+                    <div class="language-category">
+                        <h4>Spoken Languages</h4>
+                        <ul>
+                            <li>Japanese</li>
+                            <li>English</li>
+                            <li>Vietnamese</li>
+                        </ul>
+                    </div>
+                    <div class="language-category">
+                        <h4>Languages in Study</h4>
+                        <ul>
+                            <li>Russian</li>
+                            <li>Serbian</li>
+                            <li>Indonesian</li>
+                            <li>Spanish</li>
+                            <li>Latin</li>
+                            <li>Kyrgyz</li>
+                            <li>Chinese</li>
+                            <li>French</li>
+                            <li>Esperanto</li>
+                            <li>Arabic</li>
+                        </ul>
+                    </div>
+                    <div class="language-category">
+                        <h4>Languages I Want to Study</h4>
+                        <ul>
+                            <li>Hawaiian</li>
+                            <li>Saudi Arabian Arabic Dialect</li>
+                            <li>Malay</li>
+                            <li>Bulgarian</li>
+                            <li>Ancient Hebrew</li>
+                            <li>Greek</li>
+                            <li>German</li>
+                            <li>Swahili</li>
+                            <li>Hindi</li>
+                            <li>Korean</li>
+                            <li>Urdu</li>
+                            <li>Italian</li>
+                            <li>Brazilian Portuguese</li>
+                            <li>Polish</li>
+                            <li>Turkish</li>
+                            <li>Azerbaijani</li>
+                            <li>Visayan</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>Daily Routine (Including Ideal)</h3>
+                <p>I wake up at 5 AM, brush my teeth, wash my face, style my hair, shave, do skincare, and drink water. Then, while listening to music, I grind coffee beans. I meditate for 5 minutes, visualize for 10 minutes, do affirmations for 1 minute, and journal for 10 minutes. After that, I stretch for 20 minutes, then study languages for 30 minutes. If my shoulders get tired, I take a walk or stretch and read 10 pages of a book. Afterward, I make a light breakfast and start work. Work involves doing something beneficial for others. I start at 7:00 AM and continue until 10:00 AM. After that, it varies by day, but most of my decision-making requiring mental effort is completed during the morning. I then go outside to relax. In the evening, I return home by 9:00 PM and turn off the lights by 10:00 PM. On nights when I can't sleep, I allow myself to stay awake but always make sure to wake up by 5 AM.</p>
+
+                <hr style="margin: 40px 0;">
+
+                <h3>Supplement (My Thoughts & Values)</h3>
+                <p>The following are supplementary notes on my personal thoughts and values. I hope these items provide further insight into who I am. I have used abstract language to respect personal privacy.</p>
+                <ul>
+                    <li><strong>Interpersonal Relationships & Romance:</strong> I aspire to relationships built on mutual respect and independence, where we need each other and maintain/improve our bond through regular dialogue and discussion. I believe that worries are endless as long as we live, and I value the willingness to support each other and overcome challenges together. I also recognize that humanity can never be omniscient but remains ignorant, and I aim for a relationship where we can hold hands together even in old age.</li>
+                    <li><strong>Current Relationship Status:</strong> At present, I am not interested in forming relationships with specific others using terms like "girlfriend" or "dating." Past relationships are, for convenience, treated as if they never existed. However, regarding marriage, as it involves legalities and more stakeholders, I would acknowledge the existence of a partner if I were to marry in the future.</li>
+                    <li><strong>Gender:</strong> I do not intend to define my gender in a fixed way.</li>
+                </ul>
+
+                <hr style="margin: 40px 0;">
+
+                <div class="text-center">
+                    <h2>Contact Me</h2>
+                    <p>If you are interested in my activities or this blog, please feel free to contact me.</p>
+                    <a href="../contact.html" class="btn">Contact Me Here</a> </div>
+            </div>
         </section>
     </main>
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 Tatsuki All Rights Reserved.</p>
+            <p>© 2025 Tatsuki All Rights Reserved.</p>
         </div>
     </footer>
 
-    <script src="../script.js"></script>
-</body>
+    <script src="../script.js"></script> </body>
 </html>
