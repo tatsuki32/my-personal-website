@@ -163,6 +163,48 @@ p {
     border-color: var(--color-black);
 }
 
+/* --- レスポンシブデザインの調整 (既存の @media (max-width: 768px) 内に記述) --- */
+@media (max-width: 768px) {
+    /* ... 既存のCSS ... */
+
+    /* モバイル版言語スイッチャーボタン */
+    .lang-switcher-toggle {
+        display: block; /* モバイル版ボタンを表示 */
+        position: absolute;
+        top: 50%; /* 親要素の垂直方向中央に配置 */
+        transform: translateY(-50%); /* 自身の高さの半分だけ上に移動して中央に */
+        right: 70px; /* ハンバーガーボタンの左隣に配置するため、右から少し離す */
+        z-index: 1001;
+        
+        /* ★高さとパディングを調整してハンバーガーに合わせる */
+        height: 45px; /* ハンバーガーボタンと視覚的に高さを合わせる */
+        padding: 0 10px; /* 左右パディングのみ残す */
+        line-height: 45px; /* 高さと合わせる */
+        white-space: nowrap; /* テキストが折り返さないように */
+    }
+
+    /* ハンバーガーメニュー */
+    .hamburger {
+        display: block; /* スマホでハンバーガー表示 */
+        position: absolute;
+        top: 50%; /* 親要素の垂直方向中央に配置 */
+        transform: translateY(-50%); /* 自身の高さの半分だけ上に移動して中央に */
+        right: 20px;
+        z-index: 10000;
+        
+        /* ★高さとパディングを調整 */
+        height: 45px; /* 言語ボタンと視覚的に高さを合わせる */
+        width: 45px; /* 正方形にする（バーの幅と混同しない） */
+        padding: 10px; /* バーのパディングを維持 */
+        display: flex; /* バーを中央寄せするため */
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    /* ... 既存のCSS ... */
+}
+
 /* モバイル版言語スイッチャーボタン */
 .lang-switcher-toggle {
     display: none; /* デフォルトは非表示 */
