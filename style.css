@@ -225,7 +225,7 @@ p {
     cursor: pointer;
     padding: 10px;
     position: relative;
-    z-index: 1001; /* ナビより手前に */
+    z-index: 10000; /* ナビより手前に */
 }
 
 .hamburger .bar {
@@ -778,7 +778,7 @@ section h2::after {
         width: 200px; /* ドロップダウンの幅 */
         background-color: var(--color-white);
         box-shadow: 0 5px 10px rgba(0,0,0,0.1);
-        z-index: 9999;
+        z-index: 9998;
         flex-direction: column;
         padding: 15px;
         transform: translateX(100%);
