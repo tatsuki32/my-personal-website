@@ -1308,3 +1308,122 @@ section h2::after {
     margin-top: -20px; /* 少し上に詰める */
     margin-bottom: 20px;
 }
+/* style.css の既存のスタイルの後に追加 */
+
+/* SNSリンクグリッド (画像なし、文字大きく、下線) */
+.sns-links-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* アイテムが大きくなるので列数を調整 */
+    gap: 20px;
+    margin-top: 30px;
+    text-align: center;
+}
+.sns-item {
+    display: flex; /* 中央寄せのため */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    background-color: var(--color-off-white);
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.sns-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.sns-item .sns-icon-text { /* ★アイコンテキストのスタイル */
+    font-size: 2.2em; /* 文字を大きく */
+    font-weight: 700;
+    color: var(--color-black);
+    margin-bottom: 5px; /* 下の文字との間隔 */
+    position: relative; /* 下線のために追加 */
+    padding-bottom: 3px; /* 下線と文字の間隔 */
+}
+.sns-item .sns-icon-text::after { /* ★下線 */
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-black);
+    transform: scaleX(0); /* 最初は非表示 */
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+.sns-item:hover .sns-icon-text::after {
+    transform: scaleX(1); /* ホバーで表示 */
+}
+.sns-item p {
+    font-size: 0.9em;
+    color: var(--color-dark-gray);
+    line-height: 1.3;
+    margin-bottom: 0;
+}
+.sns-item img { /* 画像は非表示 */
+    display: none;
+}
+
+
+/* 取材履歴グリッド (サムネイルなし、タイトルと一言) */
+.media-articles-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    margin-top: 30px;
+}
+.media-article-item {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    overflow: hidden;
+}
+.media-article-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.media-article-item a {
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    color: inherit;
+}
+.media-article-item a:hover {
+    color: inherit;
+}
+.media-article-item .article-thumb { /* サムネイルは非表示 */
+    display: none;
+}
+.media-article-item h4 {
+    font-size: 1.15em;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    color: var(--color-black);
+}
+.media-article-item p {
+    font-size: 0.9em;
+    color: var(--color-dark-gray);
+    line-height: 1.4;
+    margin-bottom: 0;
+}
+
+/* レスポンシブ調整 */
+@media (max-width: 768px) {
+    /* ... 既存のCSS ... */
+
+    .sns-links-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* モバイルでさらに小さく */
+        gap: 15px;
+    }
+    .sns-item .sns-icon-text {
+        font-size: 1.8em; /* モバイルで文字サイズ調整 */
+    }
+
+    .media-articles-grid {
+        grid-template-columns: 1fr; /* 1列表示 */
+        gap: 20px;
+    }
+}

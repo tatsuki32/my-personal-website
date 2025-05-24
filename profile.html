@@ -8,10 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="overlay"></div> <header class="main-header">
+    <div class="overlay"></div>
+
+    <header class="main-header">
         <div class="container header-content">
             <button class="lang-switcher-toggle">LG</button>
-
             <div class="logo">たつき＠趣味としての多言語学習</div>
             <div class="lang-switcher">
                 <a href="index.html">JP</a>
@@ -19,7 +20,6 @@
                 <a href="kg/index.html">KG</a>
                 <a href="ru/index.html">RU</a>
             </div>
-            
             <nav class="main-nav">
                 <button class="hamburger" aria-label="メニューを開く">
                     <span class="bar"></span>
@@ -55,7 +55,7 @@
                 
                 <p class="update-info">
                     <strong>更新日:</strong> 2024.6.12 | 2023.9.11 | 2024.10.09
-                    </p>
+                </p>
 
                 <hr style="margin: 40px 0;">
 
@@ -94,42 +94,50 @@
 
                 <hr style="margin: 40px 0;">
 
+                <h3>取材履歴 (一部抜粋)</h3>
+                <p>これまでのメディア掲載やインタビュー記事の一部です。クリックで詳細をご覧いただけます。</p>
+                <div class="media-articles-grid" id="media-articles-container">
+                    </div>
+
+                <hr style="margin: 40px 0;">
+
                 <h3>SNSアカウント</h3>
                 <div class="sns-links-grid">
                     <a href="mailto:admin@kokosei.jp" target="_blank" rel="noopener noreferrer" class="sns-item">
-                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=✉️" alt="メールアイコン">
-                        <p>仕事の問い合わせ用メール</p>
+                        <span class="sns-icon-text">✉️</span>
+                        <p>メール</p>
                     </a>
                     <a href="https://my.prairie.cards/u/tatsuki3284" target="_blank" rel="noopener noreferrer" class="sns-item">
-                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=🪪" alt="名刺アイコン">
-                        <p>電子名刺</p>
+                        <span class="sns-icon-text">🪪</span>
+                        <p>名刺</p>
                     </a>
                     <a href="https://www.instagram.com/2gisgis/" target="_blank" rel="noopener noreferrer" class="sns-item">
-                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=📷" alt="インスタグラムアイコン">
-                        <p>Instagram (日本での発信/思い出保存)</p>
+                        <span class="sns-icon-text">📷</span>
+                        <p>Instagram</p>
                     </a>
                     <a href="https://x.com/tatsuki3284" target="_blank" rel="noopener noreferrer" class="sns-item">
-                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=X" alt="X (旧Twitter) アイコン">
-                        <p>X (日本での広報)</p>
+                        <span class="sns-icon-text">X</span>
+                        <p>X (Twitter)</p>
                     </a>
                     <a href="https://www.facebook.com/tatsuki3284" target="_blank" rel="noopener noreferrer" class="sns-item">
-                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=f" alt="Facebookアイコン">
-                        <p>Facebook (日本語の発信)</p>
+                        <span class="sns-icon-text">f</span>
+                        <p>Facebook</p>
                     </a>
                     <a href="https://www.linkedin.com/in/tatsuki3284" target="_blank" rel="noopener noreferrer" class="sns-item">
-                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=in" alt="LinkedInアイコン">
-                        <p>LinkedIn (英語でのビジネス)</p>
+                        <span class="sns-icon-text">in</span>
+                        <p>LinkedIn</p>
                     </a>
                     <a href="https://t.me/tatsuki32" target="_blank" rel="noopener noreferrer" class="sns-item">
-                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=✈️" alt="Telegramアイコン">
-                        <p>Telegram (ロシア語学習)</p>
+                        <span class="sns-icon-text">✈️</span>
+                        <p>Telegram</p>
                     </a>
-                    <a href="https://www.youtube.com/@tatsuki3284?app=desktop" target="_blank" rel="noopener noreferrer" class="sns-item"> <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=▶️" alt="YouTubeアイコン">
-                        <p>YouTube (個人の娯楽用)</p>
+                    <a href="https://www.youtube.com/@tatsuki3284?app=desktop" target="_blank" rel="noopener noreferrer" class="sns-item">
+                        <span class="sns-icon-text">▶️</span>
+                        <p>YouTube</p>
                     </a>
                     <a href="https://note.com/tatsuki32841" target="_blank" rel="noopener noreferrer" class="sns-item">
-                        <img src="https://via.placeholder.com/50x50/DDDDDD/000000?text=n" alt="noteアイコン">
-                        <p>note (エッセイ、ブログ、詩)</p>
+                        <span class="sns-icon-text">n</span>
+                        <p>note</p>
                     </a>
                 </div>
 
@@ -241,83 +249,6 @@
 
                 <hr style="margin: 40px 0;">
 
-                <h3>取材履歴 (一部抜粋)</h3>
-                <p>これまでのメディア掲載やインタビュー記事の一部です。クリックで詳細をご覧いただけます。</p>
-                <div class="media-articles-grid">
-                    <div class="media-article-item">
-                        <a href="https://www.jetro.go.jp/events/scc/a610798e353de032.html" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=JETRO+Article" alt="JETRO記事サムネイル" class="article-thumb">
-                            <h4>JETRO 記事タイトル（例）</h4>
-                            <p>海外ビジネスに関するJETROでの掲載記事です。</p>
-                        </a>
-                    </div>
-                    <div class="media-article-item">
-                        <a href="https://coki.jp/" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=Coki+Article" alt="Coki記事サムネイル" class="article-thumb">
-                            <h4>Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki</h4>
-                            <p>株式会社 Unpackedの活動に関するCokiでのインタビュー記事です。</p>
-                        </a>
-                    </div>
-                    <div class="media-article-item">
-                        <a href="https://u-29.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=U-29+Article" alt="U-29記事サムネイル" class="article-thumb">
-                            <h4>「明日を楽しみに夜眠る人を増やす」 同世代に寄り添うN高生社長・三橋龍起の志 | U-29.com</h4>
-                            <p>U-29.comでの深掘りインタビュー記事。</p>
-                        </a>
-                    </div>
-                    <div class="media-article-item">
-                        <a href="https://shonan100.org/" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=湘南100club" alt="湘南100club記事サムネイル" class="article-thumb">
-                            <h4>夜寝るときに、明日が楽しみと思える人を1人でも増やしたい—16歳が切り拓く“自分の道”、その志。 | 湘南ワンハンドレッドプロジェクト</h4>
-                            <p>湘南100クラブでのインタビュー記事です。</p>
-                        </a>
-                    </div>
-                    <div class="media-article-item">
-                        <a href="https://www.watch.impress.co.jp/" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=NED2020" alt="NED2020記事サムネイル" class="article-thumb">
-                            <h4>人生を切り拓く！N高卒業生と起業部が語る、事業と社会変革のアイディア——プレゼンテーションイベント「NED2020」レポート後編</h4>
-                            <p>プレゼンテーションイベント「NED2020」に関するレポート記事。</p>
-                        </a>
-                    </div>
-                    <div class="media-article-item">
-                        <a href="https://news.line.me/" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=BLOGOS" alt="BLOGOS記事サムネイル" class="article-thumb">
-                            <h4>「一番の問題は環境問題」ノーベル平和賞受賞者ムハマド・ユヌス氏が日本の高校生と意見を交わす (BLOGOS)</h4>
-                            <p>ムハマド・ユヌス氏との対談記事。</p>
-                        </a>
-                    </div>
-                    <div class="media-article-item">
-                        <a href="https://u29-141.peatix.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=ユニキャリ" alt="ユニキャリ記事サムネイル">
-                            <h4>【Vol.140】ユニキャリ by 父の死→N高に転校→起業を目指す！三橋龍起さんに聞く「自分で切り拓く人生論」とは</h4>
-                            <p>ユニークな価値観を持つ29歳以下の世代（U-29世代）のためのコミュニティ「ユニキャリ」でのインタビュー。</p>
-                        </a>
-                    </div>
-                    <div class="media-article-item">
-                        <a href="https://dwango.co.jp/" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=ドワンゴ" alt="ドワンゴ記事サムネイル">
-                            <h4>起業部法人登記第6号誕生中高生向けのキャリア教育支援事業「株式会社 Unpacked」高校生が高校生に未知なる発見や学びを提供|株式会社ドワンゴ</h4>
-                            <p>株式会社Unpacked設立に関するドワンゴのプレスリリース。</p>
-                        </a>
-                    </div>
-                    <div class="media-article-item">
-                        <a href="https://www.unpacked-inc.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=Unpacked+HP" alt="株式会社Unpackedホームページサムネイル">
-                            <h4>株式会社Unpacked ホームページ</h4>
-                            <p>私が創業した会社(株式会社Unpacked）のホームページ。</p>
-                        </a>
-                    </div>
-                     <div class="media-article-item">
-                        <a href="https://www.u18career.com/" target="_blank" rel="noopener noreferrer">
-                            <img src="https://via.placeholder.com/250x150/DDDDDD/000000?text=U18サミットHP" alt="U18キャリアサミットホームページサムネイル">
-                            <h4>U18キャリアサミット 公式HP</h4>
-                            <p>事業の1つ（U18CareerSummit）特設ページ。</p>
-                        </a>
-                    </div>
-                    </div>
-
-                <hr style="margin: 40px 0;">
-
                 <h3>補足（私の考え方・価値観）</h3>
                 <p>以下は、私の個人的な考え方や価値観に関する補足です。これらの項目は、私という人間をより深く理解していただくための一助となれば幸いです。個人のプライバシーに配慮し、抽象的な表現に留めています。</p>
                 <ul>
@@ -341,7 +272,7 @@
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 たつき All Rights Reserved.</p>
+            <p>© 2025 たつき All Rights Reserved.</p>
         </div>
     </footer>
 

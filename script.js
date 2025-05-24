@@ -217,3 +217,92 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    // ... (既存のナビゲーション、言語スイッチャー、多言語奮闘記インタラクションのコード) ...
+
+    // --- 取材履歴の動的生成 ---
+    const mediaArticlesData = [
+        // 各記事のデータ (URL, タイトル, 概要) をここに追加してください
+        // サムネイルは自動取得できないため、ここでは画像は指定しません。
+        // タイトルと概要は手動で入力してください。
+        {
+            url: "https://www.jetro.go.jp/events/scc/a610798e353de032.html",
+            title: "JETRO 記事タイトル（例）",
+            description: "海外ビジネスに関するJETROでの掲載記事です。"
+        },
+        {
+            url: "https://coki.jp/",
+            title: "Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki",
+            description: "株式会社 Unpackedの活動に関するCokiでのインタビュー記事です。"
+        },
+        {
+            url: "https://u-29.com/",
+            title: "「明日を楽しみに夜眠る人を増やす」 同世代に寄り添うN高生社長・三橋龍起の志 | U-29.com",
+            description: "U-29.comでの深掘りインタビュー記事。"
+        },
+        {
+            url: "https://shonan100.org/",
+            title: "夜寝るときに、明日が楽しみと思える人を1人でも増やしたい—16歳が切り拓く“自分の道”、その志。 | 湘南ワンハンドレッドプロジェクト",
+            description: "湘南100クラブでのインタビュー記事です。"
+        },
+        {
+            url: "https://www.watch.impress.co.jp/",
+            title: "人生を切り拓く！N高卒業生と起業部が語る、事業と社会変革のアイディア——プレゼンテーションイベント「NED2020」レポート後編",
+            description: "プレゼンテーションイベント「NED2020」に関するレポート記事。"
+        },
+        {
+            url: "https://news.line.me/",
+            title: "「一番の問題は環境問題」ノーベル平和賞受賞者ムハマド・ユヌス氏が日本の高校生と意見を交わす (BLOGOS)",
+            description: "ムハマド・ユヌス氏との対談記事。"
+        },
+        {
+            url: "https://u29-141.peatix.com/",
+            title: "【Vol.140】ユニキャリ by 父の死→N高に転校→起業を目指す！三橋龍起さんに聞く「自分で切り拓く人生論」とは",
+            description: "ユニークな価値観を持つ29歳以下の世代（U-29世代）のためのコミュニティ「ユニキャリ」でのインタビュー。"
+        },
+        {
+            url: "https://dwango.co.jp/",
+            title: "起業部法人登記第6号誕生中高生向けのキャリア教育支援事業「株式会社 Unpacked」高校生が高校生に未知なる発見や学びを提供|株式会社ドワンゴ",
+            description: "株式会社Unpacked設立に関するドワンゴのプレスリリース。"
+        },
+        {
+            url: "https://www.unpacked-inc.com/",
+            title: "株式会社Unpacked ホームページ",
+            description: "私が創業した会社(株式会社Unpacked）のホームページです。"
+        },
+        {
+            url: "https://www.u18career.com/",
+            title: "U18キャリアサミット 公式HP",
+            description: "事業の1つ（U18CareerSummit）特設ページです。"
+        },
+        // 20〜30件ある取材記事のURLとタイトル、概要をここに追加してください
+        // 例：
+        // {
+        //     url: "https://example.com/another-interview-article",
+        //     title: "新しいインタビュー記事のタイトル",
+        //     description: "この記事の簡単な説明文です。"
+        // },
+        // ... (ここに続けて追加)
+    ];
+
+    const mediaArticlesContainer = document.getElementById('media-articles-container');
+
+    if (mediaArticlesContainer) {
+        mediaArticlesData.forEach(article => {
+            const articleItem = document.createElement('div');
+            articleItem.classList.add('media-article-item');
+            
+            // サムネイルは削除し、タイトルと説明、リンクのみを生成
+            articleItem.innerHTML = `
+                <a href="${article.url}" target="_blank" rel="noopener noreferrer">
+                    <h4>${article.title}</h4>
+                    <p>${article.description}</p>
+                </a>
+            `;
+            mediaArticlesContainer.appendChild(articleItem);
+        });
+    }
+
+    // ... (既存のYouTubeサムネイル再生ロジックのコード) ...
+});
