@@ -10,14 +10,14 @@
 <body>
     <div class="overlay"></div> <header class="main-header">
         <div class="container header-content">
-            <div class="logo">たつき＠趣味としての多言語学習</div>
+            <button class="lang-switcher-toggle">LG</button> <div class="logo">たつき＠趣味としての多言語学習</div>
             <div class="lang-switcher">
                 <a href="index.html" class="active">JP</a>
                 <a href="en/index.html">EN</a>
                 <a href="kg/index.html">KG</a>
                 <a href="ru/index.html">RU</a>
             </div>
-            <button class="lang-switcher-toggle">言語</button>
+            
             <nav class="main-nav">
                 <button class="hamburger" aria-label="メニューを開く">
                     <span class="bar"></span>
@@ -34,7 +34,7 @@
             </nav>
         </div>
         <div class="lang-switcher-dropdown">
-            <a href="index.html">JP</a>
+            <button class="lang-switcher-close-button">&times;</button> <a href="index.html">JP</a>
             <a href="en/index.html">EN</a>
             <a href="kg/index.html">KG</a>
             <a href="ru/index.html">RU</a>
@@ -58,16 +58,26 @@
                 言葉は無限の可能性を秘めています。この場所が、訪れてくださる皆様にとって、言葉への新たな興味や、自己表現への一歩を踏み出すきっかけとなれば幸いです。
             </p>
         </section>
+        
+        <section class="home-cta-buttons container">
+            <div class="text-center" style="margin-bottom: 30px;">
+                <a href="blog.html" class="btn">日記を読む</a>
+            </div>
+            <div class="text-center">
+                <a href="multilingual-journey.html" class="btn">多言語奮闘記へ</a>
+            </div>
+        </section>
+
 
         <section id="youtube-section" class="youtube-section container">
             <h2>動画で旅する言葉の世界</h2>
             <div class="youtube-thumbnail-wrapper">
-                <img src="https://img.youtube.com/vi/YOUR_VIDEO_ID/hqdefault.jpg" alt="YouTube動画のサムネイル" class="thumbnail">
+                <img src="http://img.youtube.com/vi/YOUR_VIDEO_ID/hqdefault.jpg" alt="YouTube動画のサムネイル" class="thumbnail">
                 <div class="play-button"></div>
                 <iframe 
                     width="560" 
                     height="315" 
-                    src="https://www.youtube.com/embed/YOUR_VIDEO_ID" 
+                    src="http://www.youtube.com/embed/YOUR_VIDEO_ID" 
                     title="YouTube video player" 
                     frameborder="0" 
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 

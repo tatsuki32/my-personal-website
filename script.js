@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- モバイル版言語スイッチャー ---
     const langSwitcherToggle = document.querySelector('.lang-switcher-toggle');
     const langSwitcherDropdown = document.querySelector('.lang-switcher-dropdown');
+    const langSwitcherCloseButton = document.querySelector('.lang-switcher-close-button'); // 追加
 
     if (langSwitcherToggle && langSwitcherDropdown) {
         langSwitcherToggle.addEventListener('click', (event) => {
@@ -42,17 +43,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 toggleNav(); // ハンバーガーメニューを閉じる
             }
             // 言語ドロップダウンが開いたらオーバーレイも表示する (任意)
-            // overlay.classList.add('is-active'); // 言語ドロップダウンを開いた時にもオーバーレイを表示したい場合
-            // document.body.classList.add('no-scroll'); // 言語ドロップダウンが開いた時にもスクロールを禁止したい場合
+            overlay.classList.toggle('is-active', langSwitcherDropdown.classList.contains('is-active'));
+            document.body.classList.toggle('no-scroll', langSwitcherDropdown.classList.contains('is-active'));
         });
+
+        // 言語ドロップダウンの閉じるボタン
+        if (langSwitcherCloseButton) {
+            langSwitcherCloseButton.addEventListener('click', () => {
+                langSwitcherDropdown.classList.remove('is-active');
+                overlay.classList.remove('is-active');
+                document.body.classList.remove('no-scroll');
+            });
+        }
 
         // ドロップダウン外をクリックで閉じる (ハンバーガーメニューと同時開閉は考慮しない)
         document.addEventListener('click', (event) => {
             if (!langSwitcherDropdown.contains(event.target) && !langSwitcherToggle.contains(event.target) && langSwitcherDropdown.classList.contains('is-active')) {
                 langSwitcherDropdown.classList.remove('is-active');
-                // if (!navList.classList.contains('is-active')) { // ハンバーガーメニューが開いてない時だけスクロール許可
-                //     document.body.classList.remove('no-scroll');
-                // }
+                overlay.classList.remove('is-active');
+                document.body.classList.remove('no-scroll'); // オーバーレイを閉じた時もスクロール許可
             }
         });
 
@@ -60,9 +69,8 @@ document.addEventListener('DOMContentLoaded', () => {
         langSwitcherDropdown.querySelectorAll('a').forEach(link => {
             link.addEventListener('click', () => {
                 langSwitcherDropdown.classList.remove('is-active');
-                // if (!navList.classList.contains('is-active')) {
-                //     document.body.classList.remove('no-scroll');
-                // }
+                overlay.classList.remove('is-active');
+                document.body.classList.remove('no-scroll');
             });
         });
     }
@@ -196,9 +204,16 @@ document.addEventListener('DOMContentLoaded', () => {
         youtubeThumbnailWrapper.addEventListener('click', function() {
             // iframeのsrc属性からautoplay=1を追加
             const iframe = this.querySelector('iframe');
-            const youtubeId = iframe.src.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/)[1];
-            iframe.src = `https://www.youtube.com/embed/${youtubeId}?autoplay=1`;
-            this.classList.add('playing'); // playingクラスを追加して動画を表示
+            // iframe.srcにYOUR_VIDEO_IDが入っている前提
+            const youtubeIdMatch = iframe.src.match(/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
+            const youtubeId = youtubeIdMatch ? youtubeIdMatch[1] : null;
+
+            if (youtubeId) {
+                iframe.src = `http://www.youtube.com/embed/${youtubeId}?autoplay=1`;
+                this.classList.add('playing'); // playingクラスを追加して動画を表示
+            } else {
+                console.error("YouTube video ID not found in iframe src.");
+            }
         });
     }
 });

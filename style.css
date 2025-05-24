@@ -1,4 +1,4 @@
-/* 基本リセット */
+/* 基本リセット (変更なし) */
 * {
     margin: 0;
     padding: 0;
@@ -6,43 +6,42 @@
 }
 
 :root {
-    /* カラーパレット (白黒とアクセントカラー) */
+    /* カラーパレット (変更なし) */
     --color-white: #FFFFFF;
     --color-off-white: #F8F8F8;
     --color-light-gray: #EEEEEE;
     --color-medium-gray: #CCCCCC;
     --color-dark-gray: #555555;
-    --color-black: #222222; /* 純粋な黒より少し柔らかく */
+    --color-black: #222222;
 
-    /* アクセントカラー (多言語奮闘記のホバー時など) */
-    --accent-blue: #3498DB; /* 英語 */
-    --accent-red: #E74C3C; /* ロシア語 */
-    --accent-green: #2ECC71; /* キルギス語 */
-    --accent-gray: #777777; /* 中古日本語など、色がない場合のデフォルト */
+    --accent-blue: #3498DB;
+    --accent-red: #E74C3C;
+    --accent-green: #2ECC71;
+    --accent-gray: #777777;
 
-    /* ドットグリッド設定 */
+    /* ドットグリッド設定 (変更なし) */
     --dot-size: 2px;
-    --dot-gap: 20px; /* PCでのドット間隔 */
-    --dot-color: rgba(0, 0, 0, 0.05); /* ごく薄い黒 */
+    --dot-gap: 20px;
+    --dot-color: rgba(0, 0, 0, 0.05);
 }
 
 body {
+    /* 変更なし */
     font-family: 'Noto Sans JP', sans-serif;
     line-height: 1.7;
     color: var(--color-black);
     background-color: var(--color-off-white);
-    /* ドットグリッドの背景 */
     background-image: radial-gradient(circle at center, var(--dot-color) var(--dot-size), transparent var(--dot-size)),
                       radial-gradient(circle at center, var(--dot-color) var(--dot-size), transparent var(--dot-size));
     background-size: var(--dot-gap) var(--dot-gap);
     background-position: 0 0, calc(var(--dot-gap) / 2) calc(var(--dot-gap) / 2);
-    min-height: 100vh; /* フッターを下に固定するため */
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
 }
 
 main {
-    flex-grow: 1; /* メインコンテンツが可変になるように */
+    flex-grow: 1;
 }
 
 .container {
@@ -121,8 +120,8 @@ p {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap; /* スマホで折り返す */
-    position: relative; /* ハンバーガーの位置決め用 */
+    flex-wrap: wrap;
+    position: relative;
 }
 
 .logo {
@@ -130,14 +129,14 @@ p {
     font-weight: 700;
     color: var(--color-black);
     font-family: 'Playfair Display', serif;
-    flex-shrink: 0; /* 縮小しない */
+    flex-shrink: 0;
 }
 
-/* 言語スイッチャー (PC版) */
+/* PC版言語スイッチャー */
 .lang-switcher {
-    margin-left: auto; /* ナビの右に配置 */
+    margin-left: auto;
     flex-shrink: 0;
-    display: flex; /* PCで常に表示 */
+    display: flex;
     align-items: center;
 }
 
@@ -163,42 +162,44 @@ p {
     border-color: var(--color-black);
 }
 
+/* モバイル版言語スイッチャーボタン (PCでは非表示) */
+.lang-switcher-toggle {
+    display: none; /* @media で表示 */
+    background: none; /* ★背景を消す */
+    border: none; /* ★ボーダーを消す */
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 1.1em;
+    color: var(--color-black);
+    padding: 10px; /* ★パディングを調整 */
+    position: fixed; /* ★固定配置に変更 */
+    top: 15px; /* ★上からの位置 */
+    left: 20px; /* ★左からの位置 */
+    z-index: 10000; /* 最前面に */
+    height: 45px; /* 高さを揃える */
+    display: flex; /* 中央寄せ用 */
+    align-items: center;
+    justify-content: center;
+}
 
-
-/* モバイル版言語スイッチャーボタン */
-    .lang-switcher-toggle {
-        display: block; /* モバイル版ボタンを表示 */
-        position: absolute;
-        top: 50%; /* 親要素の垂直方向中央に配置 */
-        transform: translateY(-50%); /* 自身の高さの半分だけ上に移動して中央に */
-        right: 70px; /* ハンバーガーボタンの左隣に配置するため、右から少し離す */
-        z-index: 1001;
-        
-        /* ★高さとパディングを調整してハンバーガーに合わせる */
-        height: 45px; /* ハンバーガーボタンと視覚的に高さを合わせる */
-        padding: 0 10px; /* 左右パディングのみ残す */
-        line-height: 45px; /* 高さと合わせる */
-        white-space: nowrap; /* テキストが折り返さないように */
-    }
-
-/* ハンバーガーメニュー */
-    .hamburger {
-        display: block; /* スマホでハンバーガー表示 */
-        position: absolute;
-        top: 50%; /* 親要素の垂直方向中央に配置 */
-        transform: translateY(-50%); /* 自身の高さの半分だけ上に移動して中央に */
-        right: 20px;
-        z-index: 10000;
-        
-        /* ★高さとパディングを調整 */
-        height: 45px; /* 言語ボタンと視覚的に高さを合わせる */
-        width: 45px; /* 正方形にする（バーの幅と混同しない） */
-        padding: 10px; /* バーのパディングを維持 */
-        display: flex; /* バーを中央寄せするため */
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
+/* ハンバーガーメニュー (PCでは非表示) */
+.hamburger {
+    display: none; /* @media で表示 */
+    background: none; /* ★背景を消す */
+    border: none; /* ★ボーダーを消す */
+    cursor: pointer;
+    padding: 10px; /* ★パディングを調整 */
+    position: fixed; /* ★固定配置に変更 */
+    top: 15px; /* ★上からの位置 */
+    right: 20px; /* ★右からの位置 */
+    z-index: 10000; /* 最前面に */
+    height: 45px; /* 高さを揃える */
+    width: 45px; /* 幅も揃える */
+    display: flex; /* バーを中央寄せするため */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
 
 .hamburger .bar {
     display: block;
@@ -209,7 +210,7 @@ p {
     transition: all 0.3s ease-in-out;
 }
 
-/* ハンバーガーメニューのアニメーション */
+/* ハンバーガーメニューのアニメーション (変更なし) */
 .hamburger.is-active .bar:nth-child(2) {
     opacity: 0;
 }
@@ -220,7 +221,7 @@ p {
     transform: translateY(-8px) rotate(-45deg);
 }
 
-/* メニュー開閉時のオーバーレイ */
+/* メニュー開閉時のオーバーレイ (変更なし) */
 .overlay {
     display: none;
     position: fixed;
@@ -228,8 +229,8 @@ p {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 暗くする背景 */
-    z-index: 998; /* メニューより下、コンテンツより上 */
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
     opacity: 0;
     transition: opacity 0.3s ease-in-out;
 }
@@ -239,63 +240,61 @@ p {
     opacity: 1;
 }
 
-/* bodyに no-scroll クラスが追加されたらスクロールを禁止 */
+/* bodyに no-scroll クラスが追加されたらスクロールを禁止 (変更なし) */
 body.no-scroll {
     overflow: hidden;
 }
 
-/* ヒーローセクション */
+/* ヒーローセクション (変更なし) */
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), /* ここを修正: 透明度を上げる (0.6 -> 0.7) */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
                 url('https://via.placeholder.com/1500x500/333333/FFFFFF?text=Language+Study') no-repeat center center/cover;
-    color: var(--color-white); /* 文字色は白 */
+    color: var(--color-white);
     text-align: center;
     padding: 100px 20px;
-    display: flex; /* 中央寄せのために追加 */
-    align-items: center; /* 中央寄せのために追加 */
-    justify-content: center; /* 中央寄せのために追加 */
-    min-height: 400px; /* 最小高さを設定してコンテンツが中央に来るように */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 400px;
 }
 
 .hero-section .container {
-    /* コンテンツが中央に表示されるように */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* 文字に影を追加: 影の色を濃くして視認性を高める */
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
 }
 
 .hero-section h1 {
-    color: var(--color-white); /* 文字色は白 */
-    font-size: 3.8em; /* 文字サイズを大きく (3.5em -> 3.8em) */
-    margin-bottom: 20px; /* 下マージンを増やす (15px -> 20px) */
+    color: var(--color-white);
+    font-size: 3.8em;
+    margin-bottom: 20px;
     line-height: 1.2;
-    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* h1専用の影を強める */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
 }
 
 .hero-section p {
-    font-size: 1.4em; /* 文字サイズを大きく (1.3em -> 1.4em) */
+    font-size: 1.4em;
     max-width: 700px;
     margin: 0 auto 30px;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* p専用の影 */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-/* ヒーローセクション下の思想・想いを書くエリア */
+/* ヒーローセクション下の思想・想いを書くエリア (変更なし) */
 .thought-section {
     padding: 60px 20px;
     text-align: center;
     background-color: var(--color-off-white);
     box-shadow: 0 2px 5px rgba(0,0,0,0.02);
-    /* ドットグリッドの背景はbodyから継承 */
 }
 .thought-section h2 {
     font-size: 1.8em;
     color: var(--color-black);
     margin-bottom: 20px;
-    text-align: center; /* 中央寄せ */
+    text-align: center;
 }
-.thought-section h2::after { /* 下線を中央に */
+.thought-section h2::after {
     left: 50%;
     transform: translateX(-50%);
 }
@@ -308,22 +307,20 @@ body.no-scroll {
 }
 
 
-/* 各セクションの基本スタイル */
+/* 各セクションの基本スタイル (変更なし) */
 section {
     padding: 80px 0;
 }
 
-section:nth-of-type(odd) { /* 奇数番目のセクションに背景色 */
+section:nth-of-type(odd) {
     background-color: var(--color-light-gray);
 }
-/* ドットグリッドの背景を重ねる */
 section:nth-of-type(odd), section:nth-of-type(even) {
     background-image: radial-gradient(circle at center, var(--dot-color) var(--dot-size), transparent var(--dot-size)),
                       radial-gradient(circle at center, var(--dot-color) var(--dot-size), transparent var(--dot-size));
     background-size: var(--dot-gap) var(--dot-gap);
     background-position: 0 0, calc(var(--dot-gap) / 2) calc(var(--dot-gap) / 2);
 }
-
 
 section h2 {
     text-align: center;
@@ -348,11 +345,11 @@ section h2::after {
     display: flex;
     justify-content: center;
     gap: 30px;
-    flex-wrap: wrap; /* スマホで折り返す */
+    flex-wrap: wrap;
 }
 
 .home-article-preview {
-    position: relative; /* hidden-link の基準にする */
+    position: relative;
     cursor: pointer;
     background-color: var(--color-white);
     border-radius: 8px;
@@ -361,11 +358,11 @@ section h2::after {
     width: 300px;
     text-align: center;
     margin-bottom: 20px;
-    transition: box-shadow 0.3s ease, transform 0.3s ease; /* ホバー効果 */
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
 }
 .home-article-preview:hover {
-    box-shadow: 0 6px 15px rgba(0,0,0,0.08); /* 影を強く */
-    transform: translateY(-3px); /* 少し上に移動 */
+    box-shadow: 0 6px 15px rgba(0,0,0,0.08);
+    transform: translateY(-3px);
 }
 
 .home-article-preview .date {
@@ -378,7 +375,7 @@ section h2::after {
 .home-article-preview h3 {
     font-size: 1.2em;
     line-height: 1.4;
-    margin-bottom: 0; /* 概要がないので */
+    margin-bottom: 0;
 }
 .home-article-preview .hidden-link {
     position: absolute;
@@ -386,13 +383,13 @@ section h2::after {
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 1; /* 手前に表示 */
-    text-decoration: none; /* 下線を表示させない */
-    background-color: transparent; /* 背景も透明 */
+    z-index: 1;
+    text-decoration: none;
+    background-color: transparent;
 }
 
 
-/* 日記記事グリッド (blog.html, 個別記事ページなど) */
+/* 日記記事グリッド (blog.html, 個別記事ページなど) (変更なし) */
 .article-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -405,7 +402,7 @@ section h2::after {
     border-radius: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
     padding: 25px;
-    text-align: left; /* 日記なので左寄せに */
+    text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -440,7 +437,7 @@ section h2::after {
     color: var(--color-dark-gray);
 }
 
-/* 個別記事ページ (blog/*html, multilingual/*html) */
+/* 個別記事ページ (blog/*html, multilingual/*html) (変更なし) */
 .individual-article {
     background-color: var(--color-white);
     padding: 40px 60px;
@@ -498,7 +495,7 @@ section h2::after {
 }
 
 
-/* 多言語奮闘記セクション (multilingual-journey.html のスタイルは残す) */
+/* 多言語奮闘記セクション (multilingual-journey.html のスタイルは残す) (変更なし) */
 .multilingual-journey-section .section-description {
     text-align: center;
     max-width: 800px;
@@ -524,8 +521,8 @@ section h2::after {
     transition: background-color 0.4s ease, transform 0.3s ease;
     cursor: pointer;
     border: 1px solid var(--color-light-gray);
-    min-height: 150px; /* 詩の表示でレイアウトが崩れないように最小高さを設定 */
-    display: flex; /* 中身を中央寄せするため */
+    min-height: 150px;
+    display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -535,21 +532,21 @@ section h2::after {
     transform: translateY(-5px);
 }
 
-.language-item .lang-display { /* 日本語＋英語などの表記 */
+.language-item .lang-display {
     font-size: 1.8em;
     font-weight: 700;
     color: var(--color-black);
     opacity: 1;
     transition: opacity 0.4s ease, transform 0.4s ease;
-    display: block; /* 常にブロック要素として扱う */
-    position: absolute; /* 詩と重ねるため */
+    display: block;
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: calc(100% - 60px); /* パディング考慮 */
+    width: calc(100% - 60px);
 }
 
-.language-item .lang-display .lang-en { /* 副言語表記 */
+.language-item .lang-display .lang-en {
     font-size: 0.6em;
     display: block;
     opacity: 0.7;
@@ -560,48 +557,48 @@ section h2::after {
     font-style: italic;
     font-size: 1em;
     color: var(--color-dark-gray);
-    height: auto; /* 高さは自動 */
+    height: auto;
     opacity: 0;
     overflow: hidden;
-    position: absolute; /* タイトルの場所に重ねる */
+    position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: calc(100% - 60px); /* パディング考慮 */
+    width: calc(100% - 60px);
     transition: all 0.4s ease;
-    display: flex; /* 中央寄せ用 */
+    display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     line-height: 1.4;
-    white-space: normal; /* 折り返しを許可 */
+    white-space: normal;
 }
 
-/* ホバー/スクロール時のスタイル */
-.language-item.is-active { /* JSで追加されるクラス */
-    background-color: var(--color-light-gray); /* わずかにトーンが変わる */
+/* ホバー/スクロール時のスタイル (変更なし) */
+.language-item.is-active {
+    background-color: var(--color-light-gray);
     border-color: var(--color-medium-gray);
 }
 
 .language-item.is-active .lang-display {
-    opacity: 0; /* 言語表記を非表示 */
-    transform: translateY(-20px); /* 上に少し移動させながら消える */
+    opacity: 0;
+    transform: translateY(-20px);
 }
 
 .language-item.is-active .lang-poetry {
     opacity: 1;
-    position: relative; /* オーバーレイ解除 */
+    position: relative;
     top: auto;
     left: auto;
-    transform: none; /* 中央寄せ解除 */
-    padding-top: 10px; /* 見た目の調整 */
+    transform: none;
+    padding-top: 10px;
 }
 
 
-/* 言語ごとの特定の色（CSSで直接定義） */
+/* 言語ごとの特定の色（CSSで直接定義） (変更なし) */
 /* English */
 .language-item[data-lang="english"].is-active {
-    background-color: #F0F2F5; /* ごく淡い青みがかったグレー */
+    background-color: #F0F2F5;
     border-color: #CED4DA;
 }
 .language-item[data-lang="english"].is-active .lang-poetry {
@@ -610,7 +607,7 @@ section h2::after {
 
 /* Russian */
 .language-item[data-lang="russian"].is-active {
-    background-color: #F5EFEF; /* ごく淡い赤みがかったグレー */
+    background-color: #F5EFEF;
     border-color: #E6B0AA;
 }
 .language-item[data-lang="russian"].is-active .lang-poetry {
@@ -619,7 +616,7 @@ section h2::after {
 
 /* Kyrgyz */
 .language-item[data-lang="kyrgyz"].is-active {
-    background-color: #EFF5ED; /* ごく淡い緑がかったグレー */
+    background-color: #EFF5ED;
     border-color: #B2D8BB;
 }
 .language-item[data-lang="kyrgyz"].is-active .lang-poetry {
@@ -636,7 +633,7 @@ section h2::after {
 }
 
 
-/* プロフィールとお問い合わせページ用 */
+/* プロフィールとお問い合わせページ用 (変更なし) */
 .content-page {
     background-color: var(--color-white);
     padding: 60px;
@@ -656,7 +653,7 @@ section h2::after {
     transform: translateX(0);
 }
 
-/* お問い合わせフォームの基本スタイル */
+/* お問い合わせフォームの基本スタイル (変更なし) */
 .contact-form label {
     display: block;
     margin-bottom: 8px;
@@ -698,7 +695,7 @@ section h2::after {
 }
 
 
-/* フッター */
+/* フッター (変更なし) */
 .main-footer {
     background-color: var(--color-black);
     color: var(--color-off-white);
@@ -714,7 +711,7 @@ section h2::after {
     color: var(--color-light-gray);
 }
 
-/* YouTubeセクション */
+/* YouTubeセクション (変更なし) */
 .youtube-section {
     padding-top: 60px;
     padding-bottom: 60px;
@@ -726,15 +723,15 @@ section h2::after {
 .youtube-thumbnail-wrapper {
     position: relative;
     width: 100%;
-    padding-bottom: 56.25%; /* 16:9 のアスペクト比 */
+    padding-bottom: 56.25%;
     height: 0;
     overflow: hidden;
     margin: 0 auto;
-    max-width: 800px; /* 動画の最大幅 */
+    max-width: 800px;
     border-radius: 8px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     cursor: pointer;
-    background-color: var(--color-light-gray); /* サムネイルが表示されるまでの背景 */
+    background-color: var(--color-light-gray);
     transition: box-shadow 0.3s ease;
 }
 
@@ -775,7 +772,7 @@ section h2::after {
     border-top: 20px solid transparent;
     border-bottom: 20px solid transparent;
     border-left: 30px solid var(--color-white);
-    margin-left: 5px; /* 三角形の位置調整 */
+    margin-left: 5px;
 }
 
 .youtube-thumbnail-wrapper .play-button:hover {
@@ -790,15 +787,15 @@ section h2::after {
     width: 100%;
     height: 100%;
     border: 0;
-    display: none; /* 初期状態は非表示 */
+    display: none;
 }
 
 .youtube-thumbnail-wrapper.playing iframe {
-    display: block; /* 再生中に表示 */
+    display: block;
 }
 .youtube-thumbnail-wrapper.playing img.thumbnail,
 .youtube-thumbnail-wrapper.playing .play-button {
-    display: none; /* 再生中に非表示 */
+    display: none;
 }
 
 
@@ -806,19 +803,32 @@ section h2::after {
     レスポンシブデザイン
 ============================ */
 
-/* ドットグリッドのモバイル対応 */
+/* ドットグリッドのモバイル対応 (変更なし) */
 @media (max-width: 768px) {
     :root {
-        --dot-gap: 15px; /* スマホではドット間隔を狭める */
-        --dot-size: 1.5px; /* ドットを小さくする */
+        --dot-gap: 15px;
+        --dot-size: 1.5px;
     }
 }
 
 
 /* タブレット・スマートフォン向け */
 @media (max-width: 768px) {
+    .main-header {
+        /* ヘッダー全体を固定し、背景も透過させない */
+        position: fixed; /* ★固定配置に変更 */
+        top: 0;
+        left: 0;
+        width: 100%;
+        background-color: rgba(255, 255, 255, 0.95); /* ★背景を半透明の白にして透け感を出す */
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        padding: 15px 0; /* ★パディングを維持 */
+    }
     .main-header .header-content {
-        flex-wrap: wrap;
+        flex-wrap: nowrap; /* ★タイトルとボタンが横に並ぶように */
+        justify-content: flex-start; /* ★要素を左寄せに */
+        align-items: center;
+        padding: 0 20px; /* ★左右のパディング */
     }
 
     .logo {
@@ -826,58 +836,85 @@ section h2::after {
         width: auto;
         text-align: left;
         margin-bottom: 0;
-        flex-grow: 1;
+        flex-grow: 1; /* ★ロゴが残りのスペースを埋めるように */
+        order: 2; /* ★ロゴの表示順序を真ん中に */
     }
 
     .lang-switcher {
         display: none; /* PC版は非表示 */
     }
 
+    /* モバイル版言語スイッチャーボタン */
     .lang-switcher-toggle {
         display: block; /* モバイル版ボタンを表示 */
-        /* positionはすでにabsoluteで設定済み */
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 1.1em;
+        color: var(--color-black);
+        padding: 10px;
+        position: static; /* ★header-content内の配置に戻す */
+        top: auto; /* ★autoに戻す */
+        left: auto; /* ★autoに戻す */
+        z-index: auto; /* ★autoに戻す */
+        height: auto; /* ★autoに戻す */
+        order: 1; /* ★左端に配置 */
+        margin-right: 15px; /* ロゴとの間隔 */
     }
 
+    /* ハンバーガーメニュー */
     .hamburger {
         display: block; /* スマホでハンバーガー表示 */
-        /* positionはすでにabsoluteで設定済み */
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 10px;
+        position: static; /* ★header-content内の配置に戻す */
+        top: auto; /* ★autoに戻す */
+        right: auto; /* ★autoに戻す */
+        z-index: auto; /* ★autoに戻す */
+        height: auto; /* ★autoに戻す */
+        width: auto; /* ★autoに戻す */
+        order: 3; /* ★右端に配置 */
+        margin-left: auto; /* ★残りのスペースを使って右に寄せる */
     }
 
-    /* .main-nav 自体は display: none; にしない (nav-listで制御) */
+    /* .main-nav 自体は display: none; にしない (nav-listで制御) (変更なし) */
     .main-nav {
         margin-left: 0;
-        text-align: left; /* メニューリストのアイテムを左寄せにするため */
+        text-align: left;
         width: auto;
         flex-grow: 0;
     }
 
-    /* モバイルメニューが開いた際のスタイル */
+    /* モバイルメニューが開いた際のスタイル (変更なし) */
     .nav-list {
         flex-direction: column;
-        width: 280px; /* メニューの幅を固定 */
+        width: 280px;
         background-color: var(--color-white);
-        position: fixed; /* 画面全体を覆う */
+        position: fixed;
         top: 0;
-        right: 0; /* 右からスライドイン */
-        height: 100%; /* 画面の高さに合わせる */
-        transform: translateX(100%); /* 最初は右に隠す */
+        right: 0;
+        height: 100%;
+        transform: translateX(100%);
         transition: transform 0.3s ease-in-out;
-        box-shadow: -5px 0 10px rgba(0,0,0,0.2); /* 影を濃くして視覚的に引き締める */
-        z-index: 9999; /* 最前面に */
-        padding-top: 80px; /* ヘッダーの高さ分開ける */
-        align-items: flex-start; /* 左寄せ */
+        box-shadow: -5px 0 10px rgba(0,0,0,0.2);
+        z-index: 9999;
+        padding-top: 80px;
+        align-items: flex-start;
         padding-left: 20px;
-        overflow-y: auto; /* メニューが長くなったらスクロール可能に */
+        overflow-y: auto;
     }
 
     .nav-list.is-active {
-        transform: translateX(0); /* 表示 */
+        transform: translateX(0);
     }
 
     .nav-list li {
         margin: 0;
         border-bottom: 1px solid var(--color-light-gray);
-        width: 100%; /* メニュー項目を横幅いっぱいに */
+        width: 100%;
     }
 
     .nav-list a {
@@ -889,24 +926,24 @@ section h2::after {
     }
 
     .nav-list a::after {
-        display: none; /* スマホメニューでは下線非表示 */
+        display: none;
     }
 
     /* モバイル版言語スイッチャーのドロップダウン */
     .lang-switcher-dropdown {
-        display: flex; /* Flexboxで縦並びに */
-        position: fixed;
+        display: flex;
+        position: fixed; /* ★固定配置 */
         top: 0;
-        right: 0; /* 右からスライドイン */
-        width: 200px; /* ドロップダウンの幅 */
+        left: 0; /* ★左からスライドイン */
+        width: 250px; /* ドロップダウンの幅 */
+        height: 100%; /* 画面の高さに合わせる */
         background-color: var(--color-white);
-        box-shadow: -5px 0 10px rgba(0,0,0,0.1);
+        box-shadow: 5px 0 10px rgba(0,0,0,0.1); /* ★影の方向を変更 */
         z-index: 9999;
         flex-direction: column;
-        padding: 15px;
-        transform: translateX(100%);
+        padding: 20px; /* ★パディングを調整 */
+        transform: translateX(-100%); /* ★初期状態は左に隠す */
         transition: transform 0.3s ease-in-out;
-        /* `is-active` クラスで表示される */
     }
 
     .lang-switcher-dropdown.is-active {
@@ -917,29 +954,44 @@ section h2::after {
         padding: 10px 0;
         font-weight: 700;
         border-bottom: 1px solid var(--color-light-gray);
+        font-size: 1.2em; /* ★文字サイズを大きく */
+        color: var(--color-black); /* ★文字色を黒に */
     }
     .lang-switcher-dropdown a:last-child {
         border-bottom: none;
     }
 
+    /* ドロップダウンの閉じるボタン */
+    .lang-switcher-close-button {
+        background: none;
+        border: none;
+        font-size: 2em; /* ★大きめのX */
+        color: var(--color-black);
+        cursor: pointer;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 10000;
+    }
 
-    /* ヒーローセクション */
+    /* ヒーローセクション (変更なし) */
     .hero-section {
-        padding: 60px 20px; /* モバイルでのパディングを調整 */
-        min-height: 300px; /* モバイルでの最小高さを調整 */
+        padding: 60px 20px;
+        min-height: 300px;
+        /* 固定ヘッダーの分だけパディングを追加し、コンテンツが隠れないように */
+        padding-top: calc(60px + 60px); /* headerの高さ + padding */
     }
     .hero-section h1 {
-        font-size: 2.5em; /* モバイルでの文字サイズを大きく */
-        margin-bottom: 15px;
+        font-size: 2.5em;
+        margin-top: 0; /* 追加パディングのため */
     }
     .hero-section p {
-        font-size: 1.1em; /* モバイルでの文字サイズを大きく */
-        margin-bottom: 20px;
+        font-size: 1.1em;
     }
 
-    /* ヒーローセクション下の思想・想いを書くエリア */
+    /* ヒーローセクション下の思想・想いを書くエリア (変更なし) */
     .thought-section {
-        padding: 40px 20px; /* モバイルでのパディング */
+        padding: 40px 20px;
     }
     .thought-section h2 {
         font-size: 1.5em;
@@ -961,16 +1013,17 @@ section h2::after {
         padding: 50px 0;
     }
 
+    /* ホームの最新記事プレビュー (スタイルは残すが、index.htmlからは削除される) (変更なし) */
     .home-latest-articles {
         flex-direction: column;
         align-items: center;
     }
     .home-article-preview {
-        width: 90%; /* スマホでの幅調整 */
+        width: 90%;
     }
 
     .article-grid {
-        grid-template-columns: 1fr; /* 1列表示 */
+        grid-template-columns: 1fr;
     }
 
     .language-item {
@@ -980,28 +1033,17 @@ section h2::after {
         font-size: 1.5em;
     }
 
-    /* スマホでは常に is-active スタイルが適用されるように調整（JSで処理） */
-    .language-item.is-active {
-        background-color: var(--color-light-gray);
-        border-color: var(--color-medium-gray);
-    }
-    .language-item.is-active .lang-display {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    .language-item.is-active .lang-poetry {
-        opacity: 1;
-        transform: none;
-        height: auto;
-    }
-
     .content-page {
         padding: 30px;
         margin: 30px auto;
+        /* 固定ヘッダーの分だけマージンを調整 */
+        margin-top: calc(30px + 60px);
     }
 
     .individual-article {
         padding: 30px;
+        /* 固定ヘッダーの分だけマージンを調整 */
+        margin-top: calc(30px + 60px);
     }
     .individual-article h1 {
         font-size: 2em;
