@@ -270,23 +270,40 @@ p {
 
 /* ヒーローセクション */
 .hero-section {
-    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url('https://via.placeholder.com/1500x500/333333/FFFFFF?text=Language+Study') no-repeat center center/cover; /* 仮の背景画像 */
-    color: var(--color-white);
+    /* 既存の背景設定 */
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), /* ここを修正: 透明度を上げる (0.6 -> 0.7) */
+                url('https://via.placeholder.com/1500x500/333333/FFFFFF?text=Language+Study') no-repeat center center/cover;
+    color: var(--color-white); /* 文字色は白 */
     text-align: center;
     padding: 100px 20px;
+    display: flex; /* 中央寄せのために追加 */
+    align-items: center; /* 中央寄せのために追加 */
+    justify-content: center; /* 中央寄せのために追加 */
+    min-height: 400px; /* 最小高さを設定してコンテンツが中央に来るように */
+}
+
+.hero-section .container {
+    /* コンテンツが中央に表示されるように */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6); /* ★文字に影を追加: 影の色を濃くして視認性を高める */
 }
 
 .hero-section h1 {
-    color: var(--color-white);
-    font-size: 3.5em;
-    margin-bottom: 15px;
+    color: var(--color-white); /* 文字色は白 */
+    font-size: 3.8em; /* ★文字サイズを大きく (3.5em -> 3.8em) */
+    margin-bottom: 20px; /* ★下マージンを増やす (15px -> 20px) */
     line-height: 1.2;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7); /* ★h1専用の影を強める */
 }
 
 .hero-section p {
-    font-size: 1.3em;
+    font-size: 1.4em; /* ★文字サイズを大きく (1.3em -> 1.4em) */
     max-width: 700px;
     margin: 0 auto 30px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* ★p専用の影 */
 }
 
 /* 各セクションの基本スタイル */
@@ -800,14 +817,18 @@ section h2::after {
     }
 
     /* ヒーローセクション */
+    
     .hero-section {
-        padding: 80px 20px;
+        padding: 60px 20px; /* ★モバイルでのパディングを調整 */
+        min-height: 300px; /* ★モバイルでの最小高さを調整 */
     }
     .hero-section h1 {
-        font-size: 2em;
+        font-size: 2.5em; /* ★モバイルでの文字サイズを大きく (2em -> 2.5em) */
+        margin-bottom: 15px;
     }
     .hero-section p {
-        font-size: 1em;
+        font-size: 1.1em; /* ★モバイルでの文字サイズを大きく (1em -> 1.1em) */
+        margin-bottom: 20px;
     }
 
     h2 {
