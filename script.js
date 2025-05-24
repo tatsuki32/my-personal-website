@@ -378,3 +378,90 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ... (既存のYouTubeサムネイル再生ロジックのコード) ...
 });
+// ... (既存の日本語版 mediaArticlesData 配列の定義) ...
+
+// 英語版のメディア記事データ (en/index.html 用)
+const mediaArticlesDataEn = [
+    {
+        url: "https://www.jetro.go.jp/events/scc/a610798e353de032.html",
+        title: "JETRO Article Title (Example)",
+        description: "An article about international business published on JETRO."
+    },
+    {
+        url: "https://coki.jp/",
+        title: "Collaborating with Amazon, Nike. Maximizing High Schoolers' Potential [Unpacked Inc.]｜coki",
+        description: "An interview article on Coki about the activities of Unpacked Inc."
+    },
+    {
+        url: "https://u-29.com/",
+        title: "'Increasing the number of people who look forward to sleeping at night' - The Ambition of N High School President Tatsuki Mitsuhashi, who stays close to his generation | U-29.com",
+        description: "A deep-dive interview article on U-29.com."
+    },
+    {
+        url: "https://shonan100.org/",
+        title: "When you go to bed at night, you want to increase the number of people who look forward to tomorrow - The ambition of a 16-year-old who is forging his own path. | Shonan One Hundred Project",
+        description: "An interview article from Shonan 100club."
+    },
+    {
+        url: "https://www.watch.impress.co.jp/",
+        title: "Paving the Way! N High School Graduates and Entrepreneurship Club Members Talk About Business and Social Transformation Ideas — NED2020 Report Part 2",
+        description: "A report article on the presentation event 'NED2020'."
+    },
+    {
+        url: "https://news.line.me/",
+        title: "'The biggest problem is environmental issues' - Nobel Peace Prize laureate Muhammad Yunus exchanges opinions with Japanese high school students (BLOGOS)",
+        description: "An interview article with Muhammad Yunam."
+    },
+    {
+        url: "https://u29-141.peatix.com/",
+        title: "[Vol.140] UniCareer by My father's death → Transfer to N High School → Aiming to start a business! Tatsuki Mitsuhashi on 'A Life Paved by Yourself'",
+        description: "An interview at UniCareer, a community for generations under 29 with unique values."
+    },
+    {
+        url: "https://dwango.co.jp/",
+        title: "6th Startup Club Registration: 'Unpacked Inc.' High School Students Providing Unknown Discoveries and Learning to High School Students | DWANGO Co., Ltd.",
+        description: "A press release from DWANGO regarding the establishment of Unpacked Inc."
+    },
+    {
+        url: "https://www.unpacked-inc.com/",
+        title: "Unpacked Inc. Official Website",
+        description: "The official website of Unpacked Inc., a company I founded."
+    },
+    {
+        url: "https://www.u18career.com/",
+        title: "U18 Career Summit Official Website",
+        description: "The official website of U18 Career Summit, one of my business projects."
+    },
+    // Add other interview articles here, translated into English
+];
+
+// ... (既存のJavaScriptコードの続き) ...
+
+// 取材履歴の動的生成 (修正: 英語版の場合のデータ選択ロジックを追加)
+const mediaArticlesContainer = document.getElementById('media-articles-container');
+const mediaArticlesContainerEn = document.getElementById('media-articles-container-en'); // 英語版用のID
+
+if (mediaArticlesContainer || mediaArticlesContainerEn) { // どちらかのコンテナが存在する場合
+    let articlesToDisplay = [];
+    if (mediaArticlesContainer) { // 日本語版
+        articlesToDisplay = mediaArticlesData;
+    } else if (mediaArticlesContainerEn) { // 英語版
+        articlesToDisplay = mediaArticlesDataEn;
+    }
+
+    const targetContainer = mediaArticlesContainer || mediaArticlesContainerEn;
+
+    articlesToDisplay.forEach(article => {
+        const articleItem = document.createElement('div');
+        articleItem.classList.add('media-article-item');
+        
+        articleItem.innerHTML = `
+            <a href="${article.url}" target="_blank" rel="noopener noreferrer">
+                <h4>${article.title}</h4>
+                <p>${article.description}</p>
+            </a>
+        `;
+        targetContainer.appendChild(articleItem);
+    });
+}
+
