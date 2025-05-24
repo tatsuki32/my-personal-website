@@ -2,17 +2,20 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- グローバルナビゲーションとハンバーガーメニュー ---
     const hamburger = document.querySelector('.hamburger');
     const navList = document.querySelector('.nav-list');
-    const navLinks = navList.querySelectorAll('a');
+    const overlay = document.querySelector('.overlay'); // オーバーレイ要素を取得
 
     const toggleNav = () => {
         hamburger.classList.toggle('is-active');
         navList.classList.toggle('is-active');
+        overlay.classList.toggle('is-active'); // オーバーレイの表示/非表示も切り替え
+        document.body.classList.toggle('no-scroll'); // 背景のスクロールを禁止
     };
 
     hamburger.addEventListener('click', toggleNav);
+    overlay.addEventListener('click', toggleNav); // オーバーレイクリックで閉じる
 
     // ナビゲーションリンククリックでメニューを閉じる (モバイル時)
-    navLinks.forEach(link => {
+    navList.querySelectorAll('a').forEach(link => {
         link.addEventListener('click', () => {
             if (navList.classList.contains('is-active')) {
                 toggleNav(); // メニューを閉じる
@@ -20,49 +23,76 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // 画面サイズ変更時にメニューを閉じる (モバイルからPCに切り替わった場合)
-    let isMobileView = window.innerWidth <= 768; // 初期状態のモバイル判定
+    // --- モバイル版言語スイッチャー ---
+    const langSwitcherToggle = document.querySelector('.lang-switcher-toggle');
+    const langSwitcherDropdown = document.querySelector('.lang-switcher-dropdown');
 
-    const handleResize = () => {
-        const newIsMobileView = window.innerWidth <= 768;
-        if (isMobileView && !newIsMobileView) {
-            // モバイルビューからデスクトップビューに切り替わった場合
-            if (navList.classList.contains('is-active')) {
-                toggleNav(); // 開いていたら閉じる
+    if (langSwitcherToggle && langSwitcherDropdown) {
+        langSwitcherToggle.addEventListener('click', (event) => {
+            event.stopPropagation(); // クリックイベントの伝播を停止
+            langSwitcherDropdown.classList.toggle('is-active');
+            // 必要であれば、言語ドロップダウンが開いたらオーバーレイも表示する
+            // overlay.classList.toggle('is-active'); 
+            // document.body.classList.toggle('no-scroll');
+        });
+
+        // ドロップダウン外をクリックで閉じる
+        document.addEventListener('click', (event) => {
+            if (!langSwitcherDropdown.contains(event.target) && langSwitcherDropdown.classList.contains('is-active')) {
+                langSwitcherDropdown.classList.remove('is-active');
+                // if (!navList.classList.contains('is-active')) { // ハンバーガーメニューが開いてない時だけスクロール許可
+                //     document.body.classList.remove('no-scroll');
+                // }
             }
-        }
-        isMobileView = newIsMobileView; // 状態を更新
-    };
+        });
 
-    window.addEventListener('resize', handleResize);
+        // ドロップダウン内のリンククリックで閉じる
+        langSwitcherDropdown.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                langSwitcherDropdown.classList.remove('is-active');
+                // if (!navList.classList.contains('is-active')) {
+                //     document.body.classList.remove('no-scroll');
+                // }
+            });
+        });
+    }
 
-
-    // 現在のページに応じたナビゲーションリンクのハイライト
+    // --- 現在のページに応じたナビゲーションリンクのハイライト ---
     const currentPath = window.location.pathname.split('/').pop();
-    const currentLangDir = window.location.pathname.split('/')[1]; // ex: "en", "kg", "ru" or empty
+    const currentLangDir = window.location.pathname.split('/')[1];
 
-    navLinks.forEach(link => {
+    navList.querySelectorAll('a').forEach(link => {
         const linkHref = link.getAttribute('href').split('/').pop();
 
-        if (currentPath === '' && linkHref === 'index.html') { // ルートURLの場合 (例: example.com/)
+        if (currentPath === 'index.html' && linkHref === 'index.html') {
             link.classList.add('active-page');
-        } else if (currentPath === linkHref) {
+        } else if (currentPath === '' && linkHref === 'index.html' && currentLangDir === '') { // ルートURLのJP版
+             link.classList.add('active-page');
+        }
+        else if (linkHref !== 'index.html' && currentPath === linkHref) {
             link.classList.add('active-page');
         }
     });
 
     // --- 言語スイッチャーのハイライト ---
     const langSwitcherLinks = document.querySelectorAll('.lang-switcher a');
+    const langSwitcherDropdownLinks = document.querySelectorAll('.lang-switcher-dropdown a');
     
-    langSwitcherLinks.forEach(link => {
-        const langCode = link.textContent.toLowerCase();
+    const highlightLangLink = (links) => {
+        links.forEach(link => {
+            const langCode = link.textContent.toLowerCase();
 
-        if (langCode === 'jp' && (currentLangDir === '' || currentPath === 'index.html' || currentPath === 'blog.html' || currentPath === 'multilingual-journey.html' || currentPath === 'profile.html' || currentPath === 'contact.html')) {
-            link.classList.add('active');
-        } else if (langCode === currentLangDir) {
-            link.classList.add('active');
-        }
-    });
+            if (langCode === 'jp' && (currentLangDir === '' || currentPath === 'index.html')) {
+                link.classList.add('active');
+            } else if (langCode === currentLangDir) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    };
+    highlightLangLink(langSwitcherLinks);
+    highlightLangLink(langSwitcherDropdownLinks);
 
 
     // --- 多言語奮闘記セクションのインタラクション ---
@@ -81,15 +111,15 @@ document.addEventListener('DOMContentLoaded', () => {
             poetry: "Кыргыз жери – алтын бешик, Кыргызым – кайнар булак.", // (キルギスの詩の例 - 適切なものに置き換えてください)
             colorClass: 'kyrgyz-active'
         },
-        'classical-japanese': { // データ属性名を変更したためJavaScript側も変更
+        'japanese-classical': {
             poetry: "世の中は　常にもがもな　渚漕ぐ　海人の小舟の　綱手かなしも", // 柿本人麻呂
-            colorClass: 'classical-japanese-active'
+            colorClass: 'japanese-classical-active'
         }
         // 他の言語もここに追加
     };
 
     // PC/タブレット: マウスオーバー時のインタラクション
-    if (window.innerWidth > 768) {
+    if (window.innerWidth > 768) { // 768px以上をPC/タブレットと判断
         languageItems.forEach(item => {
             const langKey = item.dataset.lang;
             const langPoetry = item.querySelector('.lang-poetry');
@@ -103,11 +133,11 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             item.addEventListener('mouseleave', () => {
-                setTimeout(() => { // 遅延を少し長くして自然に
-                    langPoetry.textContent = '';
+                setTimeout(() => {
                     item.classList.remove('is-active');
                     item.classList.remove(languageData[langKey].colorClass);
-                }, 250); 
+                    langPoetry.textContent = ''; // 詩をクリア
+                }, 200); // 200msの遅延
             });
         });
     }
@@ -143,10 +173,12 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }, observerOptions);
 
-    // 多言語奮闘記ページの場合のみObserverを適用
-    if (document.getElementById('multilingual-journey-section-id')) {
+    if (document.getElementById('multilingual-journey-section-id')) { // IDを追加
         languageItems.forEach(item => {
             languageObserver.observe(item);
         });
     }
+
+    // --- 背景スクロール禁止用のクラス ---
+    // CSSで body.no-scroll { overflow: hidden; } を追加
 });

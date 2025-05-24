@@ -8,16 +8,16 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <header class="main-header">
+    <div class="overlay"></div> <header class="main-header">
         <div class="container header-content">
             <div class="logo">たつき＠趣味としての多言語学習</div>
             <div class="lang-switcher">
-                <a href="/index.html" class="active">JP</a>
-                <a href="/en/index.html">EN</a>
-                <a href="/kg/index.html">KG</a>
-                <a href="/ru/index.html">RU</a>
+                <a href="index.html" class="active">JP</a>
+                <a href="en/index.html">EN</a>
+                <a href="kg/index.html">KG</a>
+                <a href="ru/index.html">RU</a>
             </div>
+            <button class="lang-switcher-toggle">言語</button>
             <nav class="main-nav">
                 <button class="hamburger" aria-label="メニューを開く">
                     <span class="bar"></span>
@@ -33,6 +33,12 @@
                 </ul>
             </nav>
         </div>
+        <div class="lang-switcher-dropdown">
+            <a href="index.html">JP</a>
+            <a href="en/index.html">EN</a>
+            <a href="kg/index.html">KG</a>
+            <a href="ru/index.html">RU</a>
+        </div>
     </header>
 
     <main>
@@ -40,8 +46,7 @@
             <div class="container">
                 <h1>言葉の奥深さを探求する旅</h1>
                 <p>世界中の言語、その使い方、そして表現の可能性を巡る私の記録</p>
-                <a href="#latest-blog" class="btn">最新記事を見る</a>
-            </div>
+                </div>
         </section>
 
         <section id="latest-blog" class="blog-section container">
@@ -49,15 +54,15 @@
             <div class="home-latest-articles">
                 <div class="home-article-preview">
                     <span class="date">2025/05/20</span>
-                    <h3>アフリカのビザ取り方、最新情報</h3>
+                    <h3>言語学習のモチベーション維持の秘訣</h3>
                 </div>
                 <div class="home-article-preview">
                     <span class="date">2025/05/18</span>
-                    <h3>カザフスタンと麹：旅と食の交差点</h3>
+                    <h3>なぜ日本語は美しいのか？</h3>
                 </div>
                 <div class="home-article-preview">
                     <span class="date">2025/05/15</span>
-                    <h3>日本のパスポートで行ける国：私の旅の計画</h3>
+                    <h3>旅先でのコミュニケーション術</h3>
                 </div>
             </div>
             <div class="text-center">
@@ -70,15 +75,15 @@
             <div class="home-latest-articles">
                 <div class="home-article-preview">
                     <span class="date">2025/05/22</span>
-                    <h3>英語：アルファベットの奥深さ</h3>
+                    <h3>英語学習：発音矯正のポイント</h3>
                 </div>
                 <div class="home-article-preview">
                     <span class="date">2025/05/19</span>
-                    <h3>ロシア語：これは何と言う？</h3>
+                    <h3>ロシア語の動詞の体（アスペクト）を理解する</h3>
                 </div>
                 <div class="home-article-preview">
                     <span class="date">2025/05/17</span>
-                    <h3>中古日本語：カ行変格活用を理解する</h3>
+                    <h3>キルギス語の挨拶表現集</h3>
                 </div>
             </div>
             <div class="text-center">
@@ -86,7 +91,22 @@
             </div>
         </section>
 
-        </main>
+        <section id="about-me-cta" class="profile-section container">
+            <div class="text-center">
+                <h2>自己紹介</h2>
+                <p>私の多言語学習の旅と、言葉への情熱について知りたい方はこちらへ。</p>
+                <a href="profile.html" class="btn">自己紹介ページへ</a>
+            </div>
+        </section>
+
+        <section id="contact-cta" class="contact-section container">
+            <div class="text-center">
+                <h2>お問い合わせ</h2>
+                <p>ご意見、ご感想、コラボレーションのご提案など、お気軽にご連絡ください。</p>
+                <a href="contact.html" class="btn">お問い合わせはこちら</a>
+            </div>
+        </section>
+    </main>
 
     <footer class="main-footer">
         <div class="container">
