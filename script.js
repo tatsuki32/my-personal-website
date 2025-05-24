@@ -226,11 +226,79 @@ document.addEventListener('DOMContentLoaded', () => {
         // 各記事のデータ (URL, タイトル, 概要) をここに追加してください
         // サムネイルは自動取得できないため、ここでは画像は指定しません。
         // タイトルと概要は手動で入力してください。
-        {
-            url: "https://www.jetro.go.jp/events/scc/a610798e353de032.html",
-            title: "JETRO 記事タイトル（例）",
-            description: "海外ビジネスに関するJETROでの掲載記事です。"
+          {
+            url: "https://prtimes.jp/main/html/rd/p/000000004.000073331.html",
+            title: "株式会社Unpacked iU情報経営イノベーション専門職大学と「次世代の教育推進」を目的として連携",
         },
+
+         {
+            url: "https://prtimes.jp/main/html/rd/p/000000003.000073331.html",
+            title: "Unpacked×テレビ東京コミュニケーションズ　共同事業としてU18キャリアサミットの開催を決定",
+            
+        },
+
+         {
+            url: "https://kininarukotomatome.com/u18-career-summit-c0514/",
+            title: "【第2弾：なんとなくから卒業だ】U18キャリアサミット",
+        },
+
+         {
+            url: "https://aoaoi.jp/news/post-20166/",
+            title: "日本最大級キャリアイベント『U18キャリアサミット』の公式サポーターになりました！",
+        },
+         {
+            url: "https://www.winkey.co.jp/single-post/ch210620",
+            title: "chFILES 6月号 ",
+            description: " [社長に会いたい]のコーナーで取材をしていただきました。"
+        },
+         {
+            url: "https://dwango.co.jp/news/5914067370593441947/",
+            title: "起業部法人登記第6号誕生中高生向けのキャリア教育支援事業「株式会社 Unpacked」高校生が高校生に未知なる発見や学びを提供",
+            description: "ドワンゴさまに掲載いただきました。"
+        },
+
+         {
+            url: "https://note.com/e0712004/n/n70745935ec79",
+            title: "思いを形にする",
+            description: "逗子市立逗子小学校教員の高司先生に取材いただきました。"
+        },
+       
+         {
+            url: "https://u-29.com/2020/10/15/tatsuki_mitsuhashi/",
+            title: "「明日を楽しみに夜眠る人を増やす」 同世代に寄り添うN高生社長・三橋龍起の志",
+            description: "「U-29ドットコム」さまに取材いただきました。"
+        },
+       
+         {
+            url: "https://www.youtube.com/watch?v=DHGabSyQT5Y&ab_channel=%E5%BF%97%E6%95%99%E8%82%B2%E3%83%97%E3%83%AD%E3%82%B8%E3%82%A7%E3%82%AF%E3%83%88",
+            title: "第二回世界青少年志プレゼンテーション大会ファイナリスト「三橋龍動画」",
+            description: "第二回世界青少年志プレゼンテーション大会ファイナリストに選抜いただきました。"
+        },
+       
+          {
+            url: "https://coki.jp/",
+            title: "Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki",
+            description: "株式会社 Unpackedの活動に関するCokiでのインタビュー記事です。"
+        },
+
+          {
+            url: "https://coki.jp/",
+            title: "Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki",
+            description: "株式会社 Unpackedの活動に関するCokiでのインタビュー記事です。"
+        },
+
+          {
+            url: "https://coki.jp/",
+            title: "Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki",
+            description: "株式会社 Unpackedの活動に関するCokiでのインタビュー記事です。"
+        },
+
+          {
+            url: "https://coki.jp/",
+            title: "Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki",
+            description: "株式会社 Unpackedの活動に関するCokiでのインタビュー記事です。"
+        },
+       
         {
             url: "https://coki.jp/",
             title: "Amazon、Nikeとも協働。高校生の可能性を最大限に【株式会社 Unpacked】｜coki",
