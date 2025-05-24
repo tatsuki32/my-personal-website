@@ -8,16 +8,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-    <header class="main-header">
+    <div class="overlay"></div> <header class="main-header">
         <div class="container header-content">
+            <button class="lang-switcher-toggle">LG</button>
+
             <div class="logo">たつき＠趣味としての多言語学習</div>
             <div class="lang-switcher">
-                <a href="/index.html">JP</a>
-                <a href="/en/index.html">EN</a>
-                <a href="/kg/index.html">KG</a>
-                <a href="/ru/index.html">RU</a>
+                <a href="index.html">JP</a>
+                <a href="en/index.html">EN</a>
+                <a href="kg/index.html">KG</a>
+                <a href="ru/index.html">RU</a>
             </div>
+            
             <nav class="main-nav">
                 <button class="hamburger" aria-label="メニューを開く">
                     <span class="bar"></span>
@@ -33,6 +35,13 @@
                 </ul>
             </nav>
         </div>
+        <div class="lang-switcher-dropdown">
+            <button class="lang-switcher-close-button">×</button>
+            <a href="index.html">JP</a>
+            <a href="en/index.html">EN</a>
+            <a href="kg/index.html">KG</a>
+            <a href="ru/index.html">RU</a>
+        </div>
     </header>
 
     <main>
@@ -40,30 +49,16 @@
             <div class="content-page">
                 <h2>お問い合わせ</h2>
                 <p>ご意見、ご感想、コラボレーションのご提案など、お気軽にお問い合わせください。</p>
-                <form class="contact-form" action="#" method="POST">
-                    <label for="name">お名前</label>
-                    <input type="text" id="name" name="name" required>
-
-                    <label for="email">メールアドレス</label>
-                    <input type="email" id="email" name="email" required>
-
-                    <label for="subject">件名</label>
-                    <input type="text" id="subject" name="subject">
-
-                    <label for="message">メッセージ</label>
-                    <textarea id="message" name="message" rows="5" required></textarea>
-
-                    <button type="submit">送信</button>
-                </form>
-                <p style="margin-top: 30px;">（注：このフォームはダミーです。実際にお問い合わせを受け付けるには、別途バックエンドの設置が必要です。または、メールアドレスを直接記載してください。）</p>
-                <p>メールアドレス: <a href="mailto:your.email@example.com">your.email@example.com</a></p>
-            </div>
+                
+                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScGJNBBf7tKis_tq5FtL97iSCkPmvzmSXOeLNY6YLyAnJsoaQ/viewform?embedded=true" width="640" height="1638" frameborder="0" marginheight="0" marginwidth="0">読み込んでいます…</iframe>
+                
+                </div>
         </section>
     </main>
 
     <footer class="main-footer">
         <div class="container">
-            <p>&copy; 2025 たつき All Rights Reserved.</p>
+            <p>© 2025 たつき All Rights Reserved.</p>
         </div>
     </footer>
 
