@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (navList.classList.contains('is-active') && langSwitcherDropdown.classList.contains('is-active')) {
             langSwitcherDropdown.classList.remove('is-active');
         }
-    };
+    };　
 
     hamburger.addEventListener('click', toggleNav);
     overlay.addEventListener('click', toggleNav); // オーバーレイクリックで閉じる
