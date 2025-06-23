@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kyrgyz Word Spark - キルギス語単語学習</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg-color: #1e1e1e;
+            --primary-text-color: #e0e0e0;
+            --secondary-text-color: #b0b0b0;
+            --accent-color: #CE1126; /* キルギス国旗の赤 */
+            --accent-hover-color: #a60e1e;
+            --hook-color: #FFC400; /* キルギス国旗の黄色 */
+            --next-btn-color: #42a5f5;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #app-container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            font-size: 2.5rem;
+        }
+        #app-subtitle {
+            color: var(--secondary-text-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        #mode-selector {
+            margin-bottom: 20px;
+        }
+        .mode-btn {
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .mode-btn:hover {
+            background-color: var(--accent-hover-color);
+            color: white;
+        }
+        .mode-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: bold;
+        }
+        .card-scene {
+            width: 100%;
+            height: 300px;
+            perspective: 1000px;
+            margin-bottom: 20px;
+        }
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        .card.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-color: var(--card-bg-color);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+        }
+        .card-face-back {
+            transform: rotateY(180deg);
+        }
+        #word-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        #ipa-display {
+            font-size: 1.2rem;
+            color: var(--secondary-text-color);
+            margin-top: 5px;
+        }
+        /* 音声ボタンは非表示 */
+        #audio-btn, #audio-btn-back {
+           display: none;
+        }
+        #back-face-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        #japanese-display {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        #hook-display {
+            font-size: 1rem;
+            color: var(--hook-color);
+            margin-top: 15px;
+            font-style: italic;
+        }
+        .example-display {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+            width: 100%;
+        }
+        #controls {
+            display: flex;
+            justify-content: center;
+        }
+        .control-btn {
+            width: 80%;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            background-color: var(--next-btn-color);
+            color: white;
+        }
+        .control-btn:hover {
+            opacity: 0.8;
+        }
+        #progress-display {
+            margin-top: 20px;
+            color: var(--secondary-text-color);
+            font-size: 1.1rem;
+        }
+        #completion-screen {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-container">
+        <h1>Kyrgyz Word Spark</h1>
+        <p id="app-subtitle">カードをクリックして答えを確認</p>
+
+        <div id="mode-selector">
+            <button id="kg-jp-btn" class="mode-btn">キルギス語 → 日本語</button>
+            <button id="jp-kg-btn" class="mode-btn active">日本語 → キルギス語</button>
+        </div>
+
+        <div id="main-content">
+            <div class="card-scene">
+                <div id="card" class="card">
+                    <div class="card-face card-face-front">
+                        <p id="word-display"></p>
+                        <p id="ipa-display"></p>
+                        <button id="audio-btn">🔊</button>
+                    </div>
+                    <div class="card-face card-face-back">
+                        <div id="back-face-header">
+                            <p id="japanese-display"></p>
+                            <button id="audio-btn-back">🔊</button>
+                        </div>
+                        <p id="hook-display"></p>
+                        <div class="example-display">
+                            <p id="example-kg-display"></p>
+                            <p id="example-ja-display"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div id="controls">
+                <button id="next-btn" class="control-btn">次へ</button>
+            </div>
+    
+            <p id="progress-display"></p>
+        </div>
+
+        <div id="completion-screen">
+            <h2>🎉 Азаматсыз! (素晴らしい!)</h2>
+            <p>お疲れ様でした！上のモードを選択して、新しいセッションを開始できます。</p>
+        </div>
+    </div>
+
+<script>
+    // ===================================================================================
+    // ★★★ 単語データの追加・編集はここから ★★★
+    // ===================================================================================
+    const wordData = [
+        { kyrgyz: "ата", ipa: "[ɑtɑ́]", japanese: "父", hook: "温かいお父さんをイメージ。", example_kg: "Менин атам мугалим.", example_ja: "私の父は先生です。" },
+        { kyrgyz: "эне", ipa: "[ené]", japanese: "母", hook: "「えね」るぎーの源、お母さん。", example_kg: "Менин энем даамдуу тамак жасайт.", example_ja: "私の母は美味しい料理を作ります。" },
+        { kyrgyz: "тигил жакка", ipa: "[tigíl d͡ʒɑχtɑ́]", japanese: "向こうへ", hook: "「あっちの方へ」と指し示す感じ。", example_kg: "Тигил жакка бас.", example_ja: "向こうへ歩いて。" },
+        { kyrgyz: "аары", ipa: "[ɑːrɯ́]", japanese: "蜂", hook: "「アーリー」モーニングに飛ぶ蜂。", example_kg: "Аары гүлдөн шире чогултат.", example_ja: "蜂は花から蜜を集める。" },
+        { kyrgyz: "баш", ipa: "[bɑʃ]", japanese: "頭", hook: "日本語の「バス」と同じ音。", example_kg: "Башым ооруп жатат.", example_ja: "頭が痛いです。" },
+        { kyrgyz: "беш", ipa: "[beʃ]", japanese: "5", hook: "「Besh」barmakは5本の指で食べるキルギスの国民食。", example_kg: "Мага беш алма берчи.", example_ja: "私にリンゴを5つください。" },
+        { kyrgyz: "барбы?", ipa: "[bɑrbɯ́]", japanese: "ありますか？", hook: "「バルブ」ありますか？と聞くイメージ。", example_kg: "Нан барбы?", example_ja: "パンはありますか？" },
+        { kyrgyz: "виза", ipa: "[vízə]", japanese: "VISA", hook: "日本語と同じ。", example_kg: "Мага Орусияга виза керек.", example_ja: "私はロシアへのビザが必要です。" },
+        { kyrgyz: "дарыгер", ipa: "[dɑrɯɣér]", japanese: "医者", hook: "「ダリげる」ほど忙しい医者。", example_kg: "Ал жакшы дарыгер.", example_ja: "彼は良い医者です。" },
+        { kyrgyz: "август", ipa: "[ávgust]", japanese: "八月", hook: "英語のAugustとほぼ同じ。", example_kg: "Август айында Ысык-Көлгө барабыз.", example_ja: "8月にイシク・クル湖へ行きます。" },
+        { kyrgyz: "эгер", ipa: "[egér]", japanese: "もし", hook: "「え、ギア」を間違えたら、もし…", example_kg: "Эгер жаан жааса, үйдө болом.", example_ja: "もし雨が降ったら、家にいます。" },
+        { kyrgyz: "гүл", ipa: "[gyl]", japanese: "花", hook: "クール(gül)な花。", example_kg: "Бул абдан кооз гүл.", example_ja: "これはとても美しい花です。" },
+        { kyrgyz: "газ", ipa: "[gɑz]", japanese: "ガス", hook: "日本語と同じ。", example_kg: "Үйдө газ барбы?", example_ja: "家にガスはありますか？" },
+        { kyrgyz: "тогуз", ipa: "[toʁúz]", japanese: "9", hook: "「研ぐ図」を9枚描く。", example_kg: "Ал тогуз жашта.", example_ja: "彼は9歳です。" },
+        { kyrgyz: "даам", ipa: "[dɑːm]", japanese: "味", hook: "ダムの水の味。", example_kg: "Тамактын даамы жакшы.", example_ja: "料理の味が良い。" },
+        { kyrgyz: "дос", ipa: "[dos]", japanese: "友", hook: "「どす」こい！友達！", example_kg: "Ал менин эң жакын досум.", example_ja: "彼は私の親友です。" },
+        { kyrgyz: "дин", ipa: "[din]", japanese: "宗教", hook: "「ディン」ドンと教会の鐘が鳴る宗教。", example_kg: "Кыргызстанда негизги дин - Ислам.", example_ja: "キルギスでの主な宗教はイスラム教です。" },
+        { kyrgyz: "бет", ipa: "[bet]", japanese: "面、顔、ページ", hook: "顔をベッド（bet）につける。", example_kg: "Китептин биринчи бетин ач.", example_ja: "本の最初のページを開いて。" },
+        { kyrgyz: "жер", ipa: "[d͡ʒer]", japanese: "土地、地面", hook: "ジェルを土地にこぼす。", example_kg: "Бул жер абдан кооз.", example_ja: "この土地はとても美しい。" },
+        { kyrgyz: "балаты", ipa: "[bɑlɑtɯ́]", japanese: "クリスマスツリー", hook: "「バラ、ティー」をツリーに飾る。", example_kg: "Биз балатыны кооздодук.", example_ja: "私たちはクリスマスツリーを飾った。" },
+        { kyrgyz: "коён", ipa: "[kojón]", japanese: "うさぎ", hook: "「来いよん」と呼ぶうさぎ。", example_kg: "Коён сабизди жакшы көрөт.", example_ja: "うさぎはニンジンが好きだ。" },
+        { kyrgyz: "жакшы", ipa: "[d͡ʒɑχʃɯ́]", japanese: "良い", hook: "キルギス語の最重要単語の一つ。", example_kg: "Жакшы, рахмат!", example_ja: "元気です、ありがとう！" },
+        { kyrgyz: "жол", ipa: "[d͡ʒol]", japanese: "道", hook: "「ジョル」ノ・ジョバァーナが歩む黄金の道。", example_kg: "Бул жол кайда барат?", example_ja: "この道はどこへ続いていますか？" },
+        { kyrgyz: "дүкөн", ipa: "[dykœ́n]", japanese: "雑貨店、店", hook: "「どこん」ですか、そのお店は？", example_kg: "Мен дүкөнгө барам.", example_ja: "私は店に行きます。" },
+        { kyrgyz: "ийрим", ipa: "[ijrím]", japanese: "サークル、クラブ", hook: "「いいリム」ジンを飲むサークル。", example_kg: "Ал музыкалык ийримге катышат.", example_ja: "彼は音楽サークルに参加している。" },
+        { kyrgyz: "доор", ipa: "[doːr]", japanese: "時代、紀元", hook: "ドアの向こうは別時代。", example_kg: "Бул жаңы доордун башталышы.", example_ja: "これは新しい時代の始まりだ。" },
+        { kyrgyz: "убак", ipa: "[uβɑ́χ]", japanese: "時、時間", hook: "「うわっ、食う」時間。", example_kg: "Азыр убак канча болду?", example_ja: "今、何時ですか？" },
+        { kyrgyz: "Кыргыз", ipa: "[qɯrʁɯ́z]", japanese: "キルギス（人）", hook: "国の名前。", example_kg: "Мен Кыргызмын.", example_ja: "私はキルギス人です。" },
+        { kyrgyz: "кыргыз тили", ipa: "[qɯrʁɯ́z tilí]", japanese: "キルギス語", hook: "「キルギスの言葉」", example_kg: "Мен кыргыз тилин үйрөнүп жатам.", example_ja: "私はキルギス語を勉強しています。" },
+        { kyrgyz: "ит", ipa: "[it]", japanese: "犬", hook: "「いっと」うの犬。", example_kg: "Ит үрүп жатат.", example_ja: "犬が吠えている。" },
+        { kyrgyz: "бир тууган", ipa: "[bir tuːʁɑ́n]", japanese: "兄弟", hook: "「一つの(bir)生まれ(tuugan)」", example_kg: "Менин бир тууганым бар.", example_ja: "私には兄弟がいます。" },
+        { kyrgyz: "эки", ipa: "[ekí]", japanese: "2", hook: "駅（えき）まで2キロ。", example_kg: "Эки билет, сураныч.", example_ja: "チケットを2枚お願いします。" },
+        { kyrgyz: "көл", ipa: "[kœl]", japanese: "湖", hook: "「来る？」湖に。", example_kg: "Ысык-Көл - Кыргызстандын бермети.", example_ja: "イシク・クル湖はキルギスの真珠です。" },
+        { kyrgyz: "кайда?", ipa: "[qɑjdɑ́]", japanese: "どこ？", hook: "「かいだ」のはどこ？", example_kg: "Даараткана кайда?", example_ja: "トイレはどこですか？" },
+        { kyrgyz: "кол", ipa: "[qol]", japanese: "手", hook: "「来ーる」を手で招く。", example_kg: "Колуңду жуу.", example_ja: "手を洗いなさい。" },
+        { kyrgyz: "лекция", ipa: "[léktsijə]", japanese: "講義", hook: "英語のlectureとほぼ同じ。", example_kg: "Бүгүн лекция кызыктуу болду.", example_ja: "今日の講義は面白かった。" },
+        { kyrgyz: "май", ipa: "[mɑj]", japanese: "油、バター、5月", hook: "5月(май)は油(май)を売る。", example_kg: "Нанга май сүйкө.", example_ja: "パンにバターを塗って。" },
+        { kyrgyz: "мал", ipa: "[mɑl]", japanese: "家畜", hook: "「まる」まると太った家畜。", example_kg: "Кыргыздар мал чарбачылыгы менен жашашат.", example_ja: "キルギス人は家畜業で暮らしている。" },
+        { kyrgyz: "нан", ipa: "[nɑn]", japanese: "パン", hook: "「ナン」もパンの一種。", example_kg: "Кыргыз наны абдан даамдуу.", example_ja: "キルギスのパンはとても美味しい。" },
+        { kyrgyz: "негиз", ipa: "[negíz]", japanese: "基本、基礎", hook: "「ねぎっす」基本は。", example_kg: "Бул грамматиканын негизи.", example_ja: "これが文法の基本です。" },
+        { kyrgyz: "манга", ipa: "[máŋgə]", japanese: "マンガ", hook: "日本語と同じ。", example_kg: "Ал манга окуганды жакшы көрөт.", example_ja: "彼はマンガを読むのが好きだ。" },
+        { kyrgyz: "дептер", ipa: "[deptér]", japanese: "ノート", hook: "「デブ、出る」とノートに書く。", example_kg: "Жаңы дептер сатып алдым.", example_ja: "新しいノートを買いました。" },
+        { kyrgyz: "тоңгон", ipa: "[toŋʁón]", japanese: "凍った", hook: "「とんがりコーン」が凍った。", example_kg: "Көл тоңгон.", example_ja: "湖が凍った。" },
+        { kyrgyz: "ой", ipa: "[oj]", japanese: "考え、意見", hook: "「おい！」と考えを言う。", example_kg: "Сенин оюң кандай?", example_ja: "あなたの考えはどうですか？" },
+        { kyrgyz: "он", ipa: "[on]", japanese: "10", hook: "スイッチをオンにする10秒前。", example_kg: "Онго чейин сана.", example_ja: "10まで数えて。" },
+        { kyrgyz: "тарап", ipa: "[tɑrɑ́p]", japanese: "側、方向", hook: "タラップの側。", example_kg: "Оң тарапка бурул.", example_ja: "右側に曲がって。" },
+        { kyrgyz: "жоон", ipa: "[d͡ʒoːn]", japanese: "（声が）太い", hook: "ジョーン・ジェットの声は太い。", example_kg: "Анын үнү жоон.", example_ja: "彼の声は太い。" },
+        { kyrgyz: "өлкө", ipa: "[ølkœ́]", japanese: "国", hook: "「終えるか」国作りを。", example_kg: "Кыргызстан - тоолуу өлкө.", example_ja: "キルギスは山国です。" },
+        { kyrgyz: "жөнүндө", ipa: "[d͡ʒønindœ́]", japanese: "～について", hook: "「ジョニーので」について話す。", example_kg: "Ал Кыргызстан жөнүндө айтып берди.", example_ja: "彼はキルギスについて話してくれた。" },
+        { kyrgyz: "уруш", ipa: "[urúʃ]", japanese: "叱る、喧嘩する", hook: "「うるせぇ！」と叱る。", example_kg: "Энем мени урушту.", example_ja: "母が私を叱った。" },
+        { kyrgyz: "сөөк", ipa: "[sɵːk]", japanese: "骨", hook: "「そーっと置く」骨。", example_kg: "Ит сөөк кемирип жатат.", example_ja: "犬が骨をかじっている。" },
+        { kyrgyz: "пайда", ipa: "[pɑjdɑ́]", japanese: "利益", hook: "「パイだ！」と喜ぶ利益。", example_kg: "Бул иштин пайдасы көп.", example_ja: "この仕事の利益は大きい。" },
+        { kyrgyz: "пикир", ipa: "[pikír]", japanese: "意見", hook: "「ぴっきり」意見が分かれる。", example_kg: "Сенин пикириң маанилүү.", example_ja: "あなたの意見が重要だ。" },
+        { kyrgyz: "республика", ipa: "[respúblikə]", japanese: "共和国", hook: "英語とほぼ同じ。", example_kg: "Кыргыз Республикасы.", example_ja: "キルギス共和国。" },
+        { kyrgyz: "сом", ipa: "[som]", japanese: "ソム（通貨）", hook: "キルギスの通貨単位。", example_kg: "Бул канча сом турат?", example_ja: "これは何ソムですか？" },
+        { kyrgyz: "сөздүк", ipa: "[søzdýk]", japanese: "辞書", hook: "「そーっす、どく」と辞書で調べる。", example_kg: "Мен кыргызча-орусча сөздүк колдоном.", example_ja: "私はキルギス語-ロシア語辞書を使います。" },
+        { kyrgyz: "тоо", ipa: "[toː]", japanese: "山", hook: "「父（とー）」さんと登る山。", example_kg: "Кыргызстанда бийик тоолор көп.", example_ja: "キルギスには高い山が多い。" },
+        { kyrgyz: "асман", ipa: "[ɑsmɑ́n]", japanese: "天、空", hook: "「明日、まん」じりともせず天を見る。", example_kg: "Асман ачык.", example_ja: "空は晴れている。" },
+        { kyrgyz: "ал", ipa: "[ɑl]", japanese: "それ、彼、彼女", hook: "「ある」のはそれ。", example_kg: "Ал менин досум.", example_ja: "彼（彼女）は私の友達です。" },
+        { kyrgyz: "уй", ipa: "[uj]", japanese: "牛", hook: "「うい」ういしい牛。", example_kg: "Уй сүт берет.", example_ja: "牛はミルクを出す。" },
+        { kyrgyz: "ун", ipa: "[un]", japanese: "小麦粉", hook: "「うん」と頷き小麦粉をこねる。", example_kg: "Нан ундан жасалат.", example_ja: "パンは小麦粉から作られる。" },
+        { kyrgyz: "үй", ipa: "[yj]", japanese: "家", hook: "「ゆい」つの我が家。", example_kg: "Мен үйгө барам.", example_ja: "私は家に帰ります。" },
+        { kyrgyz: "үн", ipa: "[yn]", japanese: "声", hook: "「うん」と低い声。", example_kg: "Анын үнү жакшы.", example_ja: "彼女の声は良い。" },
+        { kyrgyz: "жүн", ipa: "[d͡ʒyn]", japanese: "（動物の）毛、ウール", hook: "「純」ウールの毛。", example_kg: "Койдун жүнү жылуу.", example_ja: "羊の毛は暖かい。" },
+        { kyrgyz: "түктүү", ipa: "[tyktyː]", japanese: "毛深い", hook: "「ちゅくちゅく」する毛深いセーター。", example_kg: "Ал абдан түктүү ит.", example_ja: "それはとても毛深い犬だ。" },
+        { kyrgyz: "футбол", ipa: "[fudbɔ́l]", japanese: "サッカー", hook: "英語とほぼ同じ。", example_kg: "Биз футбол ойнойбуз.", example_ja: "私たちはサッカーをします。" },
+        { kyrgyz: "устакана", ipa: "[ustɑqɑnɑ́]", japanese: "工房", hook: "「うっす、高菜」と工房で作る。", example_kg: "Ал устаканада иштейт.", example_ja: "彼は工房で働いている。" },
+        { kyrgyz: "пахта", ipa: "[pɑχtɑ́]", japanese: "綿", hook: "「パクった」綿。", example_kg: "Өзбекстан пахтасы менен белгилүү.", example_ja: "ウズベキスタンは綿で有名です。" },
+        { kyrgyz: "сүрөтчү", ipa: "[syrøtʃý]", japanese: "芸術家、画家", hook: "「すると中」から芸術家が。", example_kg: "Ал белгилүү сүрөтчү.", example_ja: "彼は有名な芸術家だ。" },
+        { kyrgyz: "таблица", ipa: "[tablítsə]", japanese: "表、テーブル", hook: "タブレット（tablet）で表を見る。", example_kg: "Маалыматтар таблицада көрсөтүлгөн.", example_ja: "データは表に示されている。" },
+        { kyrgyz: "цирк", ipa: "[tsirk]", japanese: "サーカス", hook: "英語とほぼ同じ。", example_kg: "Биз циркке бардык.", example_ja: "私たちはサーカスに行った。" },
+        { kyrgyz: "сан", ipa: "[sɑn]", japanese: "数字、数", hook: "「さん」は数字の3。", example_kg: "Бирден онго чейинки сандар.", example_ja: "1から10までの数字。" },
+        { kyrgyz: "абзац", ipa: "[abzáts]", japanese: "段落", hook: "「危ないぞ、篤」と段落の始まりを教える。", example_kg: "Жаңы ойду жаңы абзацтан башта.", example_ja: "新しい考えは新しい段落から始めなさい。" },
+        { kyrgyz: "концерт", ipa: "[kantsért]", japanese: "コンサート", hook: "英語とほぼ同じ。", example_kg: "Концерт качан башталат?", example_ja: "コンサートはいつ始まりますか？" },
+        { kyrgyz: "чач", ipa: "[tʃɑtʃ]", japanese: "髪の毛", hook: "「チャチャっと」髪の毛を整える。", example_kg: "Анын чачы узун.", example_ja: "彼女の髪は長い。" },
+        { kyrgyz: "маңдай", ipa: "[mɑŋdɑ́j]", japanese: "額、おでこ", hook: "「マンゴー」を額に乗せる。", example_kg: "Анын маңдайы жарык экен.", example_ja: "彼の額は明るいね（賢そうだね）。" },
+        { kyrgyz: "тынчтык", ipa: "[tɯnʃtɯ́χ]", japanese: "平和", hook: "「ちんちく」りんの平和。", example_kg: "Дүйнөгө тынчтык керек.", example_ja: "世界に平和が必要だ。" },
+        { kyrgyz: "шейшемби", ipa: "[ʃejʃembí]", japanese: "火曜日", hook: "「シェイシェイ、ん？」と火曜日に言う。", example_kg: "Бүгүн шейшемби.", example_ja: "今日は火曜日です。" },
+        { kyrgyz: "шаар", ipa: "[ʃɑːr]", japanese: "町、都市", hook: "シャール（ショール）を巻いて町へ。", example_kg: "Бишкек - чоң шаар.", example_ja: "ビシュケクは大きな町です。" },
+        { kyrgyz: "щётка", ipa: "[ɕːótkə]", japanese: "ブラシ", hook: "ロシア語由来。「ショットガン」みたいなブラシ。", example_kg: "Тиш щёткасы кайда?", example_ja: "歯ブラシはどこですか？" },
+        { kyrgyz: "борщ", ipa: "[borɕː]", japanese: "ボルシチ", hook: "料理名。", example_kg: "Мага борщ жагат.", example_ja: "私はボルシチが好きです。" },
+        { kyrgyz: "куту", ipa: "[qutú]", japanese: "箱", hook: "「苦痛」なほど重い箱。", example_kg: "Бул кутунун ичинде эмне бар?", example_ja: "この箱の中には何がありますか？" },
+        { kyrgyz: "дворник", ipa: "[dvórnik]", japanese: "清掃人、管理人", hook: "ロシア語由来。", example_kg: "Дворник короону тазалап жатат.", example_ja: "清掃人が庭を掃除している。" },
+        { kyrgyz: "объект", ipa: "[ɑbjékt]", japanese: "対象、オブジェクト", hook: "英語とほぼ同じ。", example_kg: "Бул изилдөөнүн негизги объектиси.", example_ja: "これが研究の主な対象だ。" },
+        { kyrgyz: "съёмка", ipa: "[sjómkə]", japanese: "撮影", hook: "ロシア語由来。", example_kg: "Кино съёмкасы башталды.", example_ja: "映画の撮影が始まった。" },
+        { kyrgyz: "ысык", ipa: "[ɯsɯ́q]", japanese: "熱い", hook: "「いす、食う」ほど熱い。", example_kg: "Чай абдан ысык.", example_ja: "お茶がとても熱い。" },
+        { kyrgyz: "рахмат", ipa: "[rɑχmɑ́t]", japanese: "ありがとう", hook: "アラビア語由来。キルギスの基本の感謝。", example_kg: "Чоң рахмат!", example_ja: "どうもありがとう！" },
+        { kyrgyz: "ичкертүү белгиси", ipa: "[itʃkert´y belgisí]", japanese: "軟音符 (ь)", hook: "「細くする記号」の意。", example_kg: "Бул сөздө ичкертүү белгиси бар.", example_ja: "この単語には軟音符があります。" },
+        { kyrgyz: "эмерек", ipa: "[emerék]", japanese: "家具", hook: "「え、メロン」が家具の上に。", example_kg: "Биз жаңы эмерек сатып алдык.", example_ja: "私たちは新しい家具を買った。" },
+        { kyrgyz: "сентябрь", ipa: "[sentjabr]", japanese: "九月", hook: "英語のSeptemberと似ている。", example_kg: "Мектеп сентябрда башталат.", example_ja: "学校は9月に始まる。" },
+        { kyrgyz: "эт", ipa: "[et]", japanese: "肉", hook: "「えっと」肉は…", example_kg: "Кыргыздар этти көп жейт.", example_ja: "キルギス人は肉をよく食べる。" },
+        { kyrgyz: "мээ", ipa: "[meː]", japanese: "脳", hook: "「めー」と羊の脳。", example_kg: "Адамдын мээси татаал.", example_ja: "人間の脳は複雑だ。" },
+        { kyrgyz: "юбка", ipa: "[júpkə]", japanese: "スカート", hook: "日本語と同じ。", example_kg: "Ал кызыл юбка кийип жүрөт.", example_ja: "彼女は赤いスカートをはいている。" },
+        { kyrgyz: "коюу", ipa: "[qojúː]", japanese: "濃い、置く", hook: "「来い、言う」と濃いコーヒーを置く。", example_kg: "Мага коюу чай жагат.", example_ja: "私は濃いお茶が好きだ。" },
+        { kyrgyz: "январь", ipa: "[janvár]", japanese: "一月", hook: "英語のJanuaryと似ている。", example_kg: "Январь - жылдын биринчи айы.", example_ja: "1月は年で最初の月だ。" },
+        { kyrgyz: "уя", ipa: "[ujɑ́]", japanese: "巣", hook: "「うわっ」と鳥の巣を見つける。", example_kg: "Канаттуулар даракка уя салышат.", example_ja: "鳥は木に巣を作る。" },
+        { kyrgyz: "биз", ipa: "[biz]", japanese: "私たち", hook: "ビジネス（biz）は私たちがやる。", example_kg: "Биз кинотеатрга барабыз.", example_ja: "私たちは映画館に行きます。" },
+        { kyrgyz: "сен", ipa: "[sen]", japanese: "君（親しい相手）", hook: "「せん」べいを君と食べる。", example_kg: "Сен кайдасың?", example_ja: "君はどこにいるの？" },
+        { kyrgyz: "сиз", ipa: "[siz]", japanese: "あなた（丁寧）", hook: "「シーツ」をあなたのために。", example_kg: "Сиздин атыңыз ким?", example_ja: "あなたのお名前は何ですか？" },
+        { kyrgyz: "мен", ipa: "[men]", japanese: "私", hook: "ラーメンの「めん」は私が好き。", example_kg: "Мен студентмин.", example_ja: "私は学生です。" },
+        { kyrgyz: "силер", ipa: "[silér]", japanese: "あなたたち（友人など）", hook: "「知れる」あなたたちのこと。", example_kg: "Силер качан келесиңер?", example_ja: "君たちはいつ来ますか？" },
+        { kyrgyz: "сиздер", ipa: "[sizdér]", japanese: "あなたたち（丁寧）", hook: "「シズラー」へあなたたちと。", example_kg: "Сиздер, кириңиздер.", example_ja: "皆様、お入りください。" },
+        { kyrgyz: "алар", ipa: "[ɑlɑ́r]", japanese: "彼ら", hook: "「あらー」彼らが来た。", example_kg: "Алар футбол ойноп жатышат.", example_ja: "彼らはサッカーをしています。" },
+        { kyrgyz: "кой", ipa: "[qoj]", japanese: "羊", hook: "「来い」と羊を呼ぶ。", example_kg: "Кой тоодо жашайт.", example_ja: "羊は山に住んでいる。" },
+        { kyrgyz: "кесүү", ipa: "[kesyː]", japanese: "切る", hook: "「消す」ように紙を切る。", example_kg: "Нанды кесчи.", example_ja: "パンを切ってください。" },
+        { kyrgyz: "эшик", ipa: "[eʃík]", japanese: "ドア", hook: "「え、シック」なドア。", example_kg: "Эшикти жапчы.", example_ja: "ドアを閉めてください。" },
+        { kyrgyz: "этиш", ipa: "[etíʃ]", japanese: "動詞", hook: "「え、ティッシュ」は動詞じゃない。", example_kg: "Этиш - сүйлөмдүн маанилүү бөлүгү.", example_ja: "動詞は文の重要な部分だ。" },
+        { kyrgyz: "эже", ipa: "[ed͡ʒé]", japanese: "お姉さん", hook: "「えーじぇ」んとのお姉さん。", example_kg: "Менин эжем бар.", example_ja: "私には姉がいます。" },
+        { kyrgyz: "желек", ipa: "[d͡ʒelék]", japanese: "旗", hook: "「じぇ、レック」ボタンを押して旗を揚げる。", example_kg: "Кыргызстандын желеги кызыл.", example_ja: "キルギスの旗は赤い。" },
+        { kyrgyz: "жээк", ipa: "[d͡ʒeːk]", japanese: "岸", hook: "「J-pop」が流れる岸。", example_kg: "Көлдүн жээгинде эс алдык.", example_ja: "湖の岸で休みました。" },
+        { kyrgyz: "аэропорт", ipa: "[ɑeropórt]", japanese: "空港", hook: "英語とほぼ同じ。", example_kg: "Аэропорт шаардан алыс.", example_ja: "空港は町から遠い。" },
+        { kyrgyz: "алоэ", ipa: "[ɑlóe]", japanese: "アロエ", hook: "日本語と同じ。", example_kg: "Алоэ - дарылык өсүмдүк.", example_ja: "アロエは薬用植物です。" },
+        { kyrgyz: "ателье", ipa: "[ɑteljé]", japanese: "アトリエ", hook: "日本語と同じ。", example_kg: "Ал өзүнүн ательесинде иштейт.", example_ja: "彼は自分のアトリエで働いている。" },
+        { kyrgyz: "интерьер", ipa: "[interjér]", japanese: "インテリア", hook: "日本語と同じ。", example_kg: "Бул үйдүн интерьери абдан жагат.", example_ja: "この家のインテリアがとても好きだ。" }
+    ];
+    // ===================================================================================
+    // ★★★ 単語データの追加・編集はここまで ★★★
+    // ===================================================================================
+
+    const card = document.getElementById('card');
+    const wordDisplay = document.getElementById('word-display');
+    const ipaDisplay = document.getElementById('ipa-display');
+    const japaneseDisplay = document.getElementById('japanese-display');
+    const hookDisplay = document.getElementById('hook-display');
+    const exampleKgDisplay = document.getElementById('example-kg-display');
+    const exampleJaDisplay = document.getElementById('example-ja-display');
+    const nextBtn = document.getElementById('next-btn');
+    const progressDisplay = document.getElementById('progress-display');
+    const kgJpBtn = document.getElementById('kg-jp-btn');
+    const jpKgBtn = document.getElementById('jp-kg-btn');
+    const mainContent = document.getElementById('main-content');
+    const completionScreen = document.getElementById('completion-screen');
+
+    let currentWordIndex = 0;
+    let deck = [];
+    let mode = 'jp-kg'; // 初期モードを「日本語→キルギス語」に設定
+
+    card.addEventListener('click', () => card.classList.toggle('is-flipped'));
+    nextBtn.addEventListener('click', () => handleAnswer());
+    kgJpBtn.addEventListener('click', () => setMode('kg-jp'));
+    jpKgBtn.addEventListener('click', () => setMode('jp-kg'));
+
+    function setMode(newMode) {
+        mode = newMode;
+        kgJpBtn.classList.toggle('active', mode === 'kg-jp');
+        jpKgBtn.classList.toggle('active', mode === 'jp-kg');
+        startSession();
+    }
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function startSession() {
+        deck = shuffle([...wordData]);
+        currentWordIndex = 0;
+        mainContent.style.display = 'block';
+        completionScreen.style.display = 'none';
+        displayWord();
+    }
+    
+    function displayWord() {
+        if (currentWordIndex >= deck.length) {
+            showCompletionScreen();
+            return;
+        }
+        card.classList.remove('is-flipped');
+        
+        const word = deck[currentWordIndex];
+
+        if (mode === 'kg-jp') {
+            wordDisplay.textContent = word.kyrgyz;
+            ipaDisplay.textContent = word.ipa;
+            japaneseDisplay.textContent = word.japanese;
+            hookDisplay.textContent = word.hook;
+        } else { // jp-kg mode
+            wordDisplay.textContent = word.japanese;
+            ipaDisplay.textContent = "";
+            japaneseDisplay.textContent = word.kyrgyz;
+            hookDisplay.textContent = `発音: ${word.ipa}`;
+        }
+        
+        exampleKgDisplay.textContent = `e.g. ${word.example_kg}`;
+        exampleJaDisplay.textContent = `例）${word.example_ja}`;
+        updateProgress();
+    }
+    
+    function handleAnswer() {
+        currentWordIndex++;
+        setTimeout(displayWord, 100);
+    }
+
+    function updateProgress() {
+        if (deck.length > 0) {
+            progressDisplay.textContent = `進捗: ${currentWordIndex + 1} / ${deck.length}`;
+        }
+    }
+
+    function showCompletionScreen() {
+        mainContent.style.display = 'none';
+        completionScreen.style.display = 'block';
+    }
+
+    startSession();
+
+    </script>
+</body>
+</html>
