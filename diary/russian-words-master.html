@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Russian Slang Spark - ロシア語スラング学習</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg-color: #1e1e1e;
+            --primary-text-color: #e0e0e0;
+            --secondary-text-color: #b0b0b0;
+            --accent-color: #e53935; /* ロシアのイメージカラー赤系 */
+            --accent-hover-color: #b71c1c;
+            --hook-color: #42a5f5; /* 青系 */
+            --next-btn-color: #42a5f5;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #app-container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            font-size: 2.5rem;
+        }
+        #app-subtitle {
+            color: var(--secondary-text-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        #mode-selector {
+            margin-bottom: 20px;
+        }
+        .mode-btn {
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .mode-btn:hover {
+            background-color: var(--accent-hover-color);
+            color: white;
+        }
+        .mode-btn.active {
+            background-color: var(--accent-color);
+            color: white;
+            font-weight: bold;
+        }
+        .card-scene {
+            width: 100%;
+            height: 300px;
+            perspective: 1000px;
+            margin-bottom: 20px;
+        }
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        .card.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-color: var(--card-bg-color);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow-wrap: break-word;
+        }
+        .card-face-back {
+            transform: rotateY(180deg);
+        }
+        #word-display {
+            font-size: 2.2rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        #ipa-display {
+            font-size: 1.2rem;
+            color: var(--secondary-text-color);
+            margin-top: 5px;
+        }
+        #audio-btn, #audio-btn-back {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 2rem;
+            color: var(--accent-color);
+            transition: color 0.3s;
+        }
+        #audio-btn:hover, #audio-btn-back:hover {
+            color: var(--accent-hover-color);
+        }
+        #back-face-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        #japanese-display {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        #hook-display {
+            font-size: 1rem;
+            color: var(--hook-color);
+            margin-top: 15px;
+            font-style: italic;
+        }
+        .example-display {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+            width: 100%;
+        }
+        #controls {
+            display: flex;
+            justify-content: center;
+        }
+        .control-btn {
+            width: 80%;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            background-color: var(--next-btn-color);
+            color: white;
+        }
+        .control-btn:hover {
+            opacity: 0.8;
+        }
+        #progress-display {
+            margin-top: 20px;
+            color: var(--secondary-text-color);
+            font-size: 1.1rem;
+        }
+        #completion-screen {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="app-container">
+        <h1>Russian Slang Spark</h1>
+        <p id="app-subtitle">カードをクリックして答えを確認</p>
+
+        <div id="mode-selector">
+            <button id="ru-jp-btn" class="mode-btn">ロシア語 → 日本語</button>
+            <button id="jp-ru-btn" class="mode-btn active">日本語 → ロシア語</button>
+        </div>
+
+        <div id="main-content">
+            <div class="card-scene">
+                <div id="card" class="card">
+                    <div class="card-face card-face-front">
+                        <p id="word-display"></p>
+                        <p id="ipa-display"></p>
+                        <button id="audio-btn">🔊</button>
+                    </div>
+                    <div class="card-face card-face-back">
+                        <div id="back-face-header">
+                            <p id="japanese-display"></p>
+                            <button id="audio-btn-back">🔊</button>
+                        </div>
+                        <p id="hook-display"></p>
+                        <div class="example-display">
+                            <p id="example-ru-display"></p>
+                            <p id="example-ja-display"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div id="controls">
+                <button id="next-btn" class="control-btn">次へ</button>
+            </div>
+    
+            <p id="progress-display"></p>
+        </div>
+
+        <div id="completion-screen">
+            <h2>🎉 Молодец! (よくやった!)</h2>
+            <p>素晴らしいです！上のモードを選択して、新しいセッションを開始できます。</p>
+        </div>
+    </div>
+
+<script>
+    // ===================================================================================
+    // ★★★ 単語データの追加・編集はここから ★★★
+    // ===================================================================================
+    const wordData = [
+        {
+            russian: "Чувак",
+            ipa: "[t͡ɕʊˈvak]",
+            japanese: "男、ヤツ、兄ちゃん",
+            hook: "カジュアルに男性を呼ぶときの「ヘイ、ブラザー！」的なニュアンス。",
+            example_ru: "Эй, чувак, как дела?",
+            example_ja: "やあ、兄ちゃん、調子どう？"
+        },
+        {
+            russian: "Туса",
+            ipa: "[ˈtusə]",
+            japanese: "パーティー、集まり",
+            hook: "「тусовка (tusovka)」の略。若者の集まりやパーティー。",
+            example_ru: "Сегодня будет крутая туса.",
+            example_ja: "今日はヤバいパーティーがあるぜ。"
+        },
+        {
+            russian: "Бабки",
+            ipa: "[ˈbapkʲɪ]",
+            japanese: "金（かね）",
+            hook: "「おばあさん(бабушка)」とは違う意味のスラング。由来は諸説あり。",
+            example_ru: "У меня нет бабок.",
+            example_ja: "俺、金持ってないんだ。"
+        },
+        {
+            russian: "Тачка",
+            ipa: "[ˈtat͡ɕkə]",
+            japanese: "車（カジュアル）",
+            hook: "「Машина」よりクールで自慢げな響き。「イカした車」",
+            example_ru: "Смотри, какая у него тачка!",
+            example_ja: "見ろよ、あいつの車、かっけー！"
+        },
+        {
+            russian: "Клёво",
+            ipa: "[ˈklʲɵvə]",
+            japanese: "かっこいい、イケてる",
+            hook: "「Круто」と似ているが、よりポジティブで明るい「最高！」",
+            example_ru: "Это было клёво!",
+            example_ja: "あれはマジでイケてた！"
+        },
+        {
+            russian: "Отстой",
+            ipa: "[ɐtˈstoj]",
+            japanese: "最悪、ダサい",
+            hook: "何かを強く否定するときに使う。「これはないわー」",
+            example_ru: "Этот фильм — полный отстой.",
+            example_ja: "この映画は完全な駄作だ。"
+        },
+        {
+            russian: "Зашквар",
+            ipa: "[zɐʂˈkvar]",
+            japanese: "ダサい、みっともない",
+            hook: "特に若者言葉。「それやっちゃうのはダサい」というニュアンス。",
+            example_ru: "Носить такое — это зашквар.",
+            example_ja: "そんな格好するなんて、マジでダサい。"
+        },
+        {
+            russian: "Хавчик",
+            ipa: "[ˈxaft͡ɕɪk]",
+            japanese: "食べ物（軽食）",
+            hook: "「хавать (食べる)」から来た言葉。ジャンキーな食べ物のイメージ。",
+            example_ru: "Пойдём купим какой-нибудь хавчик.",
+            example_ja: "何か食べ物でも買いに行こうぜ。"
+        },
+        {
+            russian: "Лох",
+            ipa: "[lox]",
+            japanese: "カモ、だまされやすい人",
+            hook: "詐欺師などが使う言葉。人を侮辱する言葉なので注意。",
+            example_ru: "Он повёлся на это, вот лох!",
+            example_ja: "彼はそれに引っかかった、なんてカモなんだ！"
+        },
+        {
+            russian: "Блин",
+            ipa: "[blʲin]",
+            japanese: "ちくしょう！",
+            hook: "元はパンケーキ。悪態「Блядь」の代わりのソフトな表現。",
+            example_ru: "Блин, я забыл ключи.",
+            example_ja: "ちくしょう、鍵を忘れた。"
+        },
+        {
+            russian: "Жесть",
+            ipa: "[ʐɛsʲtʲ]",
+            japanese: "ヤバい（良い/悪い）",
+            hook: "「スズ（金属）」が元の意味。硬質な響きが「ヤバさ」を表す。",
+            example_ru: "Вчера на концерте была просто жесть!",
+            example_ja: "昨日のコンサートはマジでヤバかった！"
+        },
+        {
+            russian: "Гопник",
+            ipa: "[ˈɡopnʲɪk]",
+            japanese: "ヤンキー、不良",
+            hook: "アディダスのジャージを着てしゃがんでいるイメージ。",
+            example_ru: "На районе опять гопники собрались.",
+            example_ja: "また近所にヤンキーたちが集まってる。"
+        },
+        {
+            russian: "Бухать",
+            ipa: "[bʊˈxatʲ]",
+            japanese: "飲みまくる",
+            hook: "ただ飲む(пить)のではなく、大量にがぶ飲みする感じ。",
+            example_ru: "Мы всю ночь бухали.",
+            example_ja: "俺たちは一晩中飲みまくった。"
+        },
+        {
+            russian: "Пофиг",
+            ipa: "[ˈpofʲɪk]",
+            japanese: "どうでもいい",
+            hook: "「Мне всё равно」より強い無関心。「知ったこっちゃない」",
+            example_ru: "Мне на это абсолютно пофиг.",
+            example_ja: "そんなこと、俺にはマジでどうでもいい。"
+        },
+        {
+            russian: "Чёрт",
+            ipa: "[t͡ɕɵrt]",
+            japanese: "くそっ！、悪魔",
+            hook: "「Блин」より強い怒りや驚き。悪魔を呼び出す感じ。",
+            example_ru: "Чёрт, я опоздал!",
+            example_ja: "くそっ、遅刻だ！"
+        },
+        {
+            russian: "Залипать",
+            ipa: "[zəlʲɪˈpatʲ]",
+            japanese: "ハマる、夢中になる",
+            hook: "何かに「くっついて」離れられないイメージ。動画やゲームに。",
+            example_ru: "Я залипаю на это видео.",
+            example_ja: "俺、この動画にハマってるんだ。"
+        },
+        {
+            russian: "Тупо",
+            ipa: "[ˈtupə]",
+            japanese: "ガチで、マジで",
+            hook: "元は「馬鹿みたいに」。程度を強調する「めっちゃ」のような副詞。",
+            example_ru: "Это было тупо смешно.",
+            example_ja: "それはマジで面白かった。"
+        },
+        {
+            russian: "Ржать",
+            ipa: "[rʐatʲ]",
+            japanese: "ゲラゲラ笑う",
+            hook: "馬のいななきが原義。品のない大笑いを指す。",
+            example_ru: "Мы ржали над этой шуткой.",
+            example_ja: "俺たちはその冗談でゲラゲラ笑った。"
+        },
+        {
+            russian: "Тормоз",
+            ipa: "[ˈtorməs]",
+            japanese: "鈍いやつ、のろま",
+            hook: "車の「ブレーキ」が元の意味。行動や反応が遅い人。",
+            example_ru: "Ну ты и тормоз!",
+            example_ja: "お前って本当にのろまだな！"
+        },
+        {
+            russian: "Косить",
+            ipa: "[kɐˈsʲitʲ]",
+            japanese: "サボる、逃れる",
+            hook: "元は「（草を）刈る」。兵役などから逃れる意味でよく使われる。",
+            example_ru: "Он косит от армии.",
+            example_ja: "彼は兵役をサボっている。"
+        },
+        {
+            russian: "Зашквариться",
+            ipa: "[zɐʂˈkvarʲɪt͡sːə]",
+            japanese: "自ら恥をかく",
+            hook: "「Зашквар」の動詞形。ダサいことをして評判を落とす。",
+            example_ru: "Он зашкварился, когда надел это.",
+            example_ja: "彼はそれを着て、自分で自分の評判を落とした。（ダサいことをした）"
+        },
+        {
+            russian: "Задрот",
+            ipa: "[zɐˈdrot]",
+            japanese: "オタク、ガリ勉（侮蔑的）",
+            hook: "ゲームや勉強に没頭しすぎて他が見えない人への蔑称。",
+            example_ru: "Он настоящий задрот, всё время играет.",
+            example_ja: "あいつは本物のゲームオタクで、四六時中プレイしてる。"
+        },
+        {
+            russian: "Чёрный юмор",
+            ipa: "[ˈt͡ɕɵrnɨj ˈjumər]",
+            japanese: "ブラックユーモア",
+            hook: "直訳で「黒いユーモア」。不謹慎なジョーク。",
+            example_ru: "Я люблю чёрный юмор.",
+            example_ja: "私はブラックユーモアが好きだ。"
+        },
+        {
+            russian: "Впадлу",
+            ipa: "[ˈfpadlʊ]",
+            japanese: "面倒くさい",
+            hook: "「Мне лень」より強い「やる気ゼロ」感。",
+            example_ru: "Мне впадлу идти в магазин.",
+            example_ja: "店に行くの、マジで面倒くさい。"
+        },
+        {
+            russian: "Кайф",
+            ipa: "[kajf]",
+            japanese: "快感、気持ちいい",
+            hook: "アラビア語由来。究極のリラックスや喜びを表す。",
+            example_ru: "После бани такой кайф!",
+            example_ja: "サウナの後は本当に最高に気持ちいい！"
+        },
+        {
+            russian: "Ништяк",
+            ipa: "[nʲɪʂˈtʲak]",
+            japanese: "最高！、いいね！",
+            hook: "少し古風だが通じるスラング。「Клёво」と似ている。",
+            example_ru: "Всё ништяк, не волнуйся.",
+            example_ja: "万事OK、心配するな。"
+        },
+        {
+            russian: "Беспредел",
+            ipa: "[bʲɪsprʲɪˈdʲel]",
+            japanese: "無法状態、やりすぎ",
+            hook: "「限界（предел）が無い（бес-）」状態。社会的な混乱など。",
+            example_ru: "Что за беспредел творится на улицах?",
+            example_ja: "路上で一体どんな無法状態が起きてるんだ？"
+        },
+        {
+            russian: "Подстава",
+            ipa: "[pɐtˈstavə]",
+            japanese: "罠、ハメられること",
+            hook: "誰かに陥れられた状況を指す。",
+            example_ru: "Это была явная подстава.",
+            example_ja: "これは明らかな罠だった。"
+        },
+        {
+            russian: "Чиллить",
+            ipa: "[ˈt͡ɕɪlʲɪtʲ]",
+            japanese: "チルする、くつろぐ",
+            hook: "英語の「to chill」から。若者が使う。",
+            example_ru: "Мы просто чиллили дома весь день.",
+            example_ja: "私たちは一日中家でただチルしてた。"
+        },
+        {
+            russian: "Красава",
+            ipa: "[krɐˈsavə]",
+            japanese: "ナイス！、よくやった！",
+            hook: "「Красавчик」の略。男性の仲間を褒めるときに使う。",
+            example_ru: "Выиграл матч? Красава!",
+            example_ja: "試合に勝ったって？よくやったな！"
+        }
+    ];
+    // ===================================================================================
+    // ★★★ 単語データの追加・編集はここまで ★★★
+    // ===================================================================================
+
+    const card = document.getElementById('card');
+    const wordDisplay = document.getElementById('word-display');
+    const ipaDisplay = document.getElementById('ipa-display');
+    const audioBtn = document.getElementById('audio-btn');
+    const japaneseDisplay = document.getElementById('japanese-display');
+    const hookDisplay = document.getElementById('hook-display');
+    const exampleRuDisplay = document.getElementById('example-ru-display');
+    const exampleJaDisplay = document.getElementById('example-ja-display');
+    const nextBtn = document.getElementById('next-btn');
+    const progressDisplay = document.getElementById('progress-display');
+    const ruJpBtn = document.getElementById('ru-jp-btn');
+    const jpRuBtn = document.getElementById('jp-ru-btn');
+    const mainContent = document.getElementById('main-content');
+    const completionScreen = document.getElementById('completion-screen');
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const audioBtnBack = document.getElementById('audio-btn-back');
+
+    let currentWordIndex = 0;
+    let deck = [];
+    let mode = 'jp-ru'; // 初期モードを「日本語→ロシア語」に設定
+    const synth = window.speechSynthesis;
+
+    card.addEventListener('click', () => card.classList.toggle('is-flipped'));
+    audioBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        speak(deck[currentWordIndex].russian);
+    });
+    audioBtnBack.addEventListener('click', (e) => {
+        e.stopPropagation();
+        speak(deck[currentWordIndex].russian);
+    });
+    nextBtn.addEventListener('click', () => handleAnswer());
+    ruJpBtn.addEventListener('click', () => setMode('ru-jp'));
+    jpRuBtn.addEventListener('click', () => setMode('jp-ru'));
+
+    function setMode(newMode) {
+        mode = newMode;
+        ruJpBtn.classList.toggle('active', mode === 'ru-jp');
+        jpRuBtn.classList.toggle('active', mode === 'jp-ru');
+        startSession();
+    }
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function startSession() {
+        deck = shuffle([...wordData]);
+        currentWordIndex = 0;
+        mainContent.style.display = 'block';
+        completionScreen.style.display = 'none';
+        displayWord();
+    }
+    
+    function displayWord() {
+        if (currentWordIndex >= deck.length) {
+            showCompletionScreen();
+            return;
+        }
+        card.classList.remove('is-flipped');
+        
+        const word = deck[currentWordIndex];
+
+        if (mode === 'ru-jp') {
+            wordDisplay.textContent = word.russian;
+            ipaDisplay.textContent = word.ipa;
+            audioBtn.style.display = 'block';
+            audioBtnBack.style.display = 'none';
+            japaneseDisplay.textContent = word.japanese;
+            hookDisplay.textContent = word.hook;
+        } else { // jp-ru mode
+            wordDisplay.textContent = word.japanese;
+            ipaDisplay.textContent = "";
+            audioBtn.style.display = 'none';
+            audioBtnBack.style.display = 'block';
+            japaneseDisplay.textContent = word.russian;
+            hookDisplay.textContent = `発音: ${word.ipa}`;
+        }
+        
+        exampleRuDisplay.textContent = `e.g. ${word.example_ru}`;
+        exampleJaDisplay.textContent = `例）${word.example_ja}`;
+        updateProgress();
+    }
+    
+    function handleAnswer() {
+        currentWordIndex++;
+        setTimeout(displayWord, 100);
+    }
+
+    function speak(text) {
+        if (synth.speaking) {
+            synth.cancel();
+        }
+        if (text !== '') {
+            const utterThis = new SpeechSynthesisUtterance(text);
+            utterThis.lang = 'ru-RU'; // ★★★ 発音をロシア語に設定 ★★★
+            utterThis.pitch = 1;
+            utterThis.rate = 1;
+            synth.speak(utterThis);
+        }
+    }
+
+    function updateProgress() {
+        if (deck.length > 0) {
+            progressDisplay.textContent = `進捗: ${currentWordIndex + 1} / ${deck.length}`;
+        }
+    }
+
+    function showCompletionScreen() {
+        mainContent.style.display = 'none';
+        completionScreen.style.display = 'block';
+    }
+
+    startSession();
+
+    </script>
+</body>
+</html>

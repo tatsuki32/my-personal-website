@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Spark - 体感型・英単語学習</title>
     <style>
-        /* CSS部分は変更ありません */
         :root {
             --bg-color: #121212;
             --card-bg-color: #1e1e1e;
@@ -14,8 +13,7 @@
             --accent-color: #03dac6;
             --accent-hover-color: #018786;
             --hook-color: #bb86fc;
-            --correct-color: #4caf50;
-            --review-color: #f44336;
+            --next-btn-color: #42a5f5;
         }
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
@@ -97,12 +95,13 @@
             align-items: center;
             padding: 20px;
             box-sizing: border-box;
+            overflow-wrap: break-word;
         }
         .card-face-back {
             transform: rotateY(180deg);
         }
         #word-display {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: bold;
             margin: 0;
         }
@@ -143,14 +142,14 @@
             margin-top: 15px;
             font-size: 0.9rem;
             color: var(--secondary-text-color);
+            width: 100%;
         }
         #controls {
             display: flex;
-            justify-content: space-between;
-            gap: 15px;
+            justify-content: center;
         }
         .control-btn {
-            flex: 1;
+            width: 80%;
             padding: 15px;
             font-size: 1.2rem;
             font-weight: bold;
@@ -158,21 +157,16 @@
             border-radius: 8px;
             cursor: pointer;
             transition: opacity 0.3s;
+            background-color: var(--next-btn-color);
+            color: white;
         }
         .control-btn:hover {
             opacity: 0.8;
         }
-        #review-btn {
-            background-color: var(--review-color);
-            color: white;
-        }
-        #correct-btn {
-            background-color: var(--correct-color);
-            color: white;
-        }
         #progress-display {
             margin-top: 20px;
             color: var(--secondary-text-color);
+            font-size: 1.1rem;
         }
         #completion-screen {
             display: none;
@@ -180,10 +174,9 @@
     </style>
 </head>
 <body>
-
     <div id="app-container">
         <h1>Word Spark</h1>
-        <p id="app-subtitle">カードをクリックして意味を確認</p>
+        <p id="app-subtitle">カードをクリックして答えを確認</p>
 
         <div id="mode-selector">
             <button id="en-jp-btn" class="mode-btn active">英語 → 日本語</button>
@@ -213,8 +206,7 @@
             </div>
     
             <div id="controls">
-                <button id="review-btn" class="control-btn">もう一度</button>
-                <button id="correct-btn" class="control-btn">覚えた！</button>
+                <button id="next-btn" class="control-btn">次へ</button>
             </div>
     
             <p id="progress-display"></p>
@@ -222,24 +214,15 @@
 
         <div id="completion-screen">
             <h2>🎉 全て学習しました！</h2>
-            <p>素晴らしいです！新しいセッションを開始するには、モードを選択してください。</p>
+            <p>素晴らしいです！上のモードを選択して、新しいセッションを開始できます。</p>
         </div>
     </div>
 
-
-    <script>
+<script>
     // ===================================================================================
     // ★★★ 単語データの追加・編集はここから ★★★
     // ===================================================================================
     const wordData = [
-        {
-            english: "anxious",
-            ipa: "/ˈæŋkʃəs/",
-            japanese: "心配して、切望して",
-            hook: "「アンクしてシャツを掴む」ほど心配している様子をイメージ。",
-            example_en: "He was anxious about the results of the exam.",
-            example_ja: "彼は試験の結果を心配していた。"
-        },
         {
             english: "hypotheses",
             ipa: "/haɪˈpɒθəsiːz/",
@@ -249,68 +232,668 @@
             example_ja: "科学者たちはいくつかの仮説を検証した。"
         },
         {
+            english: "anxious",
+            ipa: "/ˈæŋkʃəs/",
+            japanese: "心配して、切望して",
+            hook: "「アンクしてシャツを掴む」ほど心配している様子をイメージ。",
+            example_en: "He was anxious about the results of the exam.",
+            example_ja: "彼は試験の結果を心配していた。"
+        },
+        {
+            english: "affective",
+            ipa: "/əˈfektɪv/",
+            japanese: "感情の、情動の",
+            hook: "アフェリエイト広告に感情（affective）を動かされる。",
+            example_en: "The therapist focused on the patient's affective state.",
+            example_ja: "セラピストは患者の感情状態に焦点を当てた。"
+        },
+        {
             english: "industry",
             ipa: "/ˈɪndəstri/",
             japanese: "産業、勤勉",
             hook: "「インドのストーリー」は勤勉な人々が産業を支える物語。",
-            example_en: "The tourism industry is vital for the economy.",
-            example_ja: "観光産業は経済にとって不可欠だ。"
+            example_en: "The tech industry is constantly evolving.",
+            example_ja: "テクノロジー産業は絶えず進化している。"
         },
         {
-            english: "fluency",
-            ipa: "/ˈfluːənsi/",
-            japanese: "流暢さ",
-            hook: "水が「流（フル）れる」ような滑らかさをイメージ。",
-            example_en: "Her fluency in French is impressive.",
-            example_ja: "彼女のフランス語の流暢さは素晴らしい。"
+            english: "Englishness",
+            ipa: "/ˈɪŋɡlɪʃnəs/",
+            japanese: "英国人気質、イギリスらしさ",
+            hook: "English（英語、英国人）に-ness（〜らしさ）がついた形。",
+            example_en: "A love of tea is often seen as a sign of Englishness.",
+            example_ja: "紅茶好きは、しばしば英国人気質のしるしと見なされる。"
+        },
+        {
+            english: "frequency",
+            ipa: "/ˈfriːkwənsi/",
+            japanese: "頻度、周波数",
+            hook: "フリーのクエン酸を摂取する頻度（frequency）。",
+            example_en: "We measured the frequency of the sound waves.",
+            example_ja: "我々はその音波の周波数を測定した。"
         },
         {
             english: "idiomatic",
             ipa: "/ˌɪdiəˈmætɪk/",
             japanese: "慣用的な、熟語的な",
             hook: "「バカな（idiot）マティック（matic）」と覚えると「なんでそんな意味に？」となる慣用句を連想しやすい。",
-            example_en: "'Spill the beans' is an idiomatic expression.",
-            example_ja: "「豆をこぼす（秘密を漏らす）」は慣用句的な表現だ。"
+            example_en: "'Break a leg' is an idiomatic expression for 'good luck'.",
+            example_ja: "「脚を折れ」は「幸運を」を意味する慣用句的な表現だ。"
         },
         {
-            english: "acquisition",
-            ipa: "/ˌækwɪˈzɪʃn/",
-            japanese: "習得、獲得",
-            hook: "「アク（acq）ション（isition）」を起こして知識を獲得するイメージ。",
-            example_en: "Language acquisition starts at a young age.",
-            example_ja: "言語の習得は幼い頃に始まる。"
+            english: "ESP",
+            ipa: "/ˌiː es ˈpiː/",
+            japanese: "超能力、特定の目的のための英語",
+            hook: "Extra-Sensory Perception (超感覚的知覚) の略。",
+            example_en: "She claims to have ESP and can read people's minds.",
+            example_ja: "彼女はESP（超能力）があり、人の心が読めると主張している。"
         },
         {
-            english: "comprehension",
-            ipa: "/ˌkɒmprɪˈhenʃn/",
-            japanese: "理解、読解力",
-            hook: "「これ（com）でプリ（pre）キュアの変身（henshion）が理解できた！」",
-            example_en: "Reading comprehension is a key skill.",
-            example_ja: "読解力は重要なスキルだ。"
+            english: "aspects",
+            ipa: "/ˈæspekts/",
+            japanese: "側面、様相",
+            hook: "「明日、ペット」を飼うことの様々な側面（aspects）を考える。",
+            example_en: "We must consider all aspects of the problem.",
+            example_ja: "我々はその問題のあらゆる側面を考慮しなければならない。"
         },
         {
             english: "determine",
             ipa: "/dɪˈtɜːrmɪn/",
             japanese: "決定する、特定する",
             hook: "強い「データー（deter）で掘るマイン（mine）クラフト」のように、固い決意をイメージ。",
-            example_en: "We must determine the cause of the problem.",
+            example_en: "We must determine the cause of the issue.",
             example_ja: "我々はその問題の原因を特定しなければならない。"
+        },
+        {
+            english: "complaints",
+            ipa: "/kəmˈpleɪnts/",
+            japanese: "不満、苦情",
+            hook: "「このプレーンなTシャツ、インす（in）るの？」と不満を言う。",
+            example_en: "The company received several complaints about the product.",
+            example_ja: "その会社は製品についていくつかの苦情を受けた。"
+        },
+        {
+            english: "further",
+            ipa: "/ˈfɜːrðər/",
+            japanese: "さらに、もっと遠くに",
+            hook: "ファーの座布団を「さらに」奥へ。",
+            example_en: "For further information, please visit our website.",
+            example_ja: "さらなる情報については、当社のウェブサイトをご覧ください。"
+        },
+        {
+            english: "preproduction",
+            ipa: "/ˌpriːprəˈdʌkʃn/",
+            japanese: "プリプロダクション、生産前準備",
+            hook: "pre-（前の）production（生産）。映画やゲームの制作準備段階。",
+            example_en: "The film is currently in preproduction.",
+            example_ja: "その映画は現在プリプロダクション段階にある。"
+        },
+        {
+            english: "acquired or learnt",
+            ipa: "/əˈkwaɪərd ɔːr lɜːrnt/",
+            japanese: "習得された、または学ばれた",
+            hook: "acquire (得る) と learn (学ぶ) の過去分詞形。",
+            example_en: "Skills can be acquired or learnt through practice.",
+            example_ja: "スキルは練習を通じて習得されたり学ばれたりする。"
+        },
+        {
+            english: "referred",
+            ipa: "/rɪˈfɜːrd/",
+            japanese: "言及した、参照した",
+            hook: "リファー（refer）して「言及した」。",
+            example_en: "He referred to the dictionary for the definition.",
+            example_ja: "彼は定義を調べるために辞書を参照した。"
+        },
+        {
+            english: "acquisition",
+            ipa: "/ˌækwɪˈzɪʃn/",
+            japanese: "習得、獲得",
+            hook: "「アク（acq）ション（isition）」を起こして知識を獲得するイメージ。",
+            example_en: "Language acquisition is a complex process.",
+            example_ja: "言語習得は複雑なプロセスだ。"
+        },
+        {
+            english: "structures",
+            ipa: "/ˈstrʌktʃərz/",
+            japanese: "構造、建造物",
+            hook: "ストラトキャスターの内部構造（structures）を見る。",
+            example_en: "We studied the grammatical structures of the language.",
+            example_ja: "私たちはその言語の文法構造を学んだ。"
+        },
+        {
+            english: "entirely",
+            ipa: "/ɪnˈtaɪərli/",
+            japanese: "完全に、まったく",
+            hook: "エンタイヤ（entire）で「完全に」囲む。",
+            example_en: "The decision is entirely up to you.",
+            example_ja: "その決定は完全にあなた次第です。"
+        },
+        {
+            english: "accurate",
+            ipa: "/ˈækjərət/",
+            japanese: "正確な",
+            hook: "「あっ、綺麗と」思うほど正確な円。",
+            example_en: "The report must be accurate and detailed.",
+            example_ja: "その報告書は正確かつ詳細でなければならない。"
+        },
+        {
+            english: "emergence",
+            ipa: "/ɪˈmɜːrdʒəns/",
+            japanese: "出現、発生",
+            hook: "エマージェンシー（Emergency）！何かが「出現（emergence）」した！",
+            example_en: "The emergence of new technologies has changed our lives.",
+            example_ja: "新技術の出現は我々の生活を変えた。"
+        },
+        {
+            english: "comprehension",
+            ipa: "/ˌkɒmprɪˈhenʃn/",
+            japanese: "理解、読解力",
+            hook: "「これ（com）でプリ（pre）キュアの変身（henshion）が理解できた！」",
+            example_en: "Reading comprehension is a key academic skill.",
+            example_ja: "読解力は主要な学業スキルだ。"
+        },
+        {
+            english: "intermediate fluency",
+            ipa: "/ˌɪntərˈmiːdiət ˈfluːənsi/",
+            japanese: "中級レベルの流暢さ",
+            hook: "intermediate（中間の）+ fluency（流暢さ）。",
+            example_en: "He speaks French with intermediate fluency.",
+            example_ja: "彼は中級レベルの流暢さでフランス語を話す。"
+        },
+        {
+            english: "proficiency",
+            ipa: "/prəˈfɪʃnsi/",
+            japanese: "熟達、堪能",
+            hook: "プロのフィッシャーマンの熟達（proficiency）した腕前。",
+            example_en: "She has a high level of proficiency in Japanese.",
+            example_ja: "彼女は日本語の熟達度が高い。"
+        },
+        {
+            english: "fluency",
+            ipa: "/ˈfluːənsi/",
+            japanese: "流暢さ",
+            hook: "水が「流（フル）れる」ような滑らかさをイメージ。",
+            example_en: "He is working on his fluency in spoken English.",
+            example_ja: "彼は英会話の流暢さを向上させようと努力している。"
+        },
+        {
+            english: "express",
+            ipa: "/ɪkˈspres/",
+            japanese: "表現する、急行",
+            hook: "エクスプレス（急行）列車で気持ちを「表現」しに行く。",
+            example_en: "It's important to express your feelings.",
+            example_ja: "自分の感情を表現することは重要だ。"
+        },
+        {
+            english: "rewarded",
+            ipa: "/rɪˈwɔːrdɪd/",
+            japanese: "報われた",
+            hook: "リワード（reward）をもらって「報われた」。",
+            example_en: "Her hard work was rewarded with a promotion.",
+            example_ja: "彼女の努力は昇進という形で報われた。"
+        },
+        {
+            english: "describe",
+            ipa: "/dɪˈskraɪb/",
+            japanese: "説明する、描写する",
+            hook: "ディスク（disc）にライブ（ribe）の様子を「説明する」。",
+            example_en: "Can you describe the man you saw?",
+            example_ja: "あなたが見た男性の特徴を説明できますか？"
+        },
+        {
+            english: "variety",
+            ipa: "/vəˈraɪəti/",
+            japanese: "多様性、種類",
+            hook: "バラエティ番組は「多様性」が売り。",
+            example_en: "The store sells a wide variety of goods.",
+            example_ja: "その店は多種多様な商品を販売している。"
+        },
+        {
+            english: "strategies",
+            ipa: "/ˈstrætədʒiz/",
+            japanese: "戦略",
+            hook: "ストラト（Streat）爺さんの「戦略」。",
+            example_en: "We need to develop new marketing strategies.",
+            example_ja: "我々は新しいマーケティング戦略を開発する必要がある。"
         },
         {
             english: "concrete",
             ipa: "/ˈkɒŋkriːt/",
             japanese: "具体的な、コンクリート",
             hook: "コンクリートのように固くて「具体的な」計画。",
-            example_en: "We need a concrete plan, not just ideas.",
-            example_ja: "単なるアイデアではなく、具体的な計画が必要です。"
+            example_en: "We need concrete evidence to proceed.",
+            example_ja: "事を進めるには具体的な証拠が必要だ。"
+        },
+        {
+            english: "classification",
+            ipa: "/ˌklæsɪfɪˈkeɪʃn/",
+            japanese: "分類",
+            hook: "クラス（class）分けが「分類」。",
+            example_en: "The classification of species is a complex task.",
+            example_ja: "種の分類は複雑な作業だ。"
+        },
+        {
+            english: "sensory",
+            ipa: "/ˈsensəri/",
+            japanese: "感覚の",
+            hook: "扇子（sens）の香りで「感覚」が研ぎ澄まされる。",
+            example_en: "The museum offers a sensory experience for visitors.",
+            example_ja: "その博物館は来館者に感覚的な体験を提供する。"
         },
         {
             english: "essential",
             ipa: "/ɪˈsenʃl/",
             japanese: "不可欠な、本質的な",
             hook: "「エッセンス（essenc）のシャル（tial）ドネ」はワインの本質だ。",
-            example_en: "Water is essential for life.",
-            example_ja: "水は生命にとって不可欠だ。"
+            example_en: "Communication is essential for a good relationship.",
+            example_ja: "コミュニケーションは良い関係に不可欠だ。"
+        },
+        {
+            english: "conscious",
+            ipa: "/ˈkɒnʃəs/",
+            japanese: "意識して、気づいて",
+            hook: "「このシャツ」を「意識して」着る。",
+            example_en: "He was conscious of being watched.",
+            example_ja: "彼は見られていることに気づいていた。"
+        },
+        {
+            english: "decisions",
+            ipa: "/dɪˈsɪʒənz/",
+            japanese: "決定、決断",
+            hook: "「弟子じゃん！」と師匠が「決定」する。",
+            example_en: "Making important decisions is part of being an adult.",
+            example_ja: "重要な決断を下すことは大人であることの一部だ。"
+        },
+        {
+            english: "involve",
+            ipa: "/ɪnˈvɒlv/",
+            japanese: "含む、関与させる",
+            hook: "「イン（in）」して「回る（volve）」ことに関わる。",
+            example_en: "The project will involve a lot of hard work.",
+            example_ja: "そのプロジェクトには多くの努力が必要となるだろう。"
+        },
+        {
+            english: "therefore",
+            ipa: "/ˈðeəfɔːr/",
+            japanese: "それゆえに、したがって",
+            hook: "「では、フォア」を打つ。それゆえに勝てた。",
+            example_en: "He was busy, therefore he could not come.",
+            example_ja: "彼は忙しかった、それゆえに来ることができなかった。"
+        },
+        {
+            english: "gain",
+            ipa: "/ɡeɪn/",
+            japanese: "得る",
+            hook: "ゲーム（game）に勝って名声を「得る」。",
+            example_en: "You will gain experience by working here.",
+            example_ja: "ここで働くことで経験を得るでしょう。"
+        },
+        {
+            english: "co-operation",
+            ipa: "/kəʊˌɒpəˈreɪʃn/",
+            japanese: "協力",
+            hook: "co-（共に）operation（操作）。「協力」。",
+            example_en: "This project requires close co-operation between departments.",
+            example_ja: "このプロジェクトは部門間の緊密な協力を必要とする。"
+        },
+        {
+            english: "adapt",
+            ipa: "/əˈdæpt/",
+            japanese: "適応する",
+            hook: "「アダプト」する。「あ、ダブっと」した服で環境に適応する。",
+            example_en: "Animals have to adapt to their environment.",
+            example_ja: "動物は環境に適応しなければならない。"
+        },
+        {
+            english: "descriptions",
+            ipa: "/dɪˈskrɪpʃənz/",
+            japanese: "説明、記述",
+            hook: "ディスク（desc）リプション（ription）。ディスクの内容を「説明」する。",
+            example_en: "The police have two different descriptions of the suspect.",
+            example_ja: "警察は容疑者について2つの異なる記述を持っている。"
+        },
+        {
+            english: "receptionists",
+            ipa: "/rɪˈsepʃənɪsts/",
+            japanese: "受付係",
+            hook: "レセプション（reception）にいる人。",
+            example_en: "The receptionists at the hotel were very helpful.",
+            example_ja: "そのホテルの受付係はとても親切だった。"
+        },
+        {
+            english: "establishment",
+            ipa: "/ɪˈstæblɪʃmənt/",
+            japanese: "設立、施設",
+            hook: "ええ、スタジアムをブリッと「設立」。",
+            example_en: "The establishment of the new library was a great success.",
+            example_ja: "新しい図書館の設立は大成功だった。"
+        },
+        {
+            english: "greet",
+            ipa: "/ɡriːt/",
+            japanese: "挨拶する",
+            hook: "「グリーと」叫んで挨拶する。",
+            example_en: "She stood up to greet her guests.",
+            example_ja: "彼女は客に挨拶するために立ち上がった。"
+        },
+        {
+            english: "processes",
+            ipa: "/ˈprəʊsesɪz/",
+            japanese: "過程、プロセス",
+            hook: "プロセッサーが処理する「過程」。",
+            example_en: "There are many processes involved in creating a film.",
+            example_ja: "映画製作には多くの過程が含まれる。"
+        },
+        {
+            english: "immediate",
+            ipa: "/ɪˈmiːdiət/",
+            japanese: "即座の、直接の",
+            hook: "「意味、デート？」と聞かれて「即座に」答える。",
+            example_en: "The medicine had an immediate effect.",
+            example_ja: "その薬は即座に効果を現した。"
+        },
+        {
+            english: "improve",
+            ipa: "/ɪmˈpruːv/",
+            japanese: "改善する、向上させる",
+            hook: "「良い（im）プルーブ（prove）で証明」して、状況を改善する。",
+            example_en: "I want to improve my English skills.",
+            example_ja: "私は英語のスキルを向上させたい。"
+        },
+        {
+            english: "perhaps",
+            ipa: "/pərˈhæps/",
+            japanese: "おそらく、たぶん",
+            hook: "「パー、ハップション！」くしゃみしたから「おそらく」風邪。",
+            example_en: "Perhaps it will rain tomorrow.",
+            example_ja: "おそらく明日は雨が降るだろう。"
+        },
+        {
+            english: "technology",
+            ipa: "/tekˈnɒlədʒi/",
+            japanese: "科学技術、テクノロジー",
+            hook: "テクニックのロジー（学問）。",
+            example_en: "Technology has changed the way we live.",
+            example_ja: "科学技術は私たちの生き方を変えた。"
+        },
+        {
+            english: "campaign",
+            ipa: "/kæmˈpeɪn/",
+            japanese: "キャンペーン、政治活動",
+            hook: "キャンプでペインティングする「キャンペーン」。",
+            example_en: "They launched a new advertising campaign.",
+            example_ja: "彼らは新しい広告キャンペーンを開始した。"
+        },
+        {
+            english: "requirements",
+            ipa: "/rɪˈkwaɪərmənts/",
+            japanese: "要件、必要なもの",
+            hook: "「リクエストは嫌」とメンツの「要件」を言う。",
+            example_en: "Please read the job requirements carefully.",
+            example_ja: "仕事の要件を注意深くお読みください。"
+        },
+        {
+            english: "constant",
+            ipa: "/ˈkɒnstənt/",
+            japanese: "絶え間ない、一定の",
+            hook: "「このスタント」は「絶え間ない」練習が必要。",
+            example_en: "The machine makes a constant humming noise.",
+            example_ja: "その機械は絶え間なくブンブンという音を立てている。"
+        },
+        {
+            english: "readjustment",
+            ipa: "/ˌriːəˈdʒʌstmənt/",
+            japanese: "再調整",
+            hook: "re-（再び）adjustment（調整）。",
+            example_en: "After the trip, a period of readjustment is needed.",
+            example_ja: "旅行の後は、再調整の期間が必要だ。"
+        },
+        {
+            english: "aims",
+            ipa: "/eɪmz/",
+            japanese: "目的、狙い",
+            hook: "エイム（狙い）を定める。",
+            example_en: "One of my main aims in life is to travel the world.",
+            example_ja: "私の人生の主な目的の一つは世界を旅することだ。"
+        },
+        {
+            english: "learner",
+            ipa: "/ˈlɜːrnər/",
+            japanese: "学習者",
+            hook: "learn（学ぶ）+ -er（人）。",
+            example_en: "He is a fast learner.",
+            example_ja: "彼は物覚えが早い学習者だ。"
+        },
+        {
+            english: "achieve",
+            ipa: "/əˈtʃiːv/",
+            japanese: "達成する",
+            hook: "「あ、チーム」で目標を「達成する」。",
+            example_en: "She worked hard to achieve her goals.",
+            example_ja: "彼女は目標を達成するために一生懸命働いた。"
+        },
+        {
+            english: "recognise",
+            ipa: "/ˈrekəɡnaɪz/",
+            japanese: "認識する、見分ける",
+            hook: "「礼儀、具ないっす」と相手を「認識する」。(recognizeとも綴る)",
+            example_en: "I didn't recognise you with your new haircut.",
+            example_ja: "新しい髪型のあなただと気づきませんでした。"
+        },
+        {
+            english: "produce",
+            ipa: "/prəˈduːs/",
+            japanese: "生産する",
+            hook: "プロデューサーが作品を「生産する」。",
+            example_en: "The factory can produce 100 cars a day.",
+            example_ja: "その工場は1日に100台の車を生産できる。"
+        },
+        {
+            english: "experiences",
+            ipa: "/ɪkˈspɪəriənsɪz/",
+            japanese: "経験",
+            hook: "「エクス（ex）ピア（peer）練習」で「経験」を積む。",
+            example_en: "He has a lot of experiences in marketing.",
+            example_ja: "彼はマーケティングにおいて多くの経験を持っている。"
+        },
+        {
+            english: "Australia",
+            ipa: "/ɔːˈstreɪliə/",
+            japanese: "オーストラリア",
+            hook: "国の名前。コアラがいる。",
+            example_en: "Sydney is a major city in Australia.",
+            example_ja: "シドニーはオーストラリアの主要都市です。"
+        },
+        {
+            english: "interviewed",
+            ipa: "/ˈɪntərvjuːd/",
+            japanese: "インタビューされた",
+            hook: "インタビュー（interview）の過去形。",
+            example_en: "She was interviewed for the job yesterday.",
+            example_ja: "彼女は昨日その仕事の面接を受けた。"
+        },
+        {
+            english: "free-time",
+            ipa: "/ˈfriː taɪm/",
+            japanese: "自由時間",
+            hook: "free（自由な）+ time（時間）。",
+            example_en: "What do you do in your free-time?",
+            example_ja: "自由時間には何をしますか？"
+        },
+        {
+            english: "tally",
+            ipa: "/ˈtæli/",
+            japanese: "集計、勘定",
+            hook: "タリー（Tally）さん、売上を「集計」して！",
+            example_en: "The final tally was 10 votes for and 5 against.",
+            example_ja: "最終集計は賛成10票、反対5票だった。"
+        },
+        {
+            english: "confiscating",
+            ipa: "/ˈkɒnfɪskeɪtɪŋ/",
+            japanese: "没収する",
+            hook: "「このフィス（fish）、景品に」と「没収する」。",
+            example_en: "The teacher is confiscating all phones during the exam.",
+            example_ja: "先生は試験中、すべての電話を没収している。"
+        },
+        {
+            english: "complete",
+            ipa: "/kəmˈpliːt/",
+            japanese: "完了する、完全な",
+            hook: "「このプレート」でパズルが「コンプリート」。",
+            example_en: "You need to complete this form.",
+            example_ja: "あなたはこの用紙に記入を完了する必要がある。"
+        },
+        {
+            english: "whatever",
+            ipa: "/wɒtˈevər/",
+            japanese: "何でも",
+            hook: "what + ever。何でも。",
+            example_en: "Choose whatever you like.",
+            example_ja: "好きなものは何でも選んでください。"
+        },
+        {
+            english: "anticipated",
+            ipa: "/ænˈtɪsɪpeɪtɪd/",
+            japanese: "予期された",
+            hook: "「アンチ、失敗と」予期された。",
+            example_en: "The results were better than anticipated.",
+            example_ja: "結果は予期されたものより良かった。"
+        },
+        {
+            english: "predict",
+            ipa: "/prɪˈdɪkt/",
+            japanese: "予測する",
+            hook: "pre-（前に）+ dict（言う）→「予測する」。",
+            example_en: "It is difficult to predict the future.",
+            example_ja: "未来を予測するのは難しい。"
+        },
+        {
+            english: "include",
+            ipa: "/ɪnˈkluːd/",
+            japanese: "含む",
+            hook: "in-（中に）+ clude（閉じる）→「中に閉じ込める、含む」。",
+            example_en: "The price includes tax.",
+            example_ja: "その価格は税金を含みます。"
+        },
+        {
+            english: "understanding",
+            ipa: "/ˌʌndərˈstændɪŋ/",
+            japanese: "理解",
+            hook: "under（下に）stand（立つ）。物事の土台がわかる「理解」。",
+            example_en: "A mutual understanding is important.",
+            example_ja: "相互の理解が重要です。"
+        },
+        {
+            english: "pronunciation",
+            ipa: "/prəˌnʌnsiˈeɪʃn/",
+            japanese: "発音",
+            hook: "プロのアナウンサーの「発音」。",
+            example_en: "English pronunciation can be difficult.",
+            example_ja: "英語の発音は難しいことがある。"
+        },
+        {
+            english: "approximately",
+            ipa: "/əˈprɒksɪmətli/",
+            japanese: "おおよそ、約",
+            hook: "「あ、プロ、岸、待っとりー」と「おおよそ」の位置を伝える。",
+            example_en: "The journey took approximately two hours.",
+            example_ja: "その旅はおおよそ2時間かかった。"
+        },
+        {
+            english: "investing",
+            ipa: "/ɪnˈvestɪŋ/",
+            japanese: "投資すること",
+            hook: "ベスト（vest）の中に（in）お金を入れる「投資」。",
+            example_en: "Investing in stocks can be risky.",
+            example_ja: "株に投資することはリスクを伴うことがある。"
+        },
+        {
+            english: "explored",
+            ipa: "/ɪkˈsplɔːrd/",
+            japanese: "探検した",
+            hook: "エクスプローラー（Explorer）が「探検した」。",
+            example_en: "They explored the ancient ruins.",
+            example_ja: "彼らは古代の遺跡を探検した。"
+        },
+        {
+            english: "procedures",
+            ipa: "/prəˈsiːdʒərz/",
+            japanese: "手順、手続き",
+            hook: "プロのシーザーが教えるサラダの「手順」。",
+            example_en: "Please follow the standard procedures.",
+            example_ja: "標準的な手順に従ってください。"
+        },
+        {
+            english: "structure",
+            ipa: "/ˈstrʌktʃər/",
+            japanese: "構造",
+            hook: "「巣、トラックツアー」でハチの巣の「構造」を見る。",
+            example_en: "The structure of the building is very unique.",
+            example_ja: "その建物の構造は非常にユニークだ。"
+        },
+        {
+            english: "smoothly",
+            ipa: "/ˈsmuːðli/",
+            japanese: "スムーズに、円滑に",
+            hook: "スムージーのように「スムーズに」。",
+            example_en: "The event went smoothly without any problems.",
+            example_ja: "イベントは何の問題もなく円滑に進んだ。"
+        },
+        {
+            english: "divided",
+            ipa: "/dɪˈvaɪdɪd/",
+            japanese: "分けられた",
+            hook: "ディバイド（divide）で「分けられた」。",
+            example_en: "The cake was divided into eight pieces.",
+            example_ja: "そのケーキは8つに分けられた。"
+        },
+        {
+            english: "specific",
+            ipa: "/spəˈsɪfɪk/",
+            japanese: "特定の、具体的な",
+            hook: "「すぺシフィック」な指示。レシピの具体的な指示。",
+            example_en: "Do you have a specific brand in mind?",
+            example_ja: "何か特定のブランドを考えていますか？"
+        },
+        {
+            english: "interaction",
+            ipa: "/ˌɪntərˈækʃn/",
+            japanese: "相互作用、交流",
+            hook: "inter-（相互の）+ action（行動）。",
+            example_en: "Social interaction is important for mental health.",
+            example_ja: "社会的な交流は精神的健康にとって重要だ。"
+        },
+        {
+            english: "related",
+            ipa: "/rɪˈleɪtɪd/",
+            japanese: "関連した",
+            hook: "リレーで繋がっているように「関連した」。",
+            example_en: "These two issues are closely related.",
+            example_ja: "これら2つの問題は密接に関連している。"
+        },
+        {
+            english: "actual",
+            ipa: "/ˈæktʃuəl/",
+            japanese: "実際の",
+            hook: "アクト（act）する「実際の」俳優。",
+            example_en: "The actual cost was higher than the estimate.",
+            example_ja: "実際の費用は見積もりよりも高かった。"
+        },
+        {
+            english: "brief",
+            ipa: "/briːf/",
+            japanese: "短い、簡潔な",
+            hook: "ブリーフケースに入る「短い」書類。",
+            example_en: "Please give a brief summary of the report.",
+            example_ja: "報告書の簡潔な要約をお願いします。"
+        },
+        {
+            english: "mingling",
+            ipa: "/ˈmɪŋɡlɪŋ/",
+            japanese: "混ぜ合わせる、交流する",
+            hook: "みんなで「ミングる」。「交流する」。",
+            example_en: "He was mingling with the guests at the party.",
+            example_ja: "彼はパーティーでゲストと交流していた。"
         }
     ];
     // ===================================================================================
@@ -325,22 +908,17 @@
     const hookDisplay = document.getElementById('hook-display');
     const exampleEnDisplay = document.getElementById('example-en-display');
     const exampleJaDisplay = document.getElementById('example-ja-display');
-    const reviewBtn = document.getElementById('review-btn');
-    const correctBtn = document.getElementById('correct-btn');
+    const nextBtn = document.getElementById('next-btn');
     const progressDisplay = document.getElementById('progress-display');
     const enJpBtn = document.getElementById('en-jp-btn');
     const jpEnBtn = document.getElementById('jp-en-btn');
     const mainContent = document.getElementById('main-content');
     const completionScreen = document.getElementById('completion-screen');
-
-    // ★★★ 新しいコード 1/2 ★★★
     const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    
     const audioBtnBack = document.getElementById('audio-btn-back');
 
     let currentWordIndex = 0;
     let deck = [];
-    let reviewPile = [];
     let mode = 'en-jp';
     const synth = window.speechSynthesis;
 
@@ -353,8 +931,7 @@
         e.stopPropagation();
         speak(deck[currentWordIndex].english);
     });
-    reviewBtn.addEventListener('click', () => handleAnswer(false));
-    correctBtn.addEventListener('click', () => handleAnswer(true));
+    nextBtn.addEventListener('click', () => handleAnswer());
     enJpBtn.addEventListener('click', () => setMode('en-jp'));
     jpEnBtn.addEventListener('click', () => setMode('jp-en'));
 
@@ -376,7 +953,6 @@
     function startSession() {
         deck = shuffle([...wordData]);
         currentWordIndex = 0;
-        reviewPile = [];
         mainContent.style.display = 'block';
         completionScreen.style.display = 'none';
         displayWord();
@@ -384,81 +960,42 @@
     
     function displayWord() {
         if (currentWordIndex >= deck.length) {
-            if (reviewPile.length > 0) {
-                deck = shuffle([...reviewPile]);
-                reviewPile = [];
-                currentWordIndex = 0;
-            } else {
-                showCompletionScreen();
-                return;
-            }
+            showCompletionScreen();
+            return;
         }
         card.classList.remove('is-flipped');
+        
         const word = deck[currentWordIndex];
+
         if (mode === 'en-jp') {
             wordDisplay.textContent = word.english;
-            wordDisplay.style.fontSize = "2.5rem";
             ipaDisplay.textContent = word.ipa;
             audioBtn.style.display = 'block';
             audioBtnBack.style.display = 'none';
             japaneseDisplay.textContent = word.japanese;
-            japaneseDisplay.style.fontSize = "1.8rem";
             hookDisplay.textContent = word.hook;
         } else {
             wordDisplay.textContent = word.japanese;
-            wordDisplay.style.fontSize = "1.8rem";
             ipaDisplay.textContent = "";
             audioBtn.style.display = 'none';
             audioBtnBack.style.display = 'block';
             japaneseDisplay.textContent = word.english;
-            japaneseDisplay.style.fontSize = "2.5rem";
             hookDisplay.textContent = `発音: ${word.ipa}`;
         }
+        
         exampleEnDisplay.textContent = `e.g. ${word.example_en}`;
         exampleJaDisplay.textContent = `例）${word.example_ja}`;
         updateProgress();
     }
     
-    // ★★★ 新しいコード 2/2 ★★★
-    function handleAnswer(isCorrect) {
-        if (!isCorrect) {
-            reviewPile.push(deck[currentWordIndex]);
-        }
-        
-        // 効果音を再生（文字列の埋め込みをやめ、音を直接生成する方法に変更）
-        if (audioCtx) { // AudioContextが利用可能な場合のみ再生
-            const oscillator = audioCtx.createOscillator();
-            const gainNode = audioCtx.createGain();
-            oscillator.connect(gainNode);
-            gainNode.connect(audioCtx.destination);
-            
-            if (isCorrect) {
-                // 正解の音（高めのピコンという音）
-                oscillator.type = 'triangle';
-                oscillator.frequency.setValueAtTime(880, audioCtx.currentTime);
-                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.1);
-            } else {
-                // 不正解の音（低めのブッという音）
-                oscillator.type = 'square';
-                oscillator.frequency.setValueAtTime(220, audioCtx.currentTime);
-                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
-                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.15);
-            }
-            
-            oscillator.start(audioCtx.currentTime);
-            oscillator.stop(audioCtx.currentTime + 0.2);
-        }
-
+    function handleAnswer() {
         currentWordIndex++;
-        
-        setTimeout(displayWord, 300);
+        setTimeout(displayWord, 100);
     }
 
     function speak(text) {
         if (synth.speaking) {
-            console.error('speechSynthesis.speaking');
-            return;
+            synth.cancel(); // 連続クリック時に前の発音をキャンセル
         }
         if (text !== '') {
             const utterThis = new SpeechSynthesisUtterance(text);
@@ -470,9 +1007,7 @@
     }
 
     function updateProgress() {
-        const remainingInDeck = deck.length - currentWordIndex;
-        const remainingInReview = reviewPile.length;
-        progressDisplay.textContent = `残り: ${remainingInDeck}単語 | 要復習: ${remainingInReview}単語`;
+        progressDisplay.textContent = `進捗: ${currentWordIndex + 1} / ${deck.length}`;
     }
 
     function showCompletionScreen() {
