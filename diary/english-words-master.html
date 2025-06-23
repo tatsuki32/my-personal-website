@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Spark - 体感型・英単語学習</title>
+    <style>
+        /* CSS部分は変更ありません */
+        :root {
+            --bg-color: #121212;
+            --card-bg-color: #1e1e1e;
+            --primary-text-color: #e0e0e0;
+            --secondary-text-color: #b0b0b0;
+            --accent-color: #03dac6;
+            --accent-hover-color: #018786;
+            --hook-color: #bb86fc;
+            --correct-color: #4caf50;
+            --review-color: #f44336;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Hiragino Sans', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--primary-text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        #app-container {
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        h1 {
+            color: var(--accent-color);
+            margin-bottom: 5px;
+            font-size: 2.5rem;
+        }
+        #app-subtitle {
+            color: var(--secondary-text-color);
+            margin-top: 0;
+            margin-bottom: 20px;
+        }
+        #mode-selector {
+            margin-bottom: 20px;
+        }
+        .mode-btn {
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .mode-btn:hover {
+            background-color: var(--accent-hover-color);
+            color: var(--bg-color);
+        }
+        .mode-btn.active {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            font-weight: bold;
+        }
+        .card-scene {
+            width: 100%;
+            height: 300px;
+            perspective: 1000px;
+            margin-bottom: 20px;
+        }
+        .card {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s;
+            cursor: pointer;
+        }
+        .card.is-flipped {
+            transform: rotateY(180deg);
+        }
+        .card-face {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            backface-visibility: hidden;
+            background-color: var(--card-bg-color);
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .card-face-back {
+            transform: rotateY(180deg);
+        }
+        #word-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        #ipa-display {
+            font-size: 1.2rem;
+            color: var(--secondary-text-color);
+            margin-top: 5px;
+        }
+        #audio-btn, #audio-btn-back {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 2rem;
+            color: var(--accent-color);
+            transition: color 0.3s;
+        }
+        #audio-btn:hover, #audio-btn-back:hover {
+            color: var(--accent-hover-color);
+        }
+        #back-face-header {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        #japanese-display {
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 0;
+        }
+        #hook-display {
+            font-size: 1rem;
+            color: var(--hook-color);
+            margin-top: 15px;
+            font-style: italic;
+        }
+        .example-display {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+        #controls {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+        }
+        .control-btn {
+            flex: 1;
+            padding: 15px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+        .control-btn:hover {
+            opacity: 0.8;
+        }
+        #review-btn {
+            background-color: var(--review-color);
+            color: white;
+        }
+        #correct-btn {
+            background-color: var(--correct-color);
+            color: white;
+        }
+        #progress-display {
+            margin-top: 20px;
+            color: var(--secondary-text-color);
+        }
+        #completion-screen {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="app-container">
+        <h1>Word Spark</h1>
+        <p id="app-subtitle">カードをクリックして意味を確認</p>
+
+        <div id="mode-selector">
+            <button id="en-jp-btn" class="mode-btn active">英語 → 日本語</button>
+            <button id="jp-en-btn" class="mode-btn">日本語 → 英語</button>
+        </div>
+
+        <div id="main-content">
+            <div class="card-scene">
+                <div id="card" class="card">
+                    <div class="card-face card-face-front">
+                        <p id="word-display"></p>
+                        <p id="ipa-display"></p>
+                        <button id="audio-btn">🔊</button>
+                    </div>
+                    <div class="card-face card-face-back">
+                        <div id="back-face-header">
+                            <p id="japanese-display"></p>
+                            <button id="audio-btn-back">🔊</button>
+                        </div>
+                        <p id="hook-display"></p>
+                        <div class="example-display">
+                            <p id="example-en-display"></p>
+                            <p id="example-ja-display"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div id="controls">
+                <button id="review-btn" class="control-btn">もう一度</button>
+                <button id="correct-btn" class="control-btn">覚えた！</button>
+            </div>
+    
+            <p id="progress-display"></p>
+        </div>
+
+        <div id="completion-screen">
+            <h2>🎉 全て学習しました！</h2>
+            <p>素晴らしいです！新しいセッションを開始するには、モードを選択してください。</p>
+        </div>
+    </div>
+
+
+    <script>
+    // ===================================================================================
+    // ★★★ 単語データの追加・編集はここから ★★★
+    // ===================================================================================
+    const wordData = [
+        {
+            english: "anxious",
+            ipa: "/ˈæŋkʃəs/",
+            japanese: "心配して、切望して",
+            hook: "「アンクしてシャツを掴む」ほど心配している様子をイメージ。",
+            example_en: "He was anxious about the results of the exam.",
+            example_ja: "彼は試験の結果を心配していた。"
+        },
+        {
+            english: "hypotheses",
+            ipa: "/haɪˈpɒθəsiːz/",
+            japanese: "仮説（複数形）",
+            hook: "hypothesisの複数形。ヒーローが「ハイ、これ仮説です！」と複数提示するイメージ。",
+            example_en: "The scientists tested several hypotheses.",
+            example_ja: "科学者たちはいくつかの仮説を検証した。"
+        },
+        {
+            english: "industry",
+            ipa: "/ˈɪndəstri/",
+            japanese: "産業、勤勉",
+            hook: "「インドのストーリー」は勤勉な人々が産業を支える物語。",
+            example_en: "The tourism industry is vital for the economy.",
+            example_ja: "観光産業は経済にとって不可欠だ。"
+        },
+        {
+            english: "fluency",
+            ipa: "/ˈfluːənsi/",
+            japanese: "流暢さ",
+            hook: "水が「流（フル）れる」ような滑らかさをイメージ。",
+            example_en: "Her fluency in French is impressive.",
+            example_ja: "彼女のフランス語の流暢さは素晴らしい。"
+        },
+        {
+            english: "idiomatic",
+            ipa: "/ˌɪdiəˈmætɪk/",
+            japanese: "慣用的な、熟語的な",
+            hook: "「バカな（idiot）マティック（matic）」と覚えると「なんでそんな意味に？」となる慣用句を連想しやすい。",
+            example_en: "'Spill the beans' is an idiomatic expression.",
+            example_ja: "「豆をこぼす（秘密を漏らす）」は慣用句的な表現だ。"
+        },
+        {
+            english: "acquisition",
+            ipa: "/ˌækwɪˈzɪʃn/",
+            japanese: "習得、獲得",
+            hook: "「アク（acq）ション（isition）」を起こして知識を獲得するイメージ。",
+            example_en: "Language acquisition starts at a young age.",
+            example_ja: "言語の習得は幼い頃に始まる。"
+        },
+        {
+            english: "comprehension",
+            ipa: "/ˌkɒmprɪˈhenʃn/",
+            japanese: "理解、読解力",
+            hook: "「これ（com）でプリ（pre）キュアの変身（henshion）が理解できた！」",
+            example_en: "Reading comprehension is a key skill.",
+            example_ja: "読解力は重要なスキルだ。"
+        },
+        {
+            english: "determine",
+            ipa: "/dɪˈtɜːrmɪn/",
+            japanese: "決定する、特定する",
+            hook: "強い「データー（deter）で掘るマイン（mine）クラフト」のように、固い決意をイメージ。",
+            example_en: "We must determine the cause of the problem.",
+            example_ja: "我々はその問題の原因を特定しなければならない。"
+        },
+        {
+            english: "concrete",
+            ipa: "/ˈkɒŋkriːt/",
+            japanese: "具体的な、コンクリート",
+            hook: "コンクリートのように固くて「具体的な」計画。",
+            example_en: "We need a concrete plan, not just ideas.",
+            example_ja: "単なるアイデアではなく、具体的な計画が必要です。"
+        },
+        {
+            english: "essential",
+            ipa: "/ɪˈsenʃl/",
+            japanese: "不可欠な、本質的な",
+            hook: "「エッセンス（essenc）のシャル（tial）ドネ」はワインの本質だ。",
+            example_en: "Water is essential for life.",
+            example_ja: "水は生命にとって不可欠だ。"
+        }
+    ];
+    // ===================================================================================
+    // ★★★ 単語データの追加・編集はここまで ★★★
+    // ===================================================================================
+
+    const card = document.getElementById('card');
+    const wordDisplay = document.getElementById('word-display');
+    const ipaDisplay = document.getElementById('ipa-display');
+    const audioBtn = document.getElementById('audio-btn');
+    const japaneseDisplay = document.getElementById('japanese-display');
+    const hookDisplay = document.getElementById('hook-display');
+    const exampleEnDisplay = document.getElementById('example-en-display');
+    const exampleJaDisplay = document.getElementById('example-ja-display');
+    const reviewBtn = document.getElementById('review-btn');
+    const correctBtn = document.getElementById('correct-btn');
+    const progressDisplay = document.getElementById('progress-display');
+    const enJpBtn = document.getElementById('en-jp-btn');
+    const jpEnBtn = document.getElementById('jp-en-btn');
+    const mainContent = document.getElementById('main-content');
+    const completionScreen = document.getElementById('completion-screen');
+
+    // ★★★ 新しいコード 1/2 ★★★
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    
+    const audioBtnBack = document.getElementById('audio-btn-back');
+
+    let currentWordIndex = 0;
+    let deck = [];
+    let reviewPile = [];
+    let mode = 'en-jp';
+    const synth = window.speechSynthesis;
+
+    card.addEventListener('click', () => card.classList.toggle('is-flipped'));
+    audioBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        speak(deck[currentWordIndex].english);
+    });
+    audioBtnBack.addEventListener('click', (e) => {
+        e.stopPropagation();
+        speak(deck[currentWordIndex].english);
+    });
+    reviewBtn.addEventListener('click', () => handleAnswer(false));
+    correctBtn.addEventListener('click', () => handleAnswer(true));
+    enJpBtn.addEventListener('click', () => setMode('en-jp'));
+    jpEnBtn.addEventListener('click', () => setMode('jp-en'));
+
+    function setMode(newMode) {
+        mode = newMode;
+        enJpBtn.classList.toggle('active', mode === 'en-jp');
+        jpEnBtn.classList.toggle('active', mode !== 'en-jp');
+        startSession();
+    }
+
+    function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    }
+
+    function startSession() {
+        deck = shuffle([...wordData]);
+        currentWordIndex = 0;
+        reviewPile = [];
+        mainContent.style.display = 'block';
+        completionScreen.style.display = 'none';
+        displayWord();
+    }
+    
+    function displayWord() {
+        if (currentWordIndex >= deck.length) {
+            if (reviewPile.length > 0) {
+                deck = shuffle([...reviewPile]);
+                reviewPile = [];
+                currentWordIndex = 0;
+            } else {
+                showCompletionScreen();
+                return;
+            }
+        }
+        card.classList.remove('is-flipped');
+        const word = deck[currentWordIndex];
+        if (mode === 'en-jp') {
+            wordDisplay.textContent = word.english;
+            wordDisplay.style.fontSize = "2.5rem";
+            ipaDisplay.textContent = word.ipa;
+            audioBtn.style.display = 'block';
+            audioBtnBack.style.display = 'none';
+            japaneseDisplay.textContent = word.japanese;
+            japaneseDisplay.style.fontSize = "1.8rem";
+            hookDisplay.textContent = word.hook;
+        } else {
+            wordDisplay.textContent = word.japanese;
+            wordDisplay.style.fontSize = "1.8rem";
+            ipaDisplay.textContent = "";
+            audioBtn.style.display = 'none';
+            audioBtnBack.style.display = 'block';
+            japaneseDisplay.textContent = word.english;
+            japaneseDisplay.style.fontSize = "2.5rem";
+            hookDisplay.textContent = `発音: ${word.ipa}`;
+        }
+        exampleEnDisplay.textContent = `e.g. ${word.example_en}`;
+        exampleJaDisplay.textContent = `例）${word.example_ja}`;
+        updateProgress();
+    }
+    
+    // ★★★ 新しいコード 2/2 ★★★
+    function handleAnswer(isCorrect) {
+        if (!isCorrect) {
+            reviewPile.push(deck[currentWordIndex]);
+        }
+        
+        // 効果音を再生（文字列の埋め込みをやめ、音を直接生成する方法に変更）
+        if (audioCtx) { // AudioContextが利用可能な場合のみ再生
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+            
+            if (isCorrect) {
+                // 正解の音（高めのピコンという音）
+                oscillator.type = 'triangle';
+                oscillator.frequency.setValueAtTime(880, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.1);
+            } else {
+                // 不正解の音（低めのブッという音）
+                oscillator.type = 'square';
+                oscillator.frequency.setValueAtTime(220, audioCtx.currentTime);
+                gainNode.gain.setValueAtTime(0.1, audioCtx.currentTime);
+                gainNode.gain.exponentialRampToValueAtTime(0.00001, audioCtx.currentTime + 0.15);
+            }
+            
+            oscillator.start(audioCtx.currentTime);
+            oscillator.stop(audioCtx.currentTime + 0.2);
+        }
+
+        currentWordIndex++;
+        
+        setTimeout(displayWord, 300);
+    }
+
+    function speak(text) {
+        if (synth.speaking) {
+            console.error('speechSynthesis.speaking');
+            return;
+        }
+        if (text !== '') {
+            const utterThis = new SpeechSynthesisUtterance(text);
+            utterThis.lang = 'en-US';
+            utterThis.pitch = 1;
+            utterThis.rate = 1;
+            synth.speak(utterThis);
+        }
+    }
+
+    function updateProgress() {
+        const remainingInDeck = deck.length - currentWordIndex;
+        const remainingInReview = reviewPile.length;
+        progressDisplay.textContent = `残り: ${remainingInDeck}単語 | 要復習: ${remainingInReview}単語`;
+    }
+
+    function showCompletionScreen() {
+        mainContent.style.display = 'none';
+        completionScreen.style.display = 'block';
+    }
+
+    startSession();
+
+    </script>
+</body>
+</html>
